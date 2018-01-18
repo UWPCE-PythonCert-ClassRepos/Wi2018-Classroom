@@ -1,8 +1,8 @@
 Name: Languages
-Donald Duck
-Mickey Mouse
-Minnie Mouse
-Daisy Duck
-Huey Duck
-Dewey Duck
-Louie Duck
+Donald Duck : c, go
+Mickey Mouse : java, javascript
+Minnie Mouse : php, html
+Daisy Duck : lisp
+Huey Duck : clisp
+Dewey Duck : R, pascal, ada
+Louie Duck : perl
