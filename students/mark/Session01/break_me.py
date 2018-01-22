@@ -3,12 +3,6 @@
 import sys
 
 
-#raise new_exc from original_exc
-#raise Exception
-#raise ValueError('A very specific bad thing happened')
-
-
-
 """Explore Errors
 
     https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/python_pushups.html#python-pushups
@@ -69,6 +63,11 @@ def getValue():
     inputErrorNo=int(input('What type of error shall I create? \n1) NameError (raised) \n2) TypeError \n3) SyntaxError \n4) AttributeError \n5) NameError (actual) \nPlease enter a number for error type: '))
     return inputErrorNo
 
+
+
+####
+#### Main
+####
 
 try:
     inputErrorNoG=getValue()
