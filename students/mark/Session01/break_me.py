@@ -4,9 +4,7 @@ import sys
 
 
 #raise new_exc from original_exc
-
 #raise Exception
-
 #raise ValueError('A very specific bad thing happened')
 
 
@@ -33,8 +31,10 @@ def simpleNameError():
 
     raise NameError('Raising a NameError')
 
+
 def altNameError():
     print(yourstuffisbroke)
+
 
 def simpleTypeError():
     """Example to raise a type TypeError"""
@@ -47,10 +47,23 @@ def simpleSyntaxError():
 
     raise SyntaxError('Raising a SyntaxError')
 
+
+def altSyntaxError():
+    """Alt Example to raise a type SyntaxError"""
+
+    ### Note: uncomment for syntax error this does not even "compile"
+    #### Maybe wrap in try except block and toss a continue later????
+
+    ## altSyntaxError_ThisIsASyntaxError():
+
+    return 0
+
+
 def simpleAttributeError():
     """Example to raise a type AttributeError"""
 
     raise AttributeError('Raising a AttributeError')
+
 
 def getValue():
     inputErrorNo=int(input('What type of error shall I create? \n1) NameError (raised) \n2) TypeError \n3) SyntaxError \n4) AttributeError \n5) NameError (actual) \nPlease enter a number for error type: '))
@@ -65,23 +78,21 @@ except:
     
 
 if (inputErrorNoG == 1):
-   print(inputErrorNoG)
+    print(inputErrorNoG)
+    simpleNameError()
 elif (inputErrorNoG == 2):
-   print(inputErrorNoG)
+    print(inputErrorNoG)
+    simpleTypeError()
 elif (inputErrorNoG == 3):
-   print(inputErrorNoG)
+    print(inputErrorNoG)
+    simpleSyntaxError()
 elif (inputErrorNoG == 4):
-   print(inputErrorNoG)
+    print(inputErrorNoG)
+    simpleAttributeError()
 elif (inputErrorNoG == 5):
-   print(inputErrorNoG)
+    print(inputErrorNoG)
+    altNameError()
 else:
-   print('Not a valid choice for an error to create:', inputErrorNoG)
+    print('Not a valid choice for an error to create:', inputErrorNoG)
 
 
-
-#print(inputErrorNo)
-
-
-#tb = sys.exc_info()[2]
-#raise OtherException(...).with_traceback(tb)
-#raise OtherException(...).with_traceback(tb)
