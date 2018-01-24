@@ -1,3 +1,5 @@
+# I've removed calls for these functions. To test, call them yourself :)
+
 def name_error():
     a = b
 
