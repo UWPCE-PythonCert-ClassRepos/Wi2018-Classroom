@@ -2,45 +2,51 @@
 ## Class 03: Series 1 & 2
 def list_series1(fruits=["Apples", "Pears", "Oranges", "Peaches"]):
 
-    # print(fruits)
-    #
-    # more_fruit=input("Add some fruit > ")
-    #
-    # if more_fruit:
-    #     fruits.append(more_fruit)
-    #
-    #     print(fruits)
-    #
-    # # prompt for a valid position in the fruit list
-    # pos=0
-    # #
-    # while not (1 <= pos < len(fruits) + 1):
-    #     pos = int(input("Enter fruit number > "))
-    #
-    #     if not (1 <= pos < len(fruits) + 1):
-    #         print("Numbers between 0 and {}".format(len(fruits)))
-    #
-    # else:
-    #     print("Position {} is  {}".format(pos, fruits[pos - 1]))
-    #
-    # # Add some fruit to the begining of the list
-    # more_fruit = input("Prepend some more fruits > ")
-    # if more_fruit:
-    #     fruits.append(more_fruit)
-    # while more_fruit:
-    #     more_fruit = input("Prepend some more fruits > ")
-    #
-    #     if more_fruit:
-    #         fruits.append(more_fruit)
-    # else:
-    #     print("Fruit list includes: {}".format(fruits))
-    #
-    # # fruits that start with P
-    # p_fruit=[f for f in fruits if f.upper().startswith('P')]
-    #
-    # print("Fruits that start with 'P':")
-    # for f in p_fruit:
-    #     print('\t'+f)
+    print(fruits)
+
+    more_fruit=input("Add some fruit > ")
+
+    if more_fruit:
+        fruits.append(more_fruit)
+
+        print(fruits)
+
+    # prompt for a valid position in the fruit list
+    position=0
+    while True:
+        try:
+            position = int(input("Enter fruit number > "))
+            assert position-1 in range(len(fruits))
+            break
+
+        except AssertionError as a:
+            print("Numbers between 1 and {}".format(len(fruits)))
+
+        except ValueError as e:
+            print("That is not an integer")
+
+    print("Position {} is  {}".format(position, fruits[position - 1]))
+
+
+
+    # Add some fruit to the begining of the list
+    more_fruit = input("Prepend some more fruits > ")
+    if more_fruit:
+        fruits.append(more_fruit)
+    while more_fruit:
+        more_fruit = input("Prepend some more fruits > ")
+
+        if more_fruit:
+            fruits.append(more_fruit)
+    else:
+        print("Fruit list includes: {}".format(fruits))
+
+    # fruits that start with P
+    p_fruit=[f for f in fruits if f.upper().startswith('P')]
+
+    print("Fruits that start with 'P':")
+    for f in p_fruit:
+        print('\t'+f)
 
     # remove fruits from the list
     counter=0
