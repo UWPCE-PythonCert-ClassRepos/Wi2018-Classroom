@@ -11,6 +11,7 @@ def list_series1(list=["Apples","Pears","Oranges","Peaches"]):
 
         print(list)
 
+    # prompt for a valid position in the fruit list
     pos=0
     while not (1<= pos <len(list)+1 ):
         pos = int(input("Enter fruit number > "))
@@ -21,6 +22,7 @@ def list_series1(list=["Apples","Pears","Oranges","Peaches"]):
     else:
         print("Position {} is  {}".format(pos, list[pos-1]))
 
+    # Add some fruit to the begining of the list
     more_fruit = input("Prepend some more fruits > ")
     if more_fruit:
         list.append(more_fruit)
@@ -32,12 +34,14 @@ def list_series1(list=["Apples","Pears","Oranges","Peaches"]):
     else:
         print("Fruit list includes: {}".format(list))
 
+    # fruits that start with P
     p_fruit=[f for f in list if f[0].upper() == 'P']
 
     print("Fruits that start with 'P':")
     for f in p_fruit:
         print('\t'+f)
 
+    # remove fruits from the list
     counter=0
     while True:
 
@@ -79,3 +83,4 @@ def list_series3(list = ["apples", "Bananas", "Pears"]):
     print("New List: {}".format(list))
 
 list_series3()
+
