@@ -1,8 +1,8 @@
 Name: Languages
-Donald Duck
-Mickey Mouse
-Minnie Mouse
-Daisy Duck
-Huey Duck
-Dewey Duck
-Louie Duck
+Donald Duck: Java
+Mickey Mouse: C#
+Minnie Mouse: HTML
+Daisy Duck: Go
+Huey Duck: SQL
+Dewey Duck: C++
+Louie Duck: Cobalt

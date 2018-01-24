@@ -16,9 +16,9 @@ students = [line.split(":")[0] for line in students]
 
 # reverse the first, last names
 # separate them:
-students = [line.split(",") for line in students]
+# students = [line.split(",") for line in students]
 # put them back together
-students = ["{} {}".format(first.strip(), last) for last, first in students]
+# students = ["{} {}".format(first.strip(), last) for last, first in students]
 
 # put them in random order
 random.shuffle(students)
