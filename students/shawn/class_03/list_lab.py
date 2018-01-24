@@ -27,11 +27,10 @@ def list_series1(list=["Apples","Pears","Oranges","Peaches"]):
 
         if more_fruit:
             list.insert(0,more_fruit)
-
     else:
-        print("Fruit list include: {}".format(list))
+        print("Fruit list includes: {}".format(list))
 
-
+    print("Fruits that start with 'P': {}".format([f for f in list if f[0].upper() == 'P']))
 
 
 
