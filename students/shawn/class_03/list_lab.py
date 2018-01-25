@@ -91,5 +91,21 @@ def list_series3(list = ["apples", "Bananas", "Pears"]):
 
     print("New List: {}".format(list))
 
-# list_series3()
+list_series3()
+
+## Class 03 Series 4
+# Make a copy of the list and reverse the letters in each fruit in the copy.
+# Delete the last item of the original list. Display the original list and the copy.
+
+def list_series4(fruits=["Apples", "Pears", "Oranges", "Peaches"]):
+
+    rev_fruits=[f[::-1] for f in fruits]
+    print(rev_fruits)
+
+    fruits.pop(-1)
+    print(fruits)
+
+list_series4()
+
+
 
