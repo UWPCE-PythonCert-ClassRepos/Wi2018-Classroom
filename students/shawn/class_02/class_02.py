@@ -23,7 +23,7 @@ def print_grid(cols=2, rows=2, width=5, height=5):
     print(sep)
 
 
- print_grid(cols=5, rows=5,width=5,height=5)
+print_grid(cols  = 5 , rows = 5 , width = 5 , height = 5)
 
 #############################################################
 
@@ -57,12 +57,12 @@ def fib_luc(nth, series = Series.Lucas ):
 
     """Return the nth number of either the Lucas or Fibonacci series"""
 
-    list=[0,1] if series == Series.Fibonacci else [2,1]
+    start_point=[0,1] if series == Series.Fibonacci else [2,1]
     for i in range(2,nth):
-        val=list[i-2] + list[i-1]
-        list.append(val)
+        val=start_point[i-2] + start_point[i-1]
+        start_point.append(val)
 
-    print("{} number =  {}".format(series.name,list[-1]))
+    print("{} number =  {}".format(series.name,start_point[-1]))
 
 fib_luc(15,series = Series.Fibonacci)
 fib_luc(15,series = Series.Lucas)
