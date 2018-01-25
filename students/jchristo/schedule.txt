@@ -1,0 +1,7 @@
+week 2: Donald Duck Perl
+week 3: Louie Duck Ruby
+week 4: Daisy Duck C#
+week 5: Dewey Duck SAS
+week 6: Mickey Mouse HQL
+week 7: Minnie Mouse SQL
+week 8: Huey Duck Java
