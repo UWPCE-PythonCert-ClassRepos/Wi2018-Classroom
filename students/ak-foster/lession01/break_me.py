@@ -1,4 +1,4 @@
-# I've removed calls for these functions. To test, call them yourself :)
+# I've removed calls for these functions. To test, comment out syntax_error() and call functions.
 
 def name_error():
     a = b
