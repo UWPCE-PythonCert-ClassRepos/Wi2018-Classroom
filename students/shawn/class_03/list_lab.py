@@ -13,17 +13,19 @@ def list_series1(fruits=["Apples", "Pears", "Oranges", "Peaches"]):
 
     # prompt for a valid position in the fruit list
     position=0
+    raw=""
     while True:
         try:
-            position = int(input("Enter fruit number > "))
+            raw=input("Enter fruit number > ")
+            position = int(raw)
             assert position-1 in range(len(fruits))
             break
 
-        except AssertionError as a:
+        except AssertionError:
             print("Numbers between 1 and {}".format(len(fruits)))
 
         except ValueError as e:
-            print("That is not an integer")
+            print("\"{}\" is not an integer!".format(raw))
 
     print("Position {} is  {}".format(position, fruits[position - 1]))
 
@@ -32,17 +34,17 @@ def list_series1(fruits=["Apples", "Pears", "Oranges", "Peaches"]):
     # Add some fruit to the begining of the list
     more_fruit = input("Prepend some more fruits > ")
     if more_fruit:
-        fruits.append(more_fruit)
+        fruits.insert(0,more_fruit)
     while more_fruit:
         more_fruit = input("Prepend some more fruits > ")
 
         if more_fruit:
-            fruits.append(more_fruit)
+            fruits.insert(0,more_fruit)
     else:
         print("Fruit list includes: {}".format(fruits))
 
     # fruits that start with P
-    p_fruit=[f for f in fruits if f.upper().startswith('P')]
+    p_fruit = [f for f in fruits if f.upper().startswith('P')]
 
     print("Fruits that start with 'P':")
     for f in p_fruit:
