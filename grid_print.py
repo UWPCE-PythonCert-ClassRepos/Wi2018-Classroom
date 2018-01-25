@@ -5,10 +5,17 @@ space = '  '
 
 
 def print_grid(cell_size, grid_size):
-    vert_line = ""
-    horiz_line = ""
+    '''
+    Prints a grid with dimensions controlled by input
+    :param cell_size: dimensions of each cell (more or less...)
+    :param grid_size: dimensions of (square) grid
+    :return: void
+    '''
 
-    for x in range(cell_size):
+    horiz_line = ""
+    vert_line = ""
+
+    for x in range(grid_size):
         horiz_line += (corner + ((cell_size-1)*horiz_char))
         vert_line += (vert_char + ((cell_size-1)*space))
     horiz_line += corner
@@ -23,4 +30,4 @@ def print_grid(cell_size, grid_size):
     print(horiz_line)
 
 
-print_grid(3, 3)
+print_grid(2, 2)
