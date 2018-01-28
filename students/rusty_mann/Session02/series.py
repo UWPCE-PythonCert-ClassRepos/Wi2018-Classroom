@@ -11,3 +11,16 @@ def fibonacci(n):
 
 print(fibonacci(10))
 
+
+def lucas(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 2
+    elif n == 2:
+        return 1
+    else:
+        return lucas(n-2)+lucas(n-1)
+
+print(lucas(10))
+
