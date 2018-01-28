@@ -1,9 +1,9 @@
 #!usr/local/bin/python3
 
 """
-Created by: Carol Farris
+Created by: Carol Farris  
 
-Grid Printer Excercise for Week 2 in class work. This file contains two methods. 
+Grid Printer Excercise for Week 2 in class work. This file contains two methods. They are called at the end. 
 
 Method 1: Method 2 satisfies part 2 of the excercise. print_Grid takes in one (usrValue)parameter and draws a 
 2x2 grid. usrValue is used as the sum of alternating  space and - lines. these are flanked by + signs. The empty rows have 
