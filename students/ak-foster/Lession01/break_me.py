@@ -1,5 +1,5 @@
-# I've removed calls for these functions. To test, call them yourself :)
-
+# To test, uncomment & call individual functions. Comment out tested functions or it may impact next test.
+""""
 def name_error():
     a = b
 
@@ -15,3 +15,4 @@ def syntax_error():
 
 def attribute_error():
     y = name_error.thing
+"""
