@@ -34,16 +34,18 @@ def every_other(s):
 
 
 def fl4_every_other(s):
-    """Return copy of a given sequence with first and last four items removed and remaining every other item removed"""
+    """Return copy of a given sequence with the first and last 4 items removed, and every other item in between."""
     return every_other(s[4:-4])
 
 
 def reverse(s):
+    """Return copy of a given sequence in the reverse order."""
     new_s = s[::-1]
     return new_s
 
 
 def sort_thirds(s):
+    """Return copy of given sequence with the middle third, then last third, then the first third in the new order."""
     x = int(len(s)/3)
     split(s,x)
     global first, last, middle
@@ -52,6 +54,7 @@ def sort_thirds(s):
 
 
 # Test block to verify the functions above work properly, throws error if not.
+
 a_string = "this is a string"
 a_tuple = (2, 54, 13, 77, 12, 5, 32, 1, 0, 33, 45, 19, 100)
 a_list = ['thing', 'another', 'example','mixed', 'with', 'numbers', 0, 1, 2]
