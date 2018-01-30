@@ -18,14 +18,12 @@ Write a function that draws a grid like the following:
 |         |         |
 + - - - - + - - - - +
 
-Debug notes:
-    still needs sizing work, prints out incorrect sizes, but prints a complete box
 """
 
 # grid 2x2
 # Define the size of the cells
-gridWidth=5
-gridHeight=5
+gridWidth=2
+gridHeight=2
 
 # Define number of rows and columns
 gridRow=2
@@ -34,7 +32,10 @@ gridCol=2
 def gridIsect(gridCol, gridWidth):
     """Draw the horizontal line to build up the intersection between the vertical rows"""
 
-    # ouput just a single column (if more columns are needed continue below)
+    # output just a single column (if more columns are needed continue below)
+    if gridCol < 1:
+        exit(0)   # exit if I don't have to print any columns
+
     print("+ ", end='')
     print("- " * gridWidth, end='')
     print("+", end='')
@@ -55,23 +56,21 @@ def gridIsect(gridCol, gridWidth):
 def gridTall(gridHeight, gridWidth, gridCol):
     """Draw a horizontal line to build up the cell size for the height of the grid"""
 
-    i=0
-    while i < gridHeight:
-        i = i + 1
-    if gridCol > 1:
-        loopControl = 0
-        rowControl = 0
-        while rowControl < gridRow:
-            while loopControl < gridHeight:
-                i=0
-                while i < gridCol:
-                    print("|", (" " * (2*gridWidth)), end='')
-                    i = i + 1
+    #if gridCol > 0:
+    loopControl = 0
+    rowControl = 0
+    while rowControl < gridRow:
+        while loopControl < gridHeight:
+            i=0
+            while i < gridCol:
+                print("|", (" " * (2*gridWidth)), end='')
+                i = i + 1
 
-                print("|") # terminate the line
-                loopControl = loopControl + 1
+            if gridCol > 0:
+                print("|") # terminate the line, but only if we acutually draw at least one row
+            loopControl = loopControl + 1
 
-            rowControl = rowControl + 1
+        rowControl = rowControl + 1
 
 
 def gridActual(gridRow, gridHeight, gridWidth, gridCol):
@@ -80,7 +79,7 @@ def gridActual(gridRow, gridHeight, gridWidth, gridCol):
     gridRow = number of rows to draw
     gridCol = number of columns to draw
 
-    numCol = width of columns to draw
+    gridWidth = width of columns to draw
     gridHeight = how tall to make the cells
     """
 
@@ -95,5 +94,4 @@ def gridActual(gridRow, gridHeight, gridWidth, gridCol):
 
 
 if __name__ == "__main__":
-    #gridActual(gridRow, gridHeight, gridWidth, gridCol)
     gridActual(2, 8, 8, 2)
