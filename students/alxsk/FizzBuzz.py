@@ -4,7 +4,7 @@
 
 a_list=list(range(1,101))
 
-#Loop through the list of numbers to using modulo functionevaluate the remainders  . Print results. 
+#Loop through the list of numbers using modulo in a series of if/else functions to evaluate each number. Print results. 
 for i in a_list: 
   if i%3==0 and i%5==0:
     print('FizzBuzz')
