@@ -42,6 +42,7 @@ def sum_series(n, a=0, b=1):
 
 #####################################################################
 
+
 #testing output of fibonacci function
 assert fibonacci(5) == 3
 assert fibonacci(8) == 13
