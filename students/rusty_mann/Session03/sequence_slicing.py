@@ -29,3 +29,17 @@ def reversed(seq):
 
 #print(reversed("this is a string"))
 #print(reversed([1,2,3,4,5,6,7,8,9,0]))
+
+
+def thirds(seq):
+    third1 = int(len(seq)/3)
+    first_third = seq[:third1]
+    remainder = seq[third1:]
+    third2 = int(len(remainder)/2)
+    second_third = remainder[:third2]
+    third_third = remainder[third2:]
+    return second_third + third_third + first_third
+
+print(thirds("123456789"))
+print(thirds([1,2,3,4,5,6,7,8,9,0]))
+
