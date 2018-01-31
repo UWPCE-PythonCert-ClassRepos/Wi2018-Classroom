@@ -69,11 +69,11 @@ def get_article(word,is_singular):
     else:
         return "the"
 
-def task_five(val=['oranges', 1.3, 'lemons', 1.1]
-              ,use_singular=True
-              ,is_upper=False
-              ,size_fac=1):
 
+def task_five(val=['oranges', 1.3, 'lemons', 1.1]
+              , use_singular=True
+              , is_upper=False
+              , size_fac=1):
     """Format using f-string
         val - [list] input for task 5
         use_singular - [bool] that indicates if function should treat nouns as singular or plural
@@ -83,11 +83,13 @@ def task_five(val=['oranges', 1.3, 'lemons', 1.1]
 
     # Apply case
     if is_upper:
-        val=[x.upper() if type(x) is str else x for x in val]
+        val = [x.upper() if type(x) is str else x for x in val]
     # build statements with f-string
-    li=[]
-    for i in range(0,4,2):
-        li.append(f"{'T' if i==0 else 't'}he weight of {get_article(val[i],is_singular=use_singular)} {val[i][:-1] if use_singular else val[i]} is {format(val[i+1]*size_fac,'.1f')}")
+    li = []
+    for i in range(0, 4, 2):
+        li.append(
+            f"{'T' if i==0 else 't'}he weight of {get_article(val[i],is_singular=use_singular)} "
+            f"{val[i][:-1] if use_singular else val[i]} is {format(val[i+1]*size_fac,'.1f')}")
 
     print(" and ".join(li))
 
@@ -95,8 +97,7 @@ def task_five(val=['oranges', 1.3, 'lemons', 1.1]
 
 
 #------------------------------------------------------------------------*
-#  Task 6  predict lower	upper
-
+#  Task 6
 #------------------------------------------------------------------------*
 import csv
 
@@ -112,13 +113,28 @@ def read_csv(fnam):
 def task_six(fnam):
 
     """ Task 6 - align columns"""
+    head,data=read_csv(fnam)
 
-    fil=read_csv(fnam)
-    head=fil[0]
-    data=fil[1]
-    print(f"{'{:<10}'.format(head[0])} {'{: ^10}'.format(head[1])} {'{:>10}'.format(head[2])}")
+
+    # get length of longest fields in each column
+    l=[0,0,0]
+    for val in data:
+        for i,v in enumerate(l):
+            if len(val[i]) > v:
+                l[i]=len(val[i])
+
+    # create formats for each column
+    colspace=2
+    fmts=["{: <" + str(l[0]+colspace) + "}","{: <" + str(l[1]+colspace) + "}","{: >" + str(l[2]+colspace) + "}"]
+    sep=[ i*"-" for i in l] # Separator line
+
+    #header
+    print(f"{fmts[0].format(head[0])} {fmts[1].format(head[1])} {fmts[2].format(head[2])}")
+    print(f"{((colspace*len(l))+len(l) +sum(l))*'-'}")
+
+    #data
     for i,v in enumerate(data):
-        print(f"{'{:<10}'.format(v[0])} {'{: ^10}'.format(v[1])} {'{:>10}'.format(v[2])}")
+        print(f"{fmts[0].format(v[0])} {fmts[1].format(v[1])} ${fmts[2].format(v[2])}")
 
 
 
