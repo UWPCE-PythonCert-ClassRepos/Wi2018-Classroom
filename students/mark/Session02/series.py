@@ -27,6 +27,16 @@
     fib(n) = fib(n-2) + fib(n-1)
 
 
+Lucas Numbers
+
+The Lucas Numbers are a related series of integers that start with the values 2 and 1 rather than 0 and 1. The resulting series looks like this:
+
+2, 1, 3, 4, 7, 11, 18, 29, ...
+
+In your series.py module, add a new function lucas that returns the nth value in the lucas numbers series (starting with zero index).
+
+Ensure that your function has a well-formed docstring
+
 """
 
 def recurseMeSimple(n):
@@ -131,7 +141,7 @@ def fibonacciOneInput(n):
     fib=15
 
     print(fib)
-    fib=fibonacci(n-1)+fibonacci(n-2)
+    fib=fibonacciGT(n-1)+fibonacciGT(n-2)
     n = n + 1
     #fib = (n - 2) + (n - 1)
     print(fib)
@@ -141,14 +151,14 @@ def fibonacciOneInput(n):
 
 
 previous = {0:0, 1:1}
-def fibonacci(n):
+def fibonacciGT(n):
     """approved green tea press answer (modified for python3 (has_key, using get))"""
     #define out side function: previous = {0:1, 1:1}
     #if previous.get(n):
     if n in previous:
         return previous[n]
     else:
-        newValue = fibonacci(n-1) + fibonacci(n-2)
+        newValue = fibonacciGT(n-1) + fibonacciGT(n-2)
         previous[n] = newValue
 
     return newValue
@@ -166,29 +176,76 @@ def fibonacciKnown(n):
     return res
 
 
+def fibonacci(n):
+    """Return the nth value in the fibonacci series."""
+    x=0
+    y=1
+
+    fibNumber=sumSeries(n, x, y)
+
+    return fibNumber
+
+
+def lucas(n):
+    """Return the nth value in the lucas numbers series."""
+    x = 2
+    y = 1
+    return sumSeries(n, x, y)
+
+
+def sumSeries(n, x, y):
+    """Return the nth value in a given numbers series. Defaults to fibonacci series.
+
+    test values:
+    x=0
+    y=1
+    n="position in fibonacci"
+
+    localDebug=0 // if > 1 enable debugging, print additional output to screen
+
+    """
+    fibList = [x, y]
+    fibVal=0
+    localDebug=0
+
+    for i in range(n):
+        value = fibList[-2] + fibList[-1]
+        fibList.append(value)
+
+        if localDebug > 0:
+            print(fibList)
+
+        fibVal=fibList[-1]
+
+    return fibVal
+
+
+
 if __name__ == '__main__':
     print("demonstrate recursion: ")
     recurseMeSimple(0)
 
     print("greenTeaAnswer Example (fibonacci): ", end="")
-    print(fibonacci(4))
+    print(fibonacciGT(4))
 
     print("greenTeaAnswer Python3 Example (fibonacci): ", end="")
     print(fibonacciKnown(4))
 
-#recurseMeSimple(0)
-print('###')
-#basicFibonacci(0,1)
-print('###')
-fibonacciLoop(13)
-print('###')
-fibonacciOneInput(8)
+    print("Solution fibonacci: ", end='')
+    print(fibonacci(4))
+
+    print("Solution lucas: ", end='')
+    print(lucas(4))
+
+
 
 """
 Student Notes: Not exactly sure how we're supposed to accomplish recursing a fibonnicci set with a single input var,
 no lookup table(dictonary) and using only the info in ThinkPython2(ch1-6)??
 http://greenteapress.com/thinkpython2/html/thinkpython2007.html
 
+
+Student notes: Accomplish using array slicing, not by recursing the function from itself.
 
 
 
