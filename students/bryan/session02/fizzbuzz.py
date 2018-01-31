@@ -15,7 +15,19 @@ def fizzbuzz():
         else:
             print (idx)
         idx += 1
+        
+def fizzbuzz2():
+    """try doing fizzbuzz a different way. Using list comprehension"""
+    print("hi")
+    mylist = list(range(1,101))
+    mylist[:] = ["fizzbuzz" if x % 3 == 0 and x % 5 == 0 
+        else "fizz" if x % 3 == 0 
+        else "buzz" if x % 5 == 0 
+        else x for x in mylist]
+    print(mylist)
 
-fizzbuzz()
+#fizzbuzz()
+fizzbuzz2()
+
 
 
