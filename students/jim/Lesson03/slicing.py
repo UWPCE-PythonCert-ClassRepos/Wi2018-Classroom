@@ -1,6 +1,6 @@
 my_string_1 = "camelot"
 my_string_2 = "spam"
-foo = [1, 2, 3, 4, 5]
+foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 def exchange_first_last(seq):
     try:
@@ -11,4 +11,13 @@ def exchange_first_last(seq):
 
 assert exchange_first_last(my_string_1) == "tameloc"
 assert exchange_first_last(my_string_2) == "mpas"
-assert exchange_first_last(foo) == [5, 2, 3, 4, 1]
+assert exchange_first_last(foo) == [10, 2, 3, 4, 5, 6, 7, 8, 9, 1]
+
+
+def remove_every_other(seq):
+    new_seq = seq[::2]
+    return new_seq
+
+assert remove_every_other(my_string_1) == "cmlt"
+assert remove_every_other(my_string_2) == "sa"
+assert remove_every_other(foo) == [1, 3, 5, 7, 9]
