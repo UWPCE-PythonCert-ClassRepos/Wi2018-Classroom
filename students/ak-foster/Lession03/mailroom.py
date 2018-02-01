@@ -1,44 +1,76 @@
 #!/usr/bin/env python3
 
-donate = [['Merv', 1], ['Linda', 3], ['Larry', 2], ['Sue', 2]]
+donate = [['Merv', 10, 500, 100], ['Linda', 300, 62, 7], ['Larry', 25, 50, 100], ['Sue', 20, 50, 1000]]
 
-while True:
-    res = input('Type \'1\' to send a thank you. Type \'2\' to create a report. Type \'3\' to quit:  ')
-    if res == '1':
-        resp = input('Type \'list\' to see donor list, otherwise, type a name:  ')
-        if resp == 'list':
-            print(donate)
-        else:
-            for name in donate:
-                countMatches = 0
-                if name[0] == resp:
-                    amount = input('Please input the donation amount:  ')
-                    name.append(int(amount))
-                    countMatches =+ 1
-                    break
-            if countMatches == 0:
-                donate.append([resp, ])
-                amount = input('Please input the donation amount:  ')
-                donate[-1].append(int(amount))
-            print(f'{resp} - Thank you for your gift of {amount} bitcoin.')
-    if res == '2':
-        # TODO: If the user (you) selected “Create a Report”, print a list of your donors, sorted by total historical donation amount.
-            # TODO: Include Donor Name, total donated, number of donations and average donation amount as values in each row. You do not need to print out all their donations, just the summary info.
-            # TODO: Using string formatting, format the output rows as nicely as possible. The end result should be tabular (values in each column should align with those above and below)
-            # TODO: After printing this report, return to the original prompt.
-        # TODO: At any point, the user should be able to quit their current task and return to the original prompt.
-        # TODO: From the original prompt, the user should be able to quit the script cleanly.
-        donateReport = []
+def thankYou():
+    """Adds new donations to record and displays a thank you note when provided a name and donation amount."""
+    resp = input('Type \'list\' to see donor list, otherwise, type a name:  ')
+    if resp == 'list':
+        print(donate)
+    else:
         for name in donate:
-            dName = name[0]
-            donations = name[1:]
-            total = sum(donations)
-            avg = total / (len(donations))
-            donateReport.append([dName, str(total), str(avg)])
-        # TODO: figure out a better way to pretty print...some thoughts below
-        row = '{:<10}' * len(donateReport)
-        for record in zip(*donateReport):
-            print(row.format(*record))
+            countMatches = 0
+            if name[0] == resp:
+                amount = input('Please input the donation amount:  ')
+                name.append(int(amount))
+                countMatches = + 1
+                break
+        if countMatches == 0:
+            donate.append([resp, ])
+            amount = input('Please input the donation amount:  ')
+            donate[-1].append(int(amount))
+        print(f'{resp} - Thank you for your gift of {amount} dollars.')
 
-    if res == '3':
+
+def createReport():
+    donateReport = []
+    """Print report with donors names, total donations, and avg donation- sorted by highest to lowest total donations"""
+    # Calculate donation summary for each donor and add to the report
+    for name in donate:
+        dName = name[0]
+        donations = name[1:]
+        total = sum(donations)
+        avg = total // (len(donations))
+        donateReport.append([dName, total, avg])
+
+    # get total donations for sort
+    def totalDonations(elem):
+        return elem[1]
+
+    # sort donations report for highest total donations
+    sortedDonateReport = sorted(donateReport, key=totalDonations, reverse=True)
+
+    # format row (left align - column 10 wide, right align - column 20 wide, right align - column 20 wide)
+    row = '{:<10}{:>20}{:>20}'
+
+    def printLine():
+        line = ['-' * 10, '-' * 20, '-' * 20]  # line break (multipliers to match width set above)
+        print(row.format(*line))
+
+    def printHeader():
+        header = ['Donor Name', 'Total ($)', 'Average ($)']
+        print(row.format(*header))
+
+    # print report header with column titles
+    printLine()
+    printHeader()
+    printLine()
+
+    # print donation summary sorted
+    for record in sortedDonateReport:
+        print(row.format(*record))
+
+    # print report footer
+    printLine()
+
+# Prompt with menu
+while True:
+    res = input('Type \'1\' to send a thank you. Type \'2\' to create a report. Type \'0\' to quit:  ')
+    if res == '1':
+        thankYou()
+
+    if res == '2':
+        createReport()
+
+    if res == '0':
         break
