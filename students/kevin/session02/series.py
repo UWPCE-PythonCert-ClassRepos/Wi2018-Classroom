@@ -26,6 +26,7 @@ def lucas(n):
     return lucList[n-1]
 
 
+# NOTE: Would be way more efficient to not append a list, but rather keep two variables only
 def sumSeries(n, a=0, b=1):
     """
     Docstring goes here
