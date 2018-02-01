@@ -44,7 +44,7 @@ def seq_shift(seq):
     """with the middle third, then last third, then the first third in the new order."""
     r=[]
     spos= m.floor(len(seq)/3)
-    epos= m.floor(spos*2)
+    epos= spos*2
 
     c = seq[spos:epos]
     f=seq[0:spos]
