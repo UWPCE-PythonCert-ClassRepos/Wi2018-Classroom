@@ -115,26 +115,37 @@ def task_six(fnam):
     """ Task 6 - align columns"""
     head,data=read_csv(fnam)
 
+    cols=len(head)
 
     # get length of longest fields in each column
-    l=[0,0,0]
+    l=[0 for i in head]
     for val in data:
         for i,v in enumerate(l):
             if len(val[i]) > v:
                 l[i]=len(val[i])
 
     # create formats for each column
-    colspace=2
-    fmts=["{: <" + str(l[0]+colspace) + "}","{: <" + str(l[1]+colspace) + "}","{: >" + str(l[2]+colspace) + "}"]
+    colspace=3
+    #
+    fmts=[]
+    for i in range(len(head)):
+        sym= '<' if i < len(head) - 1 else '>'
+        fmts.append("{: " + sym + str(l[i]+colspace) + "}")
+
     sep=[ i*"-" for i in l] # Separator line
 
     #header
-    print(f"{fmts[0].format(head[0].title())} {fmts[1].format(head[1].title())} {fmts[2].format(head[2].title())}")
+    for i,val in enumerate(head):
+        print(f"{fmts[i].format(head[i].title())}",end="")
+    print(" ")
     print(f"{((colspace*len(l))+len(l) +sum(l))*'-'}")
 
     #data
-    for i,v in enumerate(data):
-        print(f"{fmts[0].format(v[0])} {fmts[1].format(v[1])} ${fmts[2].format(v[2])}")
+    for v in data:
+        for i,j in enumerate(v):
+            print(f"{fmts[i].format(j)}",end="")
+            if i==len(v)-1:
+                print(' ')
 
 
 
