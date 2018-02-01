@@ -31,3 +31,11 @@ def first_last_four(seq):
 
 assert first_last_four(city_1) == "teahn"
 assert first_last_four(city_2) == "aepipnsl"
+
+
+def reverse(seq):
+    new_seq = seq[::-1]
+    return new_seq
+
+assert reverse(my_string_1) == "tolemac"
+assert reverse(foo) == [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
