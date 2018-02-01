@@ -129,7 +129,7 @@ def task_six(fnam):
     sep=[ i*"-" for i in l] # Separator line
 
     #header
-    print(f"{fmts[0].format(head[0])} {fmts[1].format(head[1])} {fmts[2].format(head[2])}")
+    print(f"{fmts[0].format(head[0].title())} {fmts[1].format(head[1].title())} {fmts[2].format(head[2].title())}")
     print(f"{((colspace*len(l))+len(l) +sum(l))*'-'}")
 
     #data
