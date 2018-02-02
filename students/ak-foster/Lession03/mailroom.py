@@ -30,8 +30,9 @@ def createReport():
         dName = name[0]
         donations = name[1:]
         total = sum(donations)
-        avg = total // (len(donations))
-        donateReport.append([dName, total, avg])
+        count = len(donations)
+        avg = total // count
+        donateReport.append([dName, total, count, avg])
 
     # get total donations for sort
     def totalDonations(elem):
@@ -41,14 +42,14 @@ def createReport():
     sortedDonateReport = sorted(donateReport, key=totalDonations, reverse=True)
 
     # format row (left align - column 10 wide, right align - column 20 wide, right align - column 20 wide)
-    row = '{:<10}{:>20}{:>20}'
+    row = '{:<10}{:>20}{:>20}{:>20}'
 
     def printLine():
-        line = ['-' * 10, '-' * 20, '-' * 20]  # line break (multipliers to match width set above)
+        line = ['-' * 10, '-' * 20, '-' * 20, '-' * 20]  # line break (multipliers to match width set above)
         print(row.format(*line))
 
     def printHeader():
-        header = ['Donor Name', 'Total ($)', 'Average ($)']
+        header = ['Donor Name', 'Total ($)', 'Count', 'Average ($)']
         print(row.format(*header))
 
     # print report header with column titles
