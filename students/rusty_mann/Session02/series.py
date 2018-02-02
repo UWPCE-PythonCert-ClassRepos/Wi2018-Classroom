@@ -32,9 +32,9 @@ def sum_series(n, a=0, b=1):
          and nth number in lucas series if a, b arguments are set to 2 and 1"""
     if n == 0:
         return 0
-    if n == 1:
+    elif n == 1:
         return a
-    if n == 2:
+    elif n == 2:
         return b
     else:
         return sum_series(n-2,a,b)+sum_series(n-1,a,b)

@@ -4,9 +4,9 @@ def switch_first_last(seq):
     new = seq[-1:] + mid + seq[:1]
     return new
 
-#print(switch_first_last("this is a string"))
-#print(switch_first_last([1,2,3,4,5,6,7,8,9,0]))
-#print(switch_first_last((1,2,3,4,5,6,7,8,9,0)))
+print(switch_first_last("this is a string"))
+print(switch_first_last([1,2,3,4,5,6,7,8,9,0]))
+print(switch_first_last((1,2,3,4,5,6,7,8,9,0)))
 
 
 def every_other(seq):
@@ -20,9 +20,9 @@ def remove_four(seq):
     seq = seq[4:-4]
     return seq[::2]
 
-print(remove_four("0000102030405060708090000"))
-print(remove_four([0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0]))
-print (remove_four((0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0)))
+#print(remove_four("0000102030405060708090000"))
+#print(remove_four([0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0]))
+#print (remove_four((0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0)))
 
 def reversed(seq):
     return seq[::-1]
@@ -40,6 +40,7 @@ def thirds(seq):
     third_third = remainder[third2:]
     return second_third + third_third + first_third
 
-print(thirds("123456789"))
-print(thirds([1,2,3,4,5,6,7,8,9,0]))
+#print(thirds("123456789"))
+#print(thirds([1,2,3,4,5,6,7,8,9,0]))
+#print(thirds((1,2,3,4,5,6,7,8,9,0)))
 
