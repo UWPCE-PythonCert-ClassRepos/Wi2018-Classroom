@@ -132,11 +132,11 @@ def createLetter(donor):
     """
     return '''\n
           Dear {}
-          Thank you for your very kind donation of ${}.
+          Thank you for your very kind donation of ${:.2f}.
           It will be put to very good use.
                          Sincerely,
                             -The Team
-          '''.format(donor[0], donor[1][-1])
+          '''.format(donor[0][0], sum(donor[1][-1]))
 
           #           Thank you for your very kind donation of ${:.2f}.
 
