@@ -98,14 +98,8 @@ def printMenu():
 
 
 def reportSortKey(item):
-    return item[1]
-
-    """not really clear on how this little piece of magic works yet, but it's needed.
-    used to print the printDonorReport
-
-    this is the "item column" which we will sort on, but why in a function?
+    """list.sort(key="<thing>") thing must be a function
     """
-
     return item[1]
 
 def printDonorReport():
