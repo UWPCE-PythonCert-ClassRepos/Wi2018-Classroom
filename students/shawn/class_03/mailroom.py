@@ -139,20 +139,45 @@ def send_thankyou():
             if user[1].lower()=="list":
                 for i, v in dlist.donors.items():
                     print(v)
+                print("\n")
             else:
-                donor=get_user(user[1])
-                if donor != None:
-                    print(f"\n\nDearest {donor[1].fnam},\n\nThank for your latest donation of {donor[1].donation[-1]}, bringing your total donations to {sum([i for i in donor[1].donation])}.\n\nSincerly,\nmanagment")
+                if user[1].lower()=='quit':
+                    return True
+                else:
+                    donor=get_user(user[1])
+                    if donor != None:
+                        print(f"{'-'*100}"
+                              f"\n\nDearest {donor[1].fnam},\n\nThank for your latest donation of {donor[1].donation[-1]}, "
+                              f"bringing your total donations to {sum([i for i in donor[1].donation])}.\n\nSincerly,\nmanagment\n"
+                              f"{'-'*100}")
 
-                break
+                    return True
+
 
 # -----------------------------------------------------------------------*
 # Write report
 # -----------------------------------------------------------------------*
 def report(donors):
     report=donors.report()
+    return True
 
-
+# -----------------------------------------------------------------------*
+# Main menu
+# -----------------------------------------------------------------------*
+def main_menu():
+    msg="**Welcome to MailRoom**\nPlease select from the following actions\n\n\t(1)Send a thank you\n\t(2)Create a report\n\t(3)Quit\n\nSelect"
+    action=prompt_user(msg)
+    if action[0]:
+        if action[1] in ['1','2','3']:
+            if action[1]=='1':
+                ty=send_thankyou()
+                return ty
+            elif action[1]=='2':
+                rc=report(dlist)
+                return rc
+            else:
+                print("Closing...")
+                return False
 
 
 if __name__ == '__main__':
@@ -164,12 +189,11 @@ if __name__ == '__main__':
 
     # -----------------------------------------------------------------------*
     # Prompt for action
-    # --------------------------------------------------------------------
-    msg="\t(1)Send a thank you\n\t(2)Create a report\n\t(3)Quit\nSelect an action"
-    action=prompt_user(msg)
-    if action[0]:
-        if action[1] in ['1','2','3']:
-            if action[1]=='1':
-                ty=send_thankyou()
-            elif action[1]=='2':
-                report(dlist)
+    # -----------------------------------------------------------------------*
+    status=True
+    while status==True:
+        status=main_menu()
+
+
+
+
