@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
-"""
-"""
 
-# In memory representation of the donor database
-# using a tuple for each donor
-# -- kind of like a record in a database table
-# the donations are in a list -- so you can add to them
-# Note the mutable inside an immutable
 
+#List of tuples, donor at index 0 in each tuple
+#and list of donations at index 1 in each tuple
 donor_data = [("Allen, Paul", [1000000, 50000, 300000]), 
                     ("Gates, Bill", [5000000, 80000, 700000]), 
                     ("Bezos, Jeff", [30000]), 
@@ -22,6 +17,11 @@ def show_list():
 
 
 def get_donor(name):
+    """
+    retieve donor form donor_data list
+    :param: name of donor
+    :returns: donor tuple
+    """
     for donor in donor_data:
         if name.strip().lower() == donor[0].lower():
             return donor
@@ -39,6 +39,11 @@ def init_prompt():
 
 
 def make_donor_email(donor):
+    """
+    Make a thank you email for the donor
+    :param: donor tuple
+    returns: string containing text of email
+    """
     return f'''\n
         Dear {donor[0]}, 
         Thank you for your donation of ${donor[1][-1]:.2f}. 
@@ -66,6 +71,7 @@ def send_donor_email():
         else:
             amount = float(amount_str)
         donor = get_donor(name)
+        #print(donor)
         if donor is None:
             donor = (name, [])
             donor_data.append(donor)
