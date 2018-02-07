@@ -46,7 +46,7 @@ def printDonorName():
         print(donor[0])
 
 def printEgLetter():
-    print('''
+    return('''
     Dear Jeff Bezos,
 
         Thank you for your very kind donation of $877.33.
@@ -68,6 +68,23 @@ def getDonor(name):
 
     return None # or should this be donor?
 
+def sendThankYou():
+    """
+    Record a donation, create a thank you letter.
+    """
+
+    # use a while loop to get the user input and execute a function
+    # basic input checking, strip whitespace
+    while True:
+        name = input("Enter a donor's name "
+                     "(or 'list' to see all donors or 'menu' to exit)> ").strip()
+        if name == "list":
+            printDonorName()
+        elif name == "menu":
+            return
+        else:
+            break
+
 def printMenu():
     getInputVar=(input('''Choose an action:
 
@@ -80,9 +97,64 @@ def printMenu():
     return getInputVar.strip()
 
 
+def reportSortKey(item):
+    return item[1]
+
+    """not really clear on how this little piece of magic works yet, but it's needed.
+    used to print the printDonorReport
+
+    this is the "item column" which we will sort on, but why in a function?
+    """
+
+    return item[1]
+
+def printDonorReport():
+    """
+    Output report of donors
+    """
+    # First, reduce the raw data into a summary list view
+    report_rows = []
+    for (name, gifts) in donorDB:
+        total_gifts = sum(gifts)
+        num_gifts = len(gifts)
+        avg_gift = total_gifts / num_gifts
+        report_rows.append((name, total_gifts, num_gifts, avg_gift))
+
+    # sort the report data
+    print('debug')
+    report_rows.sort(key=reportSortKey)
+    # print it out in with a nice format.
+    print("{:25s} | {:11s} | {:9s} | {:12s}".format(
+          "Donor Name", "Total Given", "Num Gifts", "Average Gift"))
+    print("-" * 66)
+    for row in report_rows:
+        print("{:25s}   {:11.2f}   {:9d}   {:12.2f}".format(*row))
+
+def createLetter(donor):
+    """
+    Create a thank you letter for the donor
+    :param: donor tuple
+    :returns: string with letter
+    """
+    return '''\n
+          Dear {}
+          Thank you for your very kind donation of ${}.
+          It will be put to very good use.
+                         Sincerely,
+                            -The Team
+          '''.format(donor[0], donor[1][-1])
+
+          #           Thank you for your very kind donation of ${:.2f}.
+
+
+
 if __name__ == '__main__':
     print("this is the main section")
 
+    #donor=['w golf',(200.02)]
+    #donor='Paul Allen'
     printMenu()
     printEgLetter()
-    printDonorName()
+    printDonorReport()
+    print('debug')
+    print(createLetter(donorDB))
