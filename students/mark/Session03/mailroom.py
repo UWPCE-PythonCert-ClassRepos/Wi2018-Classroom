@@ -132,13 +132,14 @@ def createLetter(donor):
     """
     return '''\n
           Dear {}
-          Thank you for your very kind donation of ${:.2f}.
+          Thank you for your very kind donation of ${}.
           It will be put to very good use.
                          Sincerely,
                             -The Team
-          '''.format(donor[0][0], sum(donor[1][-1]))
+          '''.format(donor[0][0], donor[1][-1])
 
           #           Thank you for your very kind donation of ${:.2f}.
+          #'''.format(donor[0][0], sum(donor[1][-1]))
 
 
 
@@ -147,8 +148,23 @@ if __name__ == '__main__':
 
     #donor=['w golf',(200.02)]
     #donor='Paul Allen'
-    printMenu()
+    menuValue=printMenu()
     printEgLetter()
     printDonorReport()
     print('debug')
     print(createLetter(donorDB))
+
+
+    ### code below works, need work on called functions (works)
+    # running = True
+    # while running:
+    #     #selection = main_menu_selection()
+    #     selection=printMenu()
+    #     if selection == "1":
+    #         sendThankYou()
+    #     elif selection == "2":
+    #         printDonorReport()
+    #     elif selection == "4":
+    #         running = False
+    #     else:
+    #         print("Please select an option 1-4 from the menu")
