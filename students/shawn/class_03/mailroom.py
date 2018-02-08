@@ -90,13 +90,15 @@ class Donors(object):
             line.append(v.donation)
             result.append(line)
 
-        print(f"{'{:<25}'.format('Donor')}{'{:^10}'.format('Total')}{'{:>20}'.format('Average')}")
-        print(f"{57*'-'}")
+        print(f"{'{:<20}'.format('Donor')}{'{:<15}'.format('Total')}{'{:<15}'.format('Donations')}"
+              f"{'{:>10}'.format('Average')}")
+        print(f"{63*'-'}")
         for r in result:
-            print(f"{'{:<25}'.format(r[0] + ' ' + r[1])}",end=" ")
-            print(f"{'{:^10.2f}'.format(sum(r[2]))}", end=" ")
-            print(f"{'{:>20.2f}'.format(stat.mean(r[2]))}")
-
+            print(f"{'{:<20}'.format(r[0] + ' ' + r[1])}",end=" ")
+            print(f"{'{:<15.2f}'.format(sum(r[2]))}", end=" ")
+            print(f"{'{:<15.0f}'.format( len([i for i in r[2] if i>0])  )}", end=" ")
+            print(f"{'{:>10.2f}'.format(stat.mean(r[2]))}")
+        print(f"{63*'-'}")
 
 #-----------------------------------------------------------------------*
 # dummy function to load a collection of donors
@@ -113,7 +115,14 @@ def load_default(donors):
             ['Bill', 'Buckner', 300.33],
             ['Bill', 'Buckner', 950.00],
             ['Bill', 'Buckner', 250.25],
-            ['Don', 'Baylor', 1141.50]]
+            ['Don', 'Baylor', 1141.50],
+            ['Wade','Boggs',5000.15],
+            ['Wade','Boggs',125.55],
+            ['Wade','Boggs',1000.00],
+            ['Ted','Williams',333.45],
+            ['Jim','Rice',225.98],
+            ['Jim', 'Rice', 125.19],
+            ['Jim', 'Rice', 352.76] ]
     for i in data:
         donors.read_data(i[0],i[1],i[2])
 
