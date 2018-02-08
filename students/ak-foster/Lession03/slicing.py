@@ -2,29 +2,17 @@
 
 def split(s,x):
     """Given a sequence break into three variables defined globally."""
-    ns = list(s)
-    global first, last, middle
-    first = ns[:x]
-    last = ns[-x:]
-    middle = ns[x:-x]
-
-
-def build(s,ls):
-    """Return a transformed copy with the same type as originally given sequence."""
-    if type(s) == str:
-        new_s = ''.join(ls)
-        return new_s
-    if type(s) == tuple:
-        return tuple(ls)
-    return ls
+    first = s[:x]
+    last = s[-x:]
+    middle = s[x:-x]
+    return first, last, middle
 
 
 def first_last(s):
     """Return a copy of a given sequence with first and last items swapped."""
-    split(s,1)
-    global first, last, middle
+    first, last, middle = split(s,1)
     ls = last + middle + first
-    return (build(s,ls))
+    return ls
 
 
 def every_other(s):
@@ -47,10 +35,9 @@ def reverse(s):
 def sort_thirds(s):
     """Return copy of given sequence with the middle third, then last third, then the first third in the new order."""
     x = int(len(s)/3)
-    split(s,x)
-    global first, last, middle
+    first, last, middle = split(s,x)
     ls = middle + last + first
-    return build(s,ls)
+    return ls
 
 
 # Test block to verify the functions above work properly, throws error if not.
