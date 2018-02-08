@@ -38,3 +38,16 @@ print(s4)
 
 print(s3.issubset(s2))
 print(s4.issubset(s2))
+
+# Sets 2
+
+letter_set = set()
+letter_set.update("Python")
+letter_set.add('i')
+
+froset = set()
+froset.update("marathon")
+froset = frozenset(froset)
+
+print(letter_set.union(froset))
+print(letter_set.intersection(froset))
