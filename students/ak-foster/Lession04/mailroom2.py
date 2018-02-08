@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import os
+from datetime import datetime
 
 donate = {'Merv': [10, 500, 100], 'Linda': [300, 62, 7], 'Larry': [25, 50, 100], 'Sue': [20, 50, 1000]}
 
@@ -25,7 +27,7 @@ def thankYou():
             if amount == "":
                 quit()
             donate[resp] = [(int(amount))]
-        print(f"{resp} - Thank you for your gift of {amount} dollars.")
+        print(f"{resp},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team")
 
 
 def createReport():
@@ -71,8 +73,19 @@ def createReport():
     # print report footer
     printLine()
 
+def letters():
+    """For all the donors in the donor data structure, generate a thank you letter, and write it to disk as a text file."""
+    response = input("Type the directory where these letters should be saved:  ")
+    os.chdir(response)
+    for donor, gifts in donate.items():
+        total = sum(gifts)
+        with open(donor + '_' + str(datetime.now().date()) + '.txt', 'w+') as f:
+            f.write(f"{donor},\n\nThank you for your gift of {total} dollars. Your donation will be put to good use.\n\n - The Team")
+    print(f"\nLetters have been saved to the {response} directory.\n")
+
+
 # Prompt with menu
-switcher = {'1': thankYou, '2': createReport, '0': quit}
+switcher = {'1': thankYou, '2': createReport, '3': letters, '0': quit}
 while True:
-    res = input("Type '1' to send a thank you. \nType '2' to create a report. \nType '0' to quit:  ")
+    res = input("Type '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit:  ")
     switcher[res]()
