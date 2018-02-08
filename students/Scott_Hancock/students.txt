@@ -1,8 +1,0 @@
-Name: Languages
-Duck, Donald: c++, java
-Mouse, Mickey: fortran, elisp
-Mouse, Minnie: javascript, python, r, sql
-Duck, Daisy: java, c, c++, vba
-Duck, Hughey: php, coldfusion, html, css, sql, javascript
-Duck, Dewey: java, c, c++, sql
-Duck, Louie: vba, html, css, sql
