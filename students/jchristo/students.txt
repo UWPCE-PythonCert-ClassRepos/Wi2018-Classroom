@@ -1,8 +1,0 @@
-Name: Languages
-Donald Duck
-Mickey Mouse
-Minnie Mouse
-Daisy Duck
-Huey Duck
-Dewey Duck
-Louie Duck
