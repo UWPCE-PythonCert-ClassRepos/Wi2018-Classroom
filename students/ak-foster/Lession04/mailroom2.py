@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-donate = [['Merv', 10, 500, 100], ['Linda', 300, 62, 7], ['Larry', 25, 50, 100], ['Sue', 20, 50, 1000]]
+donate = {'Merv': [10, 500, 100], 'Linda': [300, 62, 7], 'Larry': [25, 50, 100], 'Sue': [20, 50, 1000]}
 
 def thankYou():
     """Add new donations to record and display a thank you note when provided a name and donation amount."""
@@ -9,23 +9,22 @@ def thankYou():
     if resp == "":
         quit()
     if resp == 'list':
-        print(donate)
+        print(donate.keys())
     else:
-        for name in donate:
+        for name, gifts in donate.items():
             countMatches = 0
-            if name[0] == resp:
+            if resp in donate:
                 amount = input("Please input the donation amount or leave blank to quit:  ")
                 if amount == "":
                     quit()
-                name.append(int(amount))
+                donate[name].append(int(amount))
                 countMatches += 1
                 break
         if countMatches == 0:
-            donate.append([resp, ])
             amount = input("Please input the donation amount or leave blank to quit:  ")
             if amount == "":
                 quit()
-            donate[-1].append(int(amount))
+            donate[resp] = [(int(amount))]
         print(f"{resp} - Thank you for your gift of {amount} dollars.")
 
 
@@ -34,9 +33,9 @@ def createReport():
     """Print donors names, total donations, # of donations, and avg donation- sorted highest to lowest total donation"""
 
     # Calculate donation summary for each donor and add to the report
-    for name in donate:
-        dName = name[0]
-        donations = name[1:]
+    for name, gifts in donate.items():
+        dName = name
+        donations = gifts
         total = sum(donations)
         count = len(donations)
         avg = total // count

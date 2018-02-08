@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+import os
 
 # Activity 1: Dictionaries 1
+
+
 def activity1():
     """Return results for Activity 1"""
     dict = {'name': 'Chris', 'city': 'Seattle', 'cake': 'Chocolate'}
@@ -27,7 +30,7 @@ def activity1():
     s2 = []
     s3 = []
     s4 = []
-    for i in range(1, 20):
+    for i in range(20):
         if i % 2 == 0:
             s2.append(i)
         if i % 3 == 0:
@@ -48,14 +51,24 @@ def activity1():
     nS.add('i')
     fS = frozenset(list('marathon'))
     print(fS.union(nS))
-    return fS.union(nS)
 
 # Activity 2: File Lab
-def activity2():
-    """Return the resutls of Activity 2"""
-    # TODO: Write a program which prints the full path for all files in the current directory, one per line
-    # TODO: Write a program which copies a file from a source, to a destination (without using shutil, or the OS copy command)
-    print('hello')
 
-# Tests functions above, returns Error if something goes wrong
-# assert activity1() == frozenset({'P', 'r', 'o', 'a', 'i', 't', 'n', 'm', 'h', 'y'})
+
+def list_files():
+    """Print the full path for all files in the current directory, one per line."""
+    fp = os.getcwd()
+    for file in os.listdir():
+        print(f"{fp}/{file}")
+
+
+def copy_files(filename):
+    """Copy a file from a source, to a destination (without using shutil, or the OS copy command)."""
+    with open(filename, 'rb') as source_file:
+        with open('copy-'+ filename, 'wb') as destination_file:
+            destination_file.write(source_file.read())
+    print(f"A copy of {filename} has been created in the current directory.")
+    return filename == destination_file
+
+# Tests functions above, returns Error if something goes wrong -- how do I test file copying and file paths?
+# assert copy_files('test.txt') == True
