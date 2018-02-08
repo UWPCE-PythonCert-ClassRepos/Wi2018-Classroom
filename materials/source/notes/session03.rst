@@ -6,4 +6,13 @@
 Notes for Session 03
 ####################
 
-Notes for class
+
+slicing:
+https://uwpce-pythoncert.github.io/PythonCertDevel/modules/Sequences.html#helpful-hint
+https://uwpce-pythoncert.github.io/PythonCertDevel/modules/Sequences.html#why-start-from-zero
+
+bad example of naming:
+https://uwpce-pythoncert.github.io/PythonCertDevel/modules/Sequences.html#mutable-default-argument
+
+Else in for loops:
+https://uwpce-pythoncert.github.io/PythonCertDevel/modules/Iteration.html#else

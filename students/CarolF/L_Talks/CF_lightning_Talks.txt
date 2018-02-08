@@ -1,0 +1,27 @@
+Presenter: Carol Farris
+
+Topic of Choice: Biopython
+
+Interest/background
+Former Molecularbiologist with interest in Bioinformatics
+Quick Indeed search of Bioinformatics related jobs identified Python as key requirement
+
+What is Biopython?
+1. Collection of Python tools/modules for Bioinformatics and computational biology.
+2. Identified as a good collection for those knowing Python, beginner programmers, for developing larger programs and sharing. PMID 12230038.
+3. Key 2009 publication has over 1,130 Pubmed citations and 228 citations in 2017
+4. Access at http://biopython.org/    
+5. Repository available on Github
+6. Most Recent Release Biopython 1.70, released July 10, 2017
+
+Relevance of Biopython:
+1. Used by scientists to programmatically retrieve, analyze and share their data
+2. Intended to reduce code duplication
+3. A part of the Open Bioinformatics Foundation- promoting Open source and Open science in research
+
+Examples of Biopythons capabilities:
+1. Sequence analysis of biologically relevant molecules--DNA, RNA, protein, sugars?
+2. It can read and write to many different file formats
+3. Tools to programmatically interface (and exchange data) with online data repositories (NCBI, Expasy, etc)
+4. It can provide shell wrappers to reuse the same code
+5. Tools for motif identifications (think Biology regular expressions- a pattern of aas, nts, etc)
