@@ -1,10 +1,8 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # February 5, 2017
 # list Lab #4
 # Tracy Allen - git repo https://github.com/tenoverpar/Wi2018-Classroom
-
-
-#!/usr/bin/env python3
 
 
 # Task 1 to print out data
@@ -38,6 +36,10 @@ print(myoutput)
 
 # Task 5
 my_tuple5 = ['oranges', 1.3, 'lemons', 1.1]
-f'The weight of an {my_tuple5[0]} is {my_tuple5[1]} and the weight of a {my_tuple5[2]} is {my_tuple5[3]}'
+tuple5_to_print = f'The weight of an {my_tuple5[0]} is {my_tuple5[1]} and the weight of a {my_tuple5[2]} is {my_tuple5[3]}'
+print(tuple5_to_print)
+
+
 # Make the answers all uppercase and multipy the weight by 1.2
-f'The weight of an {my_tuple5[0].upper()} is {my_tuple5[1] * 1.2} and the weight of a {my_tuple5[2]} is {my_tuple5[3]}'
+tuple5a_to_print = f'The weight of an {my_tuple5[0].upper()} is {my_tuple5[1] * 1.2} and the weight of a {my_tuple5[2].upper()} is {my_tuple5[3] * 1.2}'
+print(tuple5a_to_print)
