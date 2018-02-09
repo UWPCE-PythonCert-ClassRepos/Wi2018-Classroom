@@ -1,10 +1,9 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # February 5, 2017
 # list Lab #4
 # Tracy Allen - git repo https://github.com/tenoverpar/Wi2018-Classroom
 
-
-#!/usr/bin/env python3
 
 # Create a list  with Apples, Pears, Oranges, and Peaches. Print the list.
 print("List of fruit. Then revers the letters of each fruit. Compare lists. ")
