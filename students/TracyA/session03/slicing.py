@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # February 4, 2017
 # Slicing Lab
@@ -9,8 +10,6 @@
 #     the remaining sequence.
 # with the elements reversed (just with slicing).
 # with the middle third, then last third, then the first third in the new order
-
-#!/usr/bin/env python3
 
 
 def exchange_first_last(seq):
