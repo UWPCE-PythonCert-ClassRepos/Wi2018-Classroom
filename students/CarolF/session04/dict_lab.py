@@ -4,6 +4,7 @@
 ###########################################
 ## Dictionary and Set Lab from Week 4
 ## Created by: Carol Farris
+## February 9, 2018
 ###########################################
 
 
