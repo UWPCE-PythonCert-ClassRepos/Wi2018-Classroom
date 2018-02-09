@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
+=======
+#!/usr/bin/env python3
+>>>>>>> 792527bae1b6e70788e5b56d4308fa618caec5c2
 # Programming in python B Winter 2018
 # February 4, 2017
 # list Lab
