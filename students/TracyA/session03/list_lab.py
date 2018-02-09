@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # February 4, 2017
 # list Lab
@@ -6,7 +7,6 @@
 # Series 1
 # Create a list that contains Apples, Pears, Oranges and Peaches.
 
-#!/usr/bin/env python3
 
 fruits = ["Apples", "Pears", "Oranges", "Peaches"]
 print("These are the fruits in my list: ")
