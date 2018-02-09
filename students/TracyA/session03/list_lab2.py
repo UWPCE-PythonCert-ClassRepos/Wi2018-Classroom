@@ -1,10 +1,9 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # February 5, 2017
 # list Lab #2
 # Tracy Allen - git repo https://github.com/tenoverpar/Wi2018-Classroom
 
-
-#!/usr/bin/env python3
 
 # Series 2 of list lab exercises
 # Create a list with Apples, Pears, Oranges, and Peaches. Print the list.
