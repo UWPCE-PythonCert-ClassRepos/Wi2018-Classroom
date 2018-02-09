@@ -17,7 +17,7 @@ print_all_files()
 
 
 def copy_file(file,output_file):
-    with open(file, 'r') as infile, open(output_file, 'w+') as outfile:
+    with open(file, 'rb') as infile, open(output_file, 'wb') as outfile:
         outfile.write(infile.read())
 
 copy_file("copythis.txt", "output_this.txt")
@@ -44,8 +44,8 @@ for student in students[1:]:
 l_counter = {}
 final_languages = []
 for l in languages:
-    #instead of writing out the alphabet, I could just do a l[0] != l[0].upper(), but this looks more fun.
-    if (len(l)>1) and (l[0] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ") and (l!="nothing"): #ugh, stupid "nothing"
+    #instead of writing out the alphabet I could just do a l[0] != l[0].upper(). But this is more fun.
+    if (len(l)>1) and (l[0] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"): # Apparently "nothing" is an esoteric language (ha) so removed: "and l!='nothing'" clause
         final_languages.append(l)
         #Extra challenge: keep track of how many students specified each language
         if l not in l_counter:

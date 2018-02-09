@@ -13,7 +13,7 @@
         Display whether or not “Mango” is a value in the dictionary (i.e. True).
 
 """
-"""
+
 
 my_d = {"name":"Chris", "city":"Seattle", "cake":"Chocolate"}
 
@@ -34,7 +34,7 @@ for val in my_d.values():
 
 print("cake" in my_d) #.keys() isn't necessary here
 print("Mango" in my_d.values())
-"""
+
 
 """
 Using the dictionary from item 1: Make a dictionary using the same keys but with the number of ‘t’s in each value as the value (consider upper and lower case?).
@@ -71,7 +71,7 @@ s2 = set()
 s3 = set()
 s4 = set()
 
-for i in range(20):
+for i in range(21):
     if (i%2==0):
         s2.add(i)
     if i%3==0:
