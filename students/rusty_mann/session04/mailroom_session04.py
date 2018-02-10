@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 
-#List of tuples, donor at index 0 in each tuple
-#and list of donations at index 1 in each tuple
+#Dictionary: keys are donors and values are lists of donations
 donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00], 
                     "Gates, Bill": [5000000.00, 80000.00, 700000.00], 
                     "Bezos, Jeff": [30000.00], 
@@ -32,17 +31,7 @@ def get_donor(name):
     return None
 
 
-def init_prompt():
-    response = input('''\n
-        Would you like to: 
-        '1' - Send a Thank You 
-        '2' - Create a Report 
-        '3' - Quit
-        > ''')
-    return response.strip()
-
-
-def make_donor_email(donor):
+def make_donor_email(donor_dict):
     """
     Make a thank you email for the donor
     :param: donor tuple
@@ -50,15 +39,17 @@ def make_donor_email(donor):
     """
     #for donor, amt in donor_data.items():
     return '''\n
-        Dear {0}, 
-        Thank you for your donation of ${1:.2f}.
+        Dear {name}, 
+        Thank you for your donation of ${amt:.2f}.
         You are a good person.
                             Sincerely,
                             -Me
-        '''.format(donor, donor_data[donor][-1])
+        '''.format(**donor_dict)
+        #.format(donor, donor_data[donor][-1])
 
 
 def send_donor_email():
+    donor_dict = {}
     while True:
         name = input("Please enter a donor's name in the form of 'Last name, First name'"
             "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip()
@@ -75,19 +66,14 @@ def send_donor_email():
         else:
             amount = float(amount_str)
         donor = get_donor(name)
-        #print(donor)
         if donor is None:
-            donor = (name)
-            donor_data.setdefault(name, [])
-        #print(donor_data)
-            #donor = {name: []}
-            #donor_data.update(donor)
-        donor_data[name].append(amount)
-        #print(donor_data)
+             donor_dict["name"] = name
+        donor_dict["amt"] = amount
+        #donor[name].append(amount)
+            #donor_data.setdefault(name, [])
+        #donor_data[name].append(amount)
         break
-    #print(donor_data)
-    #print(donor)
-    print(make_donor_email(donor))
+    print(make_donor_email(donor_dict))
 
 
 def sort_key(donor):
@@ -98,32 +84,48 @@ def make_report():
     rows = []
     for donor in donor_data:
         total = sum(donor_data[donor])
-        num = len(donor_data[donor]
+        num = len(donor_data[donor])
         avg = total / num
         rows.append((donor, total, num, avg))
     rows.sort(key=sort_key, reverse=True)
+    print("{:20s}{:15s}{:15s}{:12s}".format(
+        "Donor Name", "|  Total Given", "|  Num Gifts", "|  Average Gift"))
+    print("_" * 67)
     for row in rows:
         print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row))
 
 
+def quit():
+    print("Quitting this menu now")
+    return "exit menu"
 
-'''
-def make_report():
-    donor_data.sort(key=sort_key)
-    #donor_sort = sorted(donor_data, key=lambda donor: sum(donor[1]), reverse=True)
-    print(donor_sort)
-    col_names = ["Donor Name", "| Total Given", "| Num Gifts", "| Average Gift"]
-    headers = f'{col_names[0]:20}{col_names[1]:>15}{col_names[2]:^15}{col_names[3]:20}'
-    print(" ")
-    print(headers)
-    print(("_")*65)
-    print((" "))
-    for n in range(len(donor_sort)):
-        columns = f'{donor_sort[n][0]:20}{sum(donor_sort[n][1]):15.2f}{len(donor_sort[n][1]):^15}{(sum(donor_sort[n][1])/len(donor_sort[n][1])):12.2f}'
-        print(columns)
-'''
+
+def menu_selection(prompt, dispatch_dict):
+    while True:
+        response = input(prompt)
+        if dispatch_dict[response]() == "exit menu":
+            break
+
+
+#def init_prompt():
+init_prompt = ('''\n
+                            Would you like to: 
+                            '1' - Send a Thank You 
+                            '2' - Create a Report 
+                            '3' - Quit
+                            > ''')
+    #return response.strip()
+
+
+main_dispatch = {"1": send_donor_email,
+                                   "2": make_report,
+                                   "3": quit}
+
 
 if __name__ == "__main__":
+    menu_selection(init_prompt, main_dispatch)
+
+'''
     running = True
     while running:
         selection = init_prompt()
@@ -135,5 +137,5 @@ if __name__ == "__main__":
             running = False
         else:
             print("error: please make a valid selection!")
-
+'''
 
