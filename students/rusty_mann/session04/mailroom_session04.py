@@ -31,6 +31,27 @@ def get_donor(name):
     return None
 
 
+def split_name(donor):
+    '''
+
+    '''
+    first_name = donor.split(",")[1].strip()
+    last_name = donor.split(",")[0].strip()
+    return first_name, last_name
+
+
+def make_letter_files():
+    '''
+    write thank you letter as text files for each donor
+    '''
+    letter_dict = {}
+    for donor in donor_data:
+        letter_dict["first name"], letter_dict["last name"] = split_name(donor)
+        letter_dict["amt"] = donor_data[donor][-1]
+        with open('{last name}_{first name}.txt'.format(**letter_dict), 'w') as outfile:
+            outfile.write(make_donor_email(letter_dict))
+
+
 def make_donor_email(dct):
     """
     Make a thank you email for the donor
@@ -39,7 +60,7 @@ def make_donor_email(dct):
     """
     #for donor, amt in donor_data.items():
     return '''\n
-        Dear {name}, 
+        Dear {first name} {last name}, 
         Thank you for your donation of ${amt:.2f}.
         You are a good person.
                             Sincerely,
@@ -66,16 +87,17 @@ def send_donor_email():
             amount = float(amount_str)
         donor = get_donor(name)
         if donor is None:
+            #donor = (name)
             donor_data.setdefault(name, [])
-            donor_dict["name"] = name
-        donor_dict["amt"] = amount   
+            donor_dict["first name"], donor_dict["last name"] = split_name(name)
         donor_data[name].append(amount)
+        donor_dict["amt"] = amount   
         break
     print(make_donor_email(donor_dict))
 
 
-def sort_key(donor):
-    return donor[1]
+def sort_key(item):
+    return item[1]
 
 
 def make_report():
@@ -108,14 +130,17 @@ def menu_selection(prompt, dispatch_dict):
 init_prompt = ('''\n
                 Would you like to: 
                 '1' - Send a Thank You 
-                '2' - Create a Report 
-                '3' - Quit
+                '2' - Create a Report
+                '3' - Send letters to everyone 
+                '4' - Quit
                 > ''')
 
 
 main_dispatch = {"1": send_donor_email,
-                 "2": make_report,
-                 "3": quit}
+                                   "2": make_report,
+                                   "3": make_letter_files,
+                                   "4": quit
+                                   }
 
 
 if __name__ == "__main__":
