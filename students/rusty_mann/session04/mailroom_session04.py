@@ -31,7 +31,7 @@ def get_donor(name):
     return None
 
 
-def make_donor_email(donor_dict):
+def make_donor_email(dct):
     """
     Make a thank you email for the donor
     :param: donor tuple
@@ -44,14 +44,13 @@ def make_donor_email(donor_dict):
         You are a good person.
                             Sincerely,
                             -Me
-        '''.format(**donor_dict)
-        #.format(donor, donor_data[donor][-1])
+        '''.format(**dct)
 
 
 def send_donor_email():
     donor_dict = {}
     while True:
-        name = input("Please enter a donor's name in the form of 'Last name, First name'"
+        name = input("Please enter a donor's name in the form of 'Last name, First name' "
             "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip()
         if name == "list":
             show_donor_list()
@@ -67,11 +66,10 @@ def send_donor_email():
             amount = float(amount_str)
         donor = get_donor(name)
         if donor is None:
-             donor_dict["name"] = name
-        donor_dict["amt"] = amount
-        #donor[name].append(amount)
-            #donor_data.setdefault(name, [])
-        #donor_data[name].append(amount)
+            donor_data.setdefault(name, [])
+            donor_dict["name"] = name
+        donor_dict["amt"] = amount   
+        donor_data[name].append(amount)
         break
     print(make_donor_email(donor_dict))
 
@@ -107,35 +105,20 @@ def menu_selection(prompt, dispatch_dict):
             break
 
 
-#def init_prompt():
 init_prompt = ('''\n
-                            Would you like to: 
-                            '1' - Send a Thank You 
-                            '2' - Create a Report 
-                            '3' - Quit
-                            > ''')
-    #return response.strip()
+                Would you like to: 
+                '1' - Send a Thank You 
+                '2' - Create a Report 
+                '3' - Quit
+                > ''')
 
 
 main_dispatch = {"1": send_donor_email,
-                                   "2": make_report,
-                                   "3": quit}
+                 "2": make_report,
+                 "3": quit}
 
 
 if __name__ == "__main__":
     menu_selection(init_prompt, main_dispatch)
 
-'''
-    running = True
-    while running:
-        selection = init_prompt()
-        if  selection == "1":
-            send_donor_email()
-        elif selection == "2":
-            make_report()
-        elif selection == "3":
-            running = False
-        else:
-            print("error: please make a valid selection!")
-'''
 
