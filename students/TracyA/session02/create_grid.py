@@ -1,10 +1,8 @@
+#!/usr/bin/env python
 # Programming in python B Winter 2018
 # January 27, 2017
 # Grid printer
 # Tracy Allen - git repo https://github.com/tenoverpar/Wi2018-Classroom
-
-
-#!/usr/bin/env python3
 
 
 def new_grid(a=3, b=4):
