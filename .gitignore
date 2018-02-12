@@ -89,6 +89,8 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+vclassroom/
+edu-collections/
 
 # Spyder project settings
 .spyderproject
@@ -105,3 +107,7 @@ ENV/
 
 # emacs
 *.*~
+
+# my own
+scratch.py
+

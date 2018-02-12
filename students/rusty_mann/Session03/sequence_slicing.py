@@ -4,31 +4,31 @@ def switch_first_last(seq):
     new = seq[-1:] + mid + seq[:1]
     return new
 
-print(switch_first_last("this is a string"))
-print(switch_first_last([1,2,3,4,5,6,7,8,9,0]))
-print(switch_first_last((1,2,3,4,5,6,7,8,9,0)))
+assert switch_first_last("this is a string") == "ghis is a strint"
+assert switch_first_last([1,2,3,4,5,6,7,8,9,0]) == [0,2,3,4,5,6,7,8,9,1]
+assert switch_first_last((1,2,3,4,5,6,7,8,9,0)) == (0,2,3,4,5,6,7,8,9,1)
 
 
 def every_other(seq):
     return seq[::2]
 
-#print(every_other("this is a string"))
-#print(every_other([1,2,3,4,5,6,7,8,9,0]))
+assert every_other("this is a string") == "ti sasrn"
+assert every_other([1,2,3,4,5,6,7,8,9,0]) == [1,3,5,7,9]
 
 
 def remove_four(seq):
     seq = seq[4:-4]
     return seq[::2]
 
-#print(remove_four("0000102030405060708090000"))
-#print(remove_four([0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0]))
-#print (remove_four((0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0)))
+assert remove_four("0000102030405060708090000") == "123456789"
+assert remove_four([0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0]) == [1,2,3,4,5,6,7,8,9]
+assert remove_four((0,0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,0,0,0)) == (1,2,3,4,5,6,7,8,9)
 
 def reversed(seq):
     return seq[::-1]
 
-#print(reversed("this is a string"))
-#print(reversed([1,2,3,4,5,6,7,8,9,0]))
+assert reversed("this is a string") == "gnirts a si siht"
+assert reversed([1,2,3,4,5,6,7,8,9,0]) == [0,9,8,7,6,5,4,3,2,1]
 
 
 def thirds(seq):
@@ -40,7 +40,7 @@ def thirds(seq):
     third_third = remainder[third2:]
     return second_third + third_third + first_third
 
-#print(thirds("123456789"))
-#print(thirds([1,2,3,4,5,6,7,8,9,0]))
-#print(thirds((1,2,3,4,5,6,7,8,9,0)))
+assert thirds("123456789") == "456789123"
+assert thirds([1,2,3,4,5,6,7,8,9,]) == [4,5,6,7,8,9,1,2,3]
+assert thirds((1,2,3,4,5,6,7,8,9,0)) == (4,5,6,7,8,9,0,1,2,3)
 
