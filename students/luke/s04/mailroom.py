@@ -5,7 +5,11 @@ https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/mailroom.html#exerc
 """
 
 # Store donors/history in dictionary
-donor_list = {"alice" : [5], "bob" : [1, 2], "carol" : [1, 5, 100], "dan" : [5], "erin" : [2, 1]}
+donor_list = {"alice": [5],
+              "bob": [1, 2],
+              "carol": [1, 5, 100],
+              "dan": [5],
+              "erin": [2, 1]}
 
 # Format of thank-you notes
 THANK_YOU = "Thank you, {}, for your donation(s) of ${}!\n"
@@ -13,16 +17,17 @@ THANK_YOU = "Thank you, {}, for your donation(s) of ${}!\n"
 # Destination file
 OUTFILE = "{}.txt"
 
+
 def driver():
     """ Main loop for mailroom """
     done = False
     while not done:
         action = input(("Select an action and press return:\n"
-            "[S]end a thank-you (add users and donation entries)\n"
-            "[W]rite thank-you letters to file\n"
-            "[C]reate a report\n"
-            "[Q]uit\n"
-            "> "))
+                        "[S]end a thank-you (add users and donation entries)\n"
+                        "[W]rite thank-you letters to file\n"
+                        "[C]reate a report\n"
+                        "[Q]uit\n"
+                        "> "))
         while not action.lower() in "swcq":
             action = input("Bad option, reenter > ")
 
@@ -33,7 +38,7 @@ def driver():
         elif action == "c":
             create_report()
         else:
-            done = True;
+            done = True
     return
 
 
@@ -45,18 +50,19 @@ def add_donations():
 
         if name == "list":
             # list donor names
-            for n in donor_list: print(n)
+            for n in donor_list:
+                print(n)
             continue
 
         if not donor_list.get(name):
             print("Adding new donor: " + name)
-            donor_list[name] = [ ]
+            donor_list[name] = []
 
         moredonations = True
         while moredonations:
             value = input("Enter donation amount or [enter] when finished: ")
             if (value == ""):
-                break;
+                break
             try:
                 donation_amount = int(value)
             except ValueError:
@@ -67,10 +73,12 @@ def add_donations():
         print(THANK_YOU.format(name, sum(donor_list[name])))
     return
 
+
 def write_thankyous():
     for d in donor_list:
         with open(OUTFILE.format(d), 'w') as outfile:
             outfile.write(THANK_YOU.format(d, sum(donor_list[d])))
+
 
 def create_report():
     """ Display table: Donor Name | Total Given | Num Gifts | Average Gift """
@@ -78,8 +86,12 @@ def create_report():
     for d in donor_list:
         total = 0
         d_list = donor_list[d]
-        for amt in d_list: total += amt
-        print(f"{d:10} | {total:11.2f} | {len(d_list):9d} | {total/len(d_list):12.2f}")
+        for amt in d_list:
+            total += amt
+        print(f"{d:10} | "
+              "{total:11.2f} | "
+              "{len(d_list):9d} | "
+              "{total/len(d_list):12.2f}")
     print()
     return
 
