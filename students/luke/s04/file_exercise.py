@@ -12,7 +12,7 @@ languages = { }
 
 for line in infile:
     # split at :
-    name, sep, langs = line.partition(':')
+    name, langs = line.split(':', 1)
     if name == 'Name': continue # header
     for langent in langs.split(','):
         lang = langent.replace(' ','').strip()

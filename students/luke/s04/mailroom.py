@@ -23,8 +23,8 @@ def driver():
             "[C]reate a report\n"
             "[Q]uit\n"
             "> "))
-        action = action.lower()
-        while not action in "swcq": action = input("Bad option, reenter > ")
+        while not action.lower() in "swcq":
+            action = input("Bad option, reenter > ")
 
         if action == "s":
             add_donations()
@@ -54,13 +54,14 @@ def add_donations():
 
         moredonations = True
         while moredonations:
-            value = input("Enter donation amount or -1 when finished: ")
+            value = input("Enter donation amount or [enter] when finished: ")
+            if (value == ""):
+                break;
             try:
                 donation_amount = int(value)
             except ValueError:
                 print("Invalid input, reenter.")
                 continue
-            if donation_amount == -1: break
             donor_list[name].append(donation_amount)
         done = True
         print(THANK_YOU.format(name, sum(donor_list[name])))
