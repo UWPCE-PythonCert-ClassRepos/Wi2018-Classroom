@@ -1,0 +1,8 @@
+Name: Languages
+Donald Duck: y
+Mickey Mouse: nabs, nibs
+Minnie Mouse: nabs, nibs, sql
+Daisy Duck: perl
+Huey Duck: html5
+Dewey Duck: reddit markdown
+Louie Duck: ruby, ksh
