@@ -73,7 +73,7 @@ def send_donor_email():
     while True:
         name = input("Please enter a donor's name in the form of 'Last name, First name' "
             "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip()
-        if name == "list":
+        if name == "list".strip().lower():
             show_donor_list()
         elif name == "menu":
             return None
