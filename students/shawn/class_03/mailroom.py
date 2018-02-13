@@ -100,32 +100,28 @@ class Donors(object):
             print(f"{'{:>10.2f}'.format(stat.mean(r[2]))}")
         print(f"{63*'-'}")
 
-#-----------------------------------------------------------------------*
-# dummy function to load a collection of donors
-#-----------------------------------------------------------------------*
-def load_default(donors):
-    """
-    Load the default list of users in Donor collection
-    :param donors: global list of Donor instances
-    :return: None
-    """
+    def load_default(donors):
+        """
+        Load the default list of users in Donor collection
+        :param donors: global list of Donor instances
+        :return: None
+        """
 
-    data = [['Bill', 'Buckner', 1000.25],
-            ['Bill', 'Buckner', 2300.00],
-            ['Bill', 'Buckner', 300.33],
-            ['Bill', 'Buckner', 950.00],
-            ['Bill', 'Buckner', 250.25],
-            ['Don', 'Baylor', 1141.50],
-            ['Wade','Boggs',5000.15],
-            ['Wade','Boggs',125.55],
-            ['Wade','Boggs',1000.00],
-            ['Ted','Williams',333.45],
-            ['Jim','Rice',225.98],
-            ['Jim', 'Rice', 125.19],
-            ['Jim', 'Rice', 352.76] ]
-    for i in data:
-        donors.read_data(i[0],i[1],i[2])
-
+        data = [['Bill', 'Buckner', 1000.25],
+                ['Bill', 'Buckner', 2300.00],
+                ['Bill', 'Buckner', 300.33],
+                ['Bill', 'Buckner', 950.00],
+                ['Bill', 'Buckner', 250.25],
+                ['Don', 'Baylor', 1141.50],
+                ['Wade', 'Boggs', 5000.15],
+                ['Wade', 'Boggs', 125.55],
+                ['Wade', 'Boggs', 1000.00],
+                ['Ted', 'Williams', 333.45],
+                ['Jim', 'Rice', 225.98],
+                ['Jim', 'Rice', 125.19],
+                ['Jim', 'Rice', 352.76]]
+        for i in data:
+            donors.read_data(i[0], i[1], i[2])
 
 
 #-----------------------------------------------------------------------*
@@ -165,7 +161,10 @@ def get_user(user):
     if donor_list.get(k)[0]:
         amt=prompt_user(f"Enter the donation amount for {user}")
         if amt[0]:
-            return donor_list.read_data(donor[1].fnam, donor[1].lnam, amt[1])
+            if amt[1].lower()!="quit":
+                return donor_list.read_data(donor[1].fnam, donor[1].lnam, amt[1])
+            else:
+                return None
     else:
         is_add=prompt_user(f"Would you like to add '{user}' to the database? (Y/N)")
         if is_add[0]:
@@ -196,10 +195,14 @@ def send_thankyou():
                     if donor != None:
                         print(f"{'-'*100}"
                               f"\n\nDearest {donor[1].fnam},\n\nThank for your latest donation of {donor[1].donation[-1]}, "
-                              f"bringing your total donations to {sum([i for i in donor[1].donation])}.\n\nSincerly,\nmanagment\n"
+                              f"bringing your total donations to {sum([i for i in donor[1].donation])}.\n\nSincerly,\nManagement\n"
                               f"{'-'*100}")
 
                     return True
+        else:
+            break
+            return False
+
 
 
 # -----------------------------------------------------------------------*
@@ -217,39 +220,37 @@ def report(donors):
 # -----------------------------------------------------------------------*
 # Main menu
 # -----------------------------------------------------------------------*
-def main_menu():
-    """
-    Entry point into app.
-    :return: Bool - true to continue, False to quit
-    """
-    msg="**Welcome to MailRoom**\nPlease select from the following actions\n\n\t(1)Send a thank you\n\t(2)Create a report\n\t(3)Quit\n\nSelect"
-    action=prompt_user(msg)
+def main(msg,disp_dict):
+    action = prompt_user(msg)
     if action[0]:
-        if action[1] in ['1','2','3']:
-            if action[1]=='1':
-                ty=send_thankyou()
-                return ty
-            elif action[1]=='2':
-                rc=report(donor_list)
-                return rc
+        if action[1] in ("1","2","3"):
+            if action[1]=="2":
+                return disp_dict[action[1]](donor_list)
             else:
-                print("Closing...")
-                return False
+                return disp_dict[action[1]]()
+        else:
+            print("Invalid selection\n")
+            return True
 
+def close():
+    print("Closing...")
+    return False
 
 if __name__ == '__main__':
     # -----------------------------------------------------------------------*
     # seed the database
     # -----------------------------------------------------------------------*
     donor_list=Donors()
-    load_default(donor_list)
+    donor_list.load_default()
+    dd = {"1":send_thankyou, "2":report, "3":close}
 
     # -----------------------------------------------------------------------*
     # Prompt for action
     # -----------------------------------------------------------------------*
     status=True
     while status==True:
-        status=main_menu()
+        status=main("**Welcome to MailRoom**\nPlease select from the following actions\n\n\t(1)Send a thank you\n\t(2)Create a report\n\t(3)Quit\n\nSelect",dd)
+
 
 
 
