@@ -1,0 +1,8 @@
+Name: Languages
+Donald Duck SQL Excel Matlab
+Mickey Mouse Java HTML
+Minnie Mouse Labview Javascript Basic
+Daisy Duck SQL, Java
+Huey Duck Basic, Python
+Dewey Duck SQL, Matlab, Labview
+Louie Duck Python, JAVA, C++
