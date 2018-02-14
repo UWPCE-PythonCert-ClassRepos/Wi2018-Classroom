@@ -84,7 +84,7 @@ print('frog' in a_dict)
 
 
 print('##################################################################')
-print('[*] Dictionary 2 (sets)')
+print('[*] Dictionary 2 (sets) / working with sets')
 
 """
 
@@ -112,13 +112,28 @@ Sets 2
     display the union and intersection of the two sets.
 """
 
-t_set = set('t')
+t_set = set(['t','T'])
 
 print('[-] set union/insec testing')
-print(set.union("Chris",t_set))
-a_dict={"name": set.union("Chris",t_set),
-        "city":"Seattle",
-        "cake":"Chocolate"}
+print(len(set.intersection(set("SeattleT"),t_set)))
+
+a2_dict={"name": len(set.intersection(set(a_dict['city']),t_set)),
+        "city": len(set.intersection(set(a_dict['city']),t_set)),
+        "cake": len(set(set(a_dict['city']),t_set))
+        }
+
+for k, v in a2_dict.items():
+    print(k, v)
+
+print(a_dict['city'])
+# print(set.intersection(set([a_dict['city']]),t_set)
+print(len(set.intersection(set(a_dict['city']),t_set)))
+
+#print(len(set.intersection(set(a_dict['city']),t_set)) - 1)
+
+# a3_dict={"name": len(set.intersection(set(a_dict['city']),t_set)),
+#         "city": 2,
+#         "cake": 1}
 
 
 
