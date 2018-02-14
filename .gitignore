@@ -106,4 +106,6 @@ ENV/
 # emacs
 *.*~
 
-me
+# my own
+scratch.py
+
