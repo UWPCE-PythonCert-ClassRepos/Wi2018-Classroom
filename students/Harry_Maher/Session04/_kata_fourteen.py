@@ -9,13 +9,32 @@ a good source of online books
 
 
 I found a book entitled: THE “SURE to RISE” COOKERY BOOK. An old pun 
-from a 1914! Hopefully it spits out a good bread recipe...
+from a 1914! Hopefully it spits out a good bread recipe for my bread club...
 
-Here's my favorite recipe excerpt so far:
-DATE CAKE. ½ lb. dates 1½ breakfastcups of flour piled up equal 1 lb. of steak ½ lb. flour 1 teaspoonful flour 1 pint milk
+-----
+Here are some good recipes it came up with:
+
+DATE CAKE. ½ lb. dates 1½ breakfastcups of flour piled up equal 1 lb. of steak ½ lb. 
+flour 1 teaspoonful flour 1 pint milk
+
+BATH BUNS. ½ cupful sweet milk 1 teaspoon lemon juice if desired, place in glass 
+dish, and cover with vinegar, boil slowly 4 or 5 hours.
+
+PLAIN PUFF PASTRY. ½ lb. butter, then mix egg and milk together, and add the eggs, 
+then flour and baking powder lightly and quickly, pour into greased tin, and bake 
+in quick oven. (When fully risen open door to let out the paste to a cream, then 
+beat in eggs. Mix currants with flour and baking powder, mix well, then add the milk
+
+ENGLISH QUEEN CAKES. 4 eggs Grate only the yellow part of the custard—if you use 
+Edmonds’ you can take the rest for granted. Let the children have all the dry 
+ingredients, add eggs well beaten, and enough milk to desired paste, roll out, 
+cover with a fork, and add to mixture. Grease two small dishes, fill half full 
+of fresh fruit, pour over the fire with the milk slightly warmed, and bake in 
+hot oven for about half-an-hour.
+------
 
 input: book.txt 
-output: my_new_book.txt (300 words--not a real book.)
+output: my_new_book.txt (300 words--not a real book. Really a couple of recipes, hopefully.)
 
 
 """
@@ -35,10 +54,10 @@ def book_reader(book_input):
 
 
 def trigram_dictionary_builder(book_input):
-    """builder dictionary from the list of words from book_reader"""
+    """builds dictionary from the list of words from book_reader"""
     words = book_reader(book_input)
     trigram_d = {}
-    for i, word in enumerate(words[:-2]):  #cutting off the last two words to avoid error, kinda hack-y
+    for i, word in enumerate(words[:-2]):  #cut off the last two words because they can't form a trigram
         word_pair = word+" "+words[i+1]
         if word_pair not in trigram_d:
             trigram_d[word_pair] = [words[i+2]]
@@ -52,7 +71,7 @@ def book_writer(trigram_d):
     while len(text_output) < 301:
         try:
             text_output += [random.choice(trigram_d[" ".join(text_output[-2:])])]
-        except:
+        except KeyError: # If there's no key to follow these values then start randomly again.
             text_output += list(random.choice(list(trigram_d.keys())).split())
     with open("my_new_book.txt", "w+") as f:
         f.write(" ".join(text_output))
