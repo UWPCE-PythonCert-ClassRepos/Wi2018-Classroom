@@ -1,4 +1,6 @@
 def print_grid2(columns = 2, width = 1):
+    """Created for Grid Printer Exercise - print a grid of columns and 
+    rows with variable size"""
     for i in range(columns + 1):
         main_row_str = '+' + (' -' * width) + ' '
         next_row_str = '|' + ('  ' * width) + ' '

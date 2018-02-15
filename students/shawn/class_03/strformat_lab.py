@@ -126,7 +126,6 @@ def task_six(fnam):
 
     # create formats for each column
     colspace=3
-    #
     fmts=[]
     for i in range(len(head)):
         sym= '<' if i < len(head) - 1 else '>'
