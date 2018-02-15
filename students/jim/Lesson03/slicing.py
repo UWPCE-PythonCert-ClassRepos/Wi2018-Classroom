@@ -39,3 +39,17 @@ def reverse(seq):
 
 assert reverse(my_string_1) == "tolemac"
 assert reverse(foo) == [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+
+def scramble_thirds(seq):
+    length = len(seq)
+    partition_1 = length // 3
+    partition_2 = partition_1 * 2
+    first = seq[:partition_1]
+    second = seq[partition_1:partition_2]
+    third = seq[partition_2:]
+    new_seq = second + third + first
+    return new_seq
+
+assert scramble_thirds(city_1) == "lewashingtonseatt"
+assert scramble_thirds(city_2) == "phiapennsylvaniaphiladel"
