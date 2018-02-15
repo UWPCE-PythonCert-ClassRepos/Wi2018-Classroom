@@ -1,4 +1,4 @@
-def valsToCountTs(myDict):
+def dictValuesToTCount(myDict):
     """Returns modified dict, replacing values with number of 't's"""
     for Ke, v in myDict.items():
         myDict[Ke] = str(v).lower().count('t')
@@ -14,10 +14,12 @@ def main():
 
     print(myDict)
 
+    # Delete last entry in dict
     myDict.popitem()
 
     print(myDict)
 
+    # Add new entry to dict
     myDict['fruit'] = 'Mango'
 
     # Print keys
@@ -30,16 +32,16 @@ def main():
     print('Mango' in myDict.values())
 
 
-    print(valsToCountTs(myDict))
+    # print(valsToCountTs(myDict))
 
 
-    s2 = set(
-    l2 = np.array([2]*21)
-    myList = np.array(range(21))
+    # s2 = set(
+    # l2 = np.array([2]*21)
+    # myList = np.array(range(21))
 
-    mathArray = l2 * 3
+    # mathArray = l2 * 3
     
-    print(mathArray)
+    # print(mathArray)
 
 if __name__=="__main__":
     main()
