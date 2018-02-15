@@ -7,7 +7,7 @@ donationList = {
 "Ellen": [1.25]
 }
 
-def CreateReport():
+def create_report():
 	print("Donor Name          | Total Given | Num Gifts | Average Gift")
 	print("------------------------------------------------------------")
 	for donor, amounts in donationList.items():
@@ -21,7 +21,7 @@ def CreateReport():
 			+ " $" + " " * (12 - len(giftAvg)) + giftAvg)
 
 
-def ThankYou():
+def thank_you():
     donorName = input("Donor's Full Name: ")
     exist = False
     while donorName.lower() == "list":
@@ -41,24 +41,30 @@ def ThankYou():
   
 def email(donorName):
 	print("\nDear " + donorName + "," + \
-  	"\n\n Thank you for your generous donation."+ \
-  	"Your kindness knows no bounds. Yada yada yada." + \
-  	"Please send more money soon \n\n Best, \n Kahyee \n")
-    
-      
+  	    "\n\n Thank you for your generous donation."+ \
+  	    "Your kindness knows no bounds. Yada yada yada." + \
+  	    "Please send more money soon \n\n Best, \n Kahyee \n")
 
-userPrompt = int(input("Select Action \n 1. Send a Thank You \n 2. Create a Report \n 3. quit \n"))
+def default_prompt():
+    return int(input("Select Action \n 1. Send a Thank You \n 2. Create a Report \n 3. Send Letters to Everyone \n 4. Quit \n"))    
+      
+def all_email():
+  for donor in donationList.keys():
+    email(donor)
+
+userPrompt = default_prompt()
 
 
 switch_prompt_dict = {
-  1: ThankYou,
-  2: CreateReport,
+  1: thank_you,
+  2: create_report,
+  3: all_email
 }
 
 
 
-while userPrompt != 3:
-  if userPrompt == 1 or userPrompt == 2:
+while userPrompt != 4:
+  if userPrompt in [1, 2, 3]:
     switch_prompt_dict[userPrompt]()
     
-  userPrompt = int(input("Select Action \n 1. Send a Thank You \n 2. Create a Report \n 3. quit \n"))
+  userPrompt = default_prompt()
