@@ -31,17 +31,42 @@ def main():
     print('cake' in myDict.keys())
     print('Mango' in myDict.values())
 
-
-    # print(valsToCountTs(myDict))
-
-
-    # s2 = set(
-    # l2 = np.array([2]*21)
-    # myList = np.array(range(21))
-
-    # mathArray = l2 * 3
     
-    # print(mathArray)
+    # Count number of "t"s in dict values
+    print(dictValuesToTCount(myDict))
 
+
+    print('\nSets Time!')
+
+    # Sets s2, s3, s4 = sets containing numbers from 0 - 20 divisible by 2, 3, and 4
+    s2 = set(range(2,21,2))
+    s3 = set(range(3,21,3))
+    s4 = set(range(4,21,4))
+
+    # Display sets
+    print('s2:',s2,'\ns3:',s3,'\ns4:',s4)
+
+    # Is s3 subset of s2?
+    print(s3.issubset(s2))
+
+    # Is s4 a subset of s2?
+    print(s4.issubset(s2))
+
+    # Sets Round2
+    # Create set with 'Python'
+    pSet = set()
+    for i in 'Python': pSet.add(i)
+
+    # Add 'i' to set
+    pSet.add('i')
+
+    # Create frozen set with 'marathon'
+    mSet = set()
+    for i in 'marathon': mSet.add(i)
+
+    # Show union and intersection of two sets
+    print('Union:', pSet.union(mSet), '\nIntersection:', pSet.intersection(mSet))
+
+    
 if __name__=="__main__":
     main()
