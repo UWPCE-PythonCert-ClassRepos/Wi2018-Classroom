@@ -4,6 +4,7 @@ import random
 
 trigram_dict = {}
 
+
 def get_key(word):
     for akey in trigram_dict:
         if word == akey:
@@ -26,14 +27,20 @@ with open('file_to_move.txt') as f:
         trigram_dict[k].append(v)
         count = count + 1
 
-#print(trigram_dict)
-
 trigram_list = list(trigram_dict)
-#print(trigram_list)
 
 def gen_seed():
     seed = random.choice(trigram_list)
     return seed
+
+
+story_str = ""
+#print(story_str)
+seed_str = gen_seed()
+#print(seed_str)
+story_str = story_str+seed_str
+#print(story_str)
+
 
 def get_rand_val(new_key):
     for akey in trigram_dict:
@@ -46,26 +53,29 @@ def get_last_two(new_str):
     new_key = word_list[-2] + " " + word_list[-1]
     return new_key
 
-def get_new_word():
-    new_key = get_last_two(story_str)
-    if new_key is None:
-        new_key = gen_seed()
+def get_new_word(new_str):
+    new_key = get_last_two(new_str)
+    #if new_key is None:
+        #new_key = gen_seed()
     new_val = get_rand_val(new_key)
     return str(new_val)
 
-story_str = " "
-print(story_str)
-seed_str = gen_seed()
-print(seed_str)
-story_str = story_str+seed_str
-print(story_str)
+
+
 #def make_new_story():
     #story_str = story_str + get_new_word()
     #return story_str
 
-#while True:
-new_word = get_new_word()
-story_str = story_str + " " + new_word
+
+while True:
+    new_word = get_new_word(story_str)
+    if new_word != None:
+        story_str = '{:s} {:s}'.format(story_str, new_word)
+        #story_str = story_str + " " + new_word
+    else:
+        if new_word == None:
+            break
+
 print(story_str)
 #else:
     #False
