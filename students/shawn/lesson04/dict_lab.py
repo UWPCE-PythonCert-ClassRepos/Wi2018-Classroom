@@ -3,27 +3,27 @@
 #  Lesson 4
 # Dictionary lab 1
 #------------------------------------------------------------------------*
-# dict1={"name":"Chris","city":"Seattle","cake":"Chocolate"}
-# print(dict1)
-# del dict1["cake"]
-# print(dict1)
-# dict1["fruit"]="Mango"
-# print(dict1)
-# print(dict1.keys())
-# is_cake=dict1.get("cake")!=None
-# print(is_cake)
-# is_mango="Mango" in dict1.values()
-# print(is_mango)
+dict1={"name":"Chris","city":"Seattle","cake":"Chocolate"}
+print(dict1)
+del dict1["cake"]
+print(dict1)
+dict1["fruit"]="Mango"
+print(dict1)
+print(dict1.keys())
+is_cake=dict1.get("cake")!=None
+print(is_cake)
+is_mango="Mango" in dict1.values()
+print(is_mango)
 
 #------------------------------------------------------------------------*
 # Dictionary lab 2
 #------------------------------------------------------------------------*
 # Using the dictionary from item 1: Make a dictionary using the same keys but
 # with the number of ‘t’s in each value as the value (consider upper and lower case?).
-# dict2={}
-# for i,v in dict1.items():
-#     dict2[i]=v.lower().count('t')
-# print(dict2)
+dict2={}
+for i,v in dict1.items():
+    dict2[i]=v.lower().count('t')
+print(dict2)
 
 #------------------------------------------------------------------------*
 #  Set 1
@@ -44,7 +44,7 @@ def set1(rng,divs):
         sets.append(set( [i for i in range(rng) if not i % d]))
     return sets
 
-# print(set1(20,(2,3,4)))
+print(set1(20,(2,3,4)))
 
 
 
