@@ -139,9 +139,3 @@ uniSet = unionSets(python_set, fset)
 displaySet(uniSet)
 intSet = intersectSets(python_set, fset)
 displaySet(intSet)
-
-donors = {"Navdeep": [1000], "Nick": [5, 2], "Henry": [100],
-          "Lorenzo": [1000], "Torin": [200.5]}
-print(donors["Nick"][1])
-for donor, metrics in donors.items():
-    print("{:<15}\t\t\t$ {:<20} {:<20} $ {:<20}".format(donor, metrics[0], metrics[1], metrics[2]))
