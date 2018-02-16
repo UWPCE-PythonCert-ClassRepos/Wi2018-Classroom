@@ -35,10 +35,10 @@ def gen_seed():
 
 
 story_str = ""
-#print(story_str)
 seed_str = gen_seed()
-#print(seed_str)
 story_str = story_str+seed_str
+#print(story_str)
+#print(seed_str)
 #print(story_str)
 
 
@@ -66,7 +66,7 @@ def get_new_word(new_str):
     #story_str = story_str + get_new_word()
     #return story_str
 
-
+#def make_new_story(story_str):
 while True:
     new_word = get_new_word(story_str)
     if new_word != None:
@@ -75,8 +75,9 @@ while True:
     else:
         if new_word == None:
             break
+    #return story_str
+#make_new_story(story_str)
 
-print(story_str)
 #else:
     #False
     #make_new_story()
