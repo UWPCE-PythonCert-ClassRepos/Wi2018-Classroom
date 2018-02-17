@@ -63,8 +63,6 @@ switch_prompt_dict = {
   3: all_email
 }
 
-
-
 while user_prompt != 4:
   if user_prompt in [1, 2, 3]:
     switch_prompt_dict[user_prompt]()
