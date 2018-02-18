@@ -115,8 +115,7 @@ def make_report():
     print("{:20s}{:15s}{:15s}{:12s}".format(
         "Donor Name", "|  Total Given", "|  Num Gifts", "|  Average Gift"))
     print("_" * 67)
-    for row in rows:
-        print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row))
+    [print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row)) for row in rows]
 
 
 def quit_program():
