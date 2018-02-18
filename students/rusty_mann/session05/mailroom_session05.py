@@ -12,12 +12,9 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
 
 
 def show_donor_list():
-    donor_list = []
-    for donor in donor_data:
-        donor_list.append(donor)
+    donor_list = [donor for donor in donor_data]
     sort_donors = sorted(donor_list)
-    for donor in sort_donors:
-        print(donor)
+    [print(donor) for donor in donor_data]
 
 
 def get_donor(name):
@@ -32,18 +29,24 @@ def get_donor(name):
     return None
 
 
-def split_name(donor):
+#def add_donor(name):
+    #donor_data.
+
+
+def split_name(name):
     '''
-    
+    split donor name and reverse the order
+    param: donor name
+    return: donor name in the form of "First name, Last name"
     '''
-    first_name = donor.split(",")[1].strip()
-    last_name = donor.split(",")[0].strip()
+    first_name = name.split(",")[1].strip()
+    last_name = name.split(",")[0].strip()
     return first_name, last_name
 
 
 def make_letter_files():
     '''
-    write thank you letter as text files for each donor
+    write thank you letter as text files for each donor and save to disk
     '''
     letter_dict = {}
     for donor in donor_data:
