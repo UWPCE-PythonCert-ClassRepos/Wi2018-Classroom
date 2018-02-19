@@ -41,6 +41,17 @@ donor_db = {"William Gates, III":[326888.82, 326895.67],
             "jose gonzalez" : [123.45, 678.90, 101.11]
             }
 
+def output_handle_comma(donor_names):
+    if ',' in donor_names:
+        name_title=donor_names.split(',')
+        i_var=name_title[0].title() + ','
+        donor_names=i_var.replace(',', "," + name_title[1].upper())
+        return(donor_names)
+    else:
+        name_title=donor_names
+        return(donor_names.title())
+
+
 def print_donor_name(donor_db):
     """
     Output the donor name(s)
@@ -116,25 +127,25 @@ def report_sort_key(item):
     """
     return item[1]
 
-def print_donor_report(name='anonymous donor', gifts='188.45'):
+def print_donor_report(donor_database):
     """
     Output report of donors
     """
     # First, reduce the raw data into a summary list view
     report_rows = []
-    for (name, gifts) in donor_db.items():
+    for (name, gifts) in donor_database.items():
+        name = output_handle_comma(name)
         total_gifts = sum(gifts)
         num_gifts = len(gifts)
         avg_gift = total_gifts / num_gifts
         report_rows.append((name, total_gifts, num_gifts, avg_gift))
 
     # sort the report data
-    print('debug')
     report_rows.sort(key=report_sort_key)
     # print it out in with a nice format.
     print("{:25s} | {:11s} | {:9s} | {:12s}".format(
           "Donor Name", "Total Given", "Num Gifts", "Average Gift"))
-    print("-" * 66)
+    print("-" * 66)  # Make 66 little '-'s
     for row in report_rows:
         print("{:25s}   {:11.2f}   {:9d}   {:12.2f}".format(*row))
 
@@ -177,7 +188,7 @@ if __name__ == '__main__':
         if selection == "1":
             send_thank_you()
         elif selection == "2":
-            print_donor_report()
+            print_donor_report(donor_db)
         elif selection == "4":
             running = False
         else:
