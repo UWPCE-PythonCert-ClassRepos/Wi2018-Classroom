@@ -1,6 +1,5 @@
 #mailroom program
 #program needs to do the following: “Send a Thank You”, “Create a Report” or “quit”
-#!/usr/bin/env python3
 
 #initial list of donors
 donor_db = {'Homer Simpson':[5,10,15],'Marge Simpson':[5,10,15],'Lisa Simpson':[5,10,15],'Bart Simpson':[5,10,15],'Maggie Simpson':[5,10,15]}
@@ -12,13 +11,15 @@ def doer(menu_choice):
     if menu_choice == 1:
         get_donor()
         get_donation(donor_name)
+        write_note(donor_name,donation)
     elif menu_choice ==2:
         print ("cool")
     else:
-        print("need to exit here")
+        print("Exiting")
 
 #Force lower then apply title caps to avoid errors
 def get_donor():
+    global donor_name
     donor_name = input("Please Enter the Donor's Full Name:")
     donor_name = donor_name.lower().title()
     if donor_name != "List":
@@ -33,19 +34,33 @@ def get_donor():
         print(donor_db.keys())
         donor_name = input("Please Enter the Donor's Full Name:")
         donor_name = donor_name.lower().title()
-        return donor_name
+        if donor_name in donor_db.keys():
+            print("Existing Donor")
+            return donor_name
+        elif donor_name not in donor_db.keys():
+            donor_db[donor_name] = []
+            print("New Donor")
+            return donor_name
 
 def get_donation(donor_name):
+    global donation
     donation = input("Please Enter the Donation Amount:")
     donation = int(donation)
-    donor_db[donor_name] = donation
+    donor_db[donor_name].append(donation)
+    #global total_donation
+    #total_donation = sum(donor_db[donor_name])
     return donation
 
+def write_note(donor_name,donation):
+    print("Thank You {} for Your Generous Donation of: ${}".format(donor_name,donation))
+
+
+
 #donor_name = get_donor()
-#donation = get_donor()
+#donation = get_donation(donor_name)
 
 doer(menu_choice)
 
 print("this worked")
-print(donor_name)
+#print(donor_name)
 print(donor_db)
