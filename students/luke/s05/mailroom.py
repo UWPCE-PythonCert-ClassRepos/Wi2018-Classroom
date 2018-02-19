@@ -131,7 +131,6 @@ def create_report():
               f"{total:11.2f} | "
               f"{number:9d} | "
               f"{average:12.2f}")
-    print()
     return
 
 
