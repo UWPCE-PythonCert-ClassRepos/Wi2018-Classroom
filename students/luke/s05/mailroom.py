@@ -135,5 +135,10 @@ def create_report():
     return
 
 
+# Non-interactive unit tests
+assert(build_thankyou("dan") == "Thank you, dan, for your donation(s) of $5!\n")
+assert(generate_stats("carol") == (106, 3, 106/3))
+
+
 if __name__ == '__main__':
     driver()
