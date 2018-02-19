@@ -1,3 +1,5 @@
+import sys
+
 # Pre-populated data structure in the global namespace
 donor_data = {}
 donor_data["Eric Idle"] = [500, 300, 100]
@@ -5,6 +7,7 @@ donor_data["John Cleese"] = [750, 400, 50]
 donor_data["Michael Palin"] = [1000, 150, 25]
 donor_data["Terry Gilliam"] = [200, 200, 10]
 donor_data["Graham Chapman"] = [375, 42, 7]
+
 
 def init_script():
     print("Welcome to the Boring Task Automator!")
@@ -21,7 +24,8 @@ def init_script():
     elif user_input == 2:
         create_report()
     elif user_input == 3:
-        exit(0)
+        sys.exit()
+
 
 def send_thanks():
     print("Enter the full name of the donor to thank.")
@@ -36,22 +40,35 @@ def send_thanks():
         print("Donor", donor_name, "not found; added to donor list.")
 
     donation_amt = int(input("How much is the donation? "))
-
-    donor_data[donor_name] = donor_data[donor_name].append(donation_amt)
-
-    print("Dear {}:".format(donor_name))
-    print("\n")
+    donor_data[donor_name].append(donation_amt)
+    print(donor_data[donor_name])
+    print("Dear {}:\n".format(donor_name))
     print("Thank you so much for your kind donation of {} dollars.".format(donation_amt))
-    print("It will be put to great use. Give yourself a big pat on the back.")
-    print("\n")
+    print("It will be put to great use. Give yourself a big pat on the back.\n")
     print("Sincerely,")
     print("The Management.")
 
+    # Back to the menu
     init_script()
+
 
 def list_donors():
     for donor_name in donor_data.keys():
         print(donor_name)
     send_thanks()
 
-init_script()
+
+def create_report():
+    print("Donor Name\t| Total Given \t| Num Gifts \t| Average Gift")
+    print("-"*62)
+    for donor in donor_data.keys():
+        donation_total = round(sum(donor_data[donor]), 2)
+        donation_number = len(donor_data[donor])
+        donation_avg = round((donation_total / donation_number), 2)
+        print(donor, "\t\t", donation_total, "\t\t", donation_number, "\t", donation_avg)
+
+    # Back to the  menu
+    init_script()
+
+if __name__ == '__main__':
+    init_script()
