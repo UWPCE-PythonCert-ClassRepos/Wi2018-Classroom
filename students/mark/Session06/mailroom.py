@@ -41,7 +41,12 @@ donor_db = {"William Gates, III":[326888.82, 326895.67],
             "jose gonzalez" : [123.45, 678.90, 101.11]
             }
 
-def print_donor_name():
+def print_donor_name(donor_db):
+    """
+    Output the donor name(s)
+    :param: donor_db dict
+    :returns: zero for success
+    """
     print("Donor list: \n")
     for donor_names in donor_db.keys():
         if ',' in donor_names:
@@ -49,12 +54,10 @@ def print_donor_name():
             i_var=name_title[0].title() + ','
             donor_names=i_var.replace(',', "," + name_title[1].upper())
             print(donor_names)
-            #return name_title
         else:
             name_title=donor_names
             print(donor_names.title())
-            #return name_title
-        #print(donor_names.title())
+    return 0
 
 def print_eg_letter():
     return('''
@@ -90,7 +93,7 @@ def send_thank_you():
         name = input("Enter a donor's name "
                      "(or 'list' to see all donors or 'menu' to exit)> ").strip()
         if name == "list":
-            print_donor_name()
+            print_donor_name(donor_db)
         elif name == "menu":
             return
         else:
