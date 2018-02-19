@@ -34,14 +34,21 @@ Paul Allen                 $     708.42           3  $      236.14
 */
 """
 
-donor_db = {"William Gates, III":[326888.82, 326895.67],
-            "Mark Zuckerberg":[5565.37, 5465.37, 5365.36],
-            "Jeff Bezos":[877.33],
+# donor_db = {"William Gates, III":[326888.82, 326895.67],
+#             "Mark Zuckerberg":[5565.37, 5465.37, 5365.36],
+#             "Jeff Bezos":[877.33],
+#             "paul allen":[236.14, 236.14, 236.14],
+#             "jose gonzalez" : [123.45, 678.90, 101.11]
+#             }
+
+donor_db = {"william gates, iii":[326888.82, 326895.67],
+            "mark zuckerberg":[5565.37, 5465.37, 5365.36],
+            "jeff bezos":[877.33],
             "paul allen":[236.14, 236.14, 236.14],
             "jose gonzalez" : [123.45, 678.90, 101.11]
             }
 
-def output_handle_comma(donor_names):
+def format_donor_name(donor_names):
     if ',' in donor_names:
         name_title=donor_names.split(',')
         i_var=name_title[0].title() + ','
@@ -97,6 +104,9 @@ def send_thank_you():
         elif name == "menu":
             return
         else:
+            if name.lower() in donor_db.keys():
+                print("name: ", format_donor_name(name), "found.")
+                print(create_letter(name, donor_db))
             break
 
 def print_menu():
@@ -123,7 +133,7 @@ def print_donor_report(donor_database):
     # First, reduce the raw data into a summary list view
     report_rows = []
     for (name, gifts) in donor_database.items():
-        name = output_handle_comma(name)
+        name = format_donor_name(name)
         total_gifts = sum(gifts)
         num_gifts = len(gifts)
         avg_gift = total_gifts / num_gifts
@@ -138,20 +148,22 @@ def print_donor_report(donor_database):
     for row in report_rows:
         print("{:25s}   {:11.2f}   {:9d}   {:12.2f}".format(*row))
 
-def create_letter(donor):
+def create_letter(donor, donor_db):
     """
     Create a thank you letter for the donor
-    :param: donor tuple
+    :param: donor/string, donor_db dict/string:tuple
     :returns: string with letter
     """
+    print('debug')
     return '''\n
           Dear {}
           Thank you for your very kind donation of ${:.2f}.
           It will be put to very good use.
                          Sincerely,
                             -The Team
-          '''.format(donor[0][0], sum(donor[1][-1]))
+          '''.format(format_donor_name(donor), donor_db[donor][-1])
 
+          #.format(donor[0][0], sum(donor[1][-1]))
           #           Thank you for your very kind donation of ${:.2f}.
           #'''.format(donor[0][0], sum(donor[1][-1]))
 
@@ -166,7 +178,7 @@ if __name__ == '__main__':
     # print_eg_letter()
     # print_donor_report()
     # print('debug')
-    # print(create_letter(donor_db))
+    # print(create_letter('jeff bezos', donor_db))
 
 
     ### code below works, need work on called functions (works)
