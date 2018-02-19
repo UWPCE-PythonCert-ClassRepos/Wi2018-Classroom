@@ -47,6 +47,28 @@ def driver():
     return
 
 
+def build_thankyou(name):
+    """ Apply thankyou format string to name """
+    return (THANK_YOU.format(name, sum(donor_list[name])))
+
+
+def list_donors():
+    """ return list donor names """
+    donors = ""
+    for n in donor_list:
+        donors += n + "\n"
+    return donors[:-1]  # Trim trailing newline
+
+
+def add_donation(name, amount):
+    """ add donation for name.  add name if it doesn't exist """
+    if not donor_list.get(name):
+        print("Adding new donor: " + name)
+        donor_list[name] = []
+
+    donor_list[name].append(donation_amount)
+
+
 def add_donations():
     """ Add donation history for a(n optionally new) user """
     done = False
@@ -59,14 +81,8 @@ def add_donations():
             return
 
         if name == "list":
-            # list donor names
-            for n in donor_list:
-                print(n)
+            print(list_donors())
             continue
-
-        if not donor_list.get(name):
-            print("Adding new donor: " + name)
-            donor_list[name] = []
 
         moredonations = True
         while moredonations:
@@ -85,31 +101,36 @@ def add_donations():
                 print("Invalid input, reenter.")
                 continue
 
-            donor_list[name].append(donation_amount)
+            add_donation(name, donation_amount)
 
         done = True
-        print(THANK_YOU.format(name, sum(donor_list[name])))
+        print(build_thankyou(name))
     return
 
 
 def write_thankyous():
+    """ write thankyou strings to files, one per donor """
     for d in donor_list:
         with open(OUTFILE.format(d), 'w') as outfile:
-            outfile.write(THANK_YOU.format(d, sum(donor_list[d])))
+            outfile.write(build_thankyou(d))
 
+
+def generate_stats(name):
+    """ Return total given, number of gifts, average gift for name """
+    total = sum(donor_list[name])
+    number = len(donor_list[name])
+    average = total / number
+    return total, number, average
 
 def create_report():
     """ Display table: Donor Name | Total Given | Num Gifts | Average Gift """
     print("Donor Name | Total Given | Num Gifts | Average Gift")
     for d in donor_list:
-        total = 0
-        d_list = donor_list[d]
-        for amt in d_list:
-            total += amt
+        total, number, average = generate_stats(d)
         print(f"{d:10} | "
               f"{total:11.2f} | "
-              f"{len(d_list):9d} | "
-              f"{total/len(d_list):12.2f}")
+              f"{number:9d} | "
+              f"{average:12.2f}")
     print()
     return
 
