@@ -156,13 +156,14 @@ def create_letter(donor, donor_db):
     :param: donor/string, donor_db dict/string:tuple
     :returns: string with letter
     """
-    print('debug')
     return '''\n
-          Dear {}
+          Dear {},
+
           Thank you for your very kind donation of ${:.2f}.
           It will be put to very good use.
-          Your generous contributions to date totaling ${:.2f} 
+          Your generous contributions to date totaling ${:.2f}
           allow us continue our mission and achive our joint goals.
+
                          Sincerely,
                             -The Team
           '''.format(format_donor_name(donor), donor_db[donor][-1], sum(donor_db[donor]))
@@ -187,6 +188,8 @@ def send_letters_to_all(donor_db):
         file_name=format_donor_name(k).replace(',','').replace(" ","_") + ".txt"
         with open(file_name, 'w') as fh1:
             fh1.write(create_letter(k, donor_db))
+
+        print(create_letter(k, donor_db))
 
     return 0
 
