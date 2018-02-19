@@ -161,15 +161,36 @@ def create_letter(donor, donor_db):
           Dear {}
           Thank you for your very kind donation of ${:.2f}.
           It will be put to very good use.
-          Your generous contributions to date have totaled ${:.2f} and
+          Your generous contributions to date totaling ${:.2f} 
           allow us continue our mission and achive our joint goals.
                          Sincerely,
                             -The Team
           '''.format(format_donor_name(donor), donor_db[donor][-1], sum(donor_db[donor]))
 
-          #.format(donor[0][0], sum(donor[1][-1]))
-          #           Thank you for your very kind donation of ${:.2f}.
-          #'''.format(donor[0][0], sum(donor[1][-1]))
+def send_letters_to_all(donor_db):
+    """
+
+    :params: donor_db/dict,
+    :returns: 0 if completes
+
+    :description:
+    In this version, add a function (and a menu item to invoke it),
+    that goes through all the donors in your donor data structure,
+    generates a thank you letter, and writes it to disk as a text file.
+
+    menu_item, menu #3
+
+    """
+
+    for k in donor_db.keys():
+
+        file_name=format_donor_name(k).replace(',','').replace(" ","_") + ".txt"
+        with open(file_name, 'w') as fh1:
+            fh1.write(create_letter(k, donor_db))
+
+    return 0
+
+
 
 
 
@@ -194,6 +215,8 @@ if __name__ == '__main__':
             send_thank_you()
         elif selection == "2":
             print_donor_report(donor_db)
+        elif selection == "3":
+            send_letters_to_all(donor_db)
         elif selection == "4":
             running = False
         else:
