@@ -70,17 +70,6 @@ def print_donor_name(donor_db):
             print(donor_names.title())
     return 0
 
-def print_eg_letter():
-    return('''
-    Dear Jeff Bezos,
-
-        Thank you for your very kind donation of $877.33.
-
-        It will be put to very good use.
-
-                       Sincerely,
-                          -The Team
-    ''')
 
 def get_donor(name):
     """
