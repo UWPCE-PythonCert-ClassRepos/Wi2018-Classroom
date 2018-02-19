@@ -126,6 +126,7 @@ def report_sort_key(item):
     """
     return item[1]
 
+
 def print_donor_report(donor_database):
     """
     Output report of donors
@@ -148,6 +149,7 @@ def print_donor_report(donor_database):
     for row in report_rows:
         print("{:25s}   {:11.2f}   {:9d}   {:12.2f}".format(*row))
 
+
 def create_letter(donor, donor_db):
     """
     Create a thank you letter for the donor
@@ -159,9 +161,11 @@ def create_letter(donor, donor_db):
           Dear {}
           Thank you for your very kind donation of ${:.2f}.
           It will be put to very good use.
+          Your generous contributions to date have totaled ${:.2f} and
+          allow us continue our mission and achive our joint goals.
                          Sincerely,
                             -The Team
-          '''.format(format_donor_name(donor), donor_db[donor][-1])
+          '''.format(format_donor_name(donor), donor_db[donor][-1], sum(donor_db[donor]))
 
           #.format(donor[0][0], sum(donor[1][-1]))
           #           Thank you for your very kind donation of ${:.2f}.
