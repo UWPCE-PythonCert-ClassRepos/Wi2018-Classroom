@@ -8,5 +8,4 @@
 
 <br>
 This should do it:
-<br><br>
-<center>![yep](https://i.imgur.com/vGk5ZdR.gif)</center>
+![maybe](https://i.imgur.com/vGk5ZdR.gif)
