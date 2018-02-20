@@ -52,7 +52,6 @@ students_file="./students.txt"
 
 with open(students_file, 'r') as f:
     read_data = f.readlines()
-f.closed
 
 languages={}    # dict of languages
 nick_names={}   # dict or nick_names
