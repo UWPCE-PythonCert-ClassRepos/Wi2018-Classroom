@@ -12,9 +12,8 @@ donor_db = {'Homer Simpson':[5,10,50],'Marge Simpson':[5,20,100],\
             'Lisa Simpson':[10,30,65],'Bart Simpson':[15,55,500],\
             'Maggie Simpson':[5,70,50]}
 
-#using a varaible for the input seems to cause problems, value is retained throughout script which is not desired
+#add exception handling
 def user_prompt():
-    global menu_choice
     menu_choice = int(input("Please Choose From the Following Options:"\
                         + "\n" + "1 - Send a Thank You" + "\n" + \
                         "2 - Create a Report" + "\n" +"3 - Send Letters to Everyone"\
@@ -26,7 +25,6 @@ def user_prompt():
                         "2 - Create a Report" + "\n" +"3 - Send Letters to Everyone"\
                         +"\n" +"4 - Quit"))
     return menu_choice
-#print("Exiting")
 
 def doer(menu_choice):
     if menu_choice == 1:
@@ -38,7 +36,7 @@ def doer(menu_choice):
     elif menu_choice == 3:
         send_letters()
 
-#Force lower then apply title caps to avoid errors
+#Force lower then apply title caps to avoid errors, need to add exception handling
 def get_donor():
     global donor_name
     donor_name = input("Please Enter the Donor's Full Name:")
@@ -63,10 +61,10 @@ def get_donor():
             print("New Donor")
             return donor_name
 
+#need to add exception handling
 def get_donation(donor_name):
     global donation
-    donation = input("Please Enter the Donation Amount:")
-    donation = int(donation)
+    donation = int(input("Please Enter the Donation Amount:"))
     donor_db[donor_name].append(donation)
     #global total_donation
     #total_donation = sum(donor_db[donor_name])
@@ -87,7 +85,7 @@ def send_letters():
         f = (open("{}.txt".format(file_name),"w"))
         #variables do not output in the file
         f.write("Dear {}, "+ "\n"\
-                "Thank you for your very kind donation of {1}."+ "\n" +\
+                "Thank you for your very kind donation of {}."+ "\n" +\
                 "It will be put to very good use"+ "\n" +\
                 "Sincerely,"+ "\n" + "-The Team".format(k,sum(v)))
     print("Letter Generation Complete")
