@@ -89,12 +89,13 @@ def send_letters():
     for k,v in donor_db.items():
         file_name = k.replace(" ","_")
         f = (open("{}.txt".format(file_name),"w"))
+        #variables do not output in the file
         f.write("Dear {}, "+ "\n"\
                 "Thank you for your very kind donation of {1}."+ "\n" +\
                 "It will be put to very good use"+ "\n" +\
                 "Sincerely,"+ "\n" + "-The Team".format(k,sum(v)))
     print("Letter Generation Complete")
-    menu_choice_4 = user_prompt
+    #menu_choice_4 = user_prompt
 
 doer(menu_choice)
 print("this worked")
