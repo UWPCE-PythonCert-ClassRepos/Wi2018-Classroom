@@ -7,17 +7,22 @@ Session03 - Part I
 
 https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/mailroom.html#exercise-mailroom
 
-Write a small command-line script called mailroom.py. This script should be executable. The script should accomplish the following goals:
+Write a small command-line script called mailroom.py. This script should be executable.
+The script should accomplish the following goals:
 
-    It should have a data structure that holds a list of your donors and a history of the amounts they have donated. This structure should be populated at first with at least five donors, with between 1 and 3 donations each.
+    It should have a data structure that holds a list of your donors and a history of the
+    amounts they have donated. This structure should be populated at first with at least
+    five donors, with between 1 and 3 donations each.
 
     You can store that data structure in the global namespace.
 
-    The script should prompt the user (you) to choose from a menu of 3 actions: “Send a Thank You”, “Create a Report” or “quit”)
+    The script should prompt the user (you) to choose from a menu of 3 actions:
+    “Send a Thank You”, “Create a Report” or “quit”)
 
 
 
-### Finally, use only functions and the basic Python data types you’ve learned about so far. There is no need to go any farther than that for this assignment.
+### Finally, use only functions and the basic Python data types you’ve learned about so far.
+There is no need to go any farther than that for this assignment.
 
 /*
 Donor Name                | Total Given | Num Gifts | Average Gift
