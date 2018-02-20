@@ -48,6 +48,7 @@ donor_db = {"william gates, iii":[326888.82, 326895.67],
             "jose gonzalez" : [123.45, 678.90, 101.11]
             }
 
+
 def format_donor_name(donor_names):
     if ',' in donor_names:
         name_title=donor_names.split(',')
@@ -91,6 +92,7 @@ def get_donor(name):
 
     return None # or should this be donor?
 
+
 def send_thank_you():
     """
     Record a donation, create a thank you letter.
@@ -115,6 +117,7 @@ def send_thank_you():
                     print("debug: adding a function call to add donor.")
                     add_donor_info(name, donor_db)
             break
+
 
 def print_menu():
     getInputVar=(input('''Choose an action:
@@ -176,6 +179,7 @@ def create_letter(donor, donor_db):
                             -The Team
           '''.format(format_donor_name(donor), donor_db[donor][-1], sum(donor_db[donor]))
 
+
 def send_letters_to_all(donor_db):
     """
 
@@ -200,6 +204,7 @@ def send_letters_to_all(donor_db):
         print(create_letter(k, donor_db))
 
     return 0
+
 
 def add_donor_info(name, donor_db):
     """ Add donor info or add a new donor
