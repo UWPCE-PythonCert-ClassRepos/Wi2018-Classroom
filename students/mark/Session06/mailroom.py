@@ -81,6 +81,8 @@ def print_donor_name(donor_db):
 def get_donor(name):
     """
     get a donor out of the donor "structure"
+    :params: name/
+    :return: donor
     """
     for donor in donor_db:
         if name.strip().lower() == donor[0].lower():
@@ -107,6 +109,11 @@ def send_thank_you():
             if name.lower() in donor_db.keys():
                 print("name: ", format_donor_name(name), "found.")
                 print(create_letter(name, donor_db))
+            else:
+                if name.lower() not in donor_db.keys():
+                    print("name: ", format_donor_name(name), "is NOT found.")
+                    print("debug: adding a function call to add donor.")
+                    add_donor_info(name, donor_db)
             break
 
 def print_menu():
@@ -116,6 +123,7 @@ def print_menu():
         2 - Create a Report
         3 - Send letters to everyone
         4 - Quit
+        5 - Add additional contribution
         '''))
 
     return getInputVar.strip()
@@ -193,6 +201,29 @@ def send_letters_to_all(donor_db):
 
     return 0
 
+def add_donor_info(name, donor_db):
+    """ Add donor info or add a new donor
+    :params: name/string/name of donor db key, donor_db: dictionary of donor names/amts.
+    :return:
+    """
+    if name not in donor_db:
+        "create a name in the donor_db if it does not already exist"
+        donor_db.update({name.lower():[]})
+
+
+    amount = input("Enter amount of donor's contribution "
+                 "(or 'list' to see all donors or 'menu' to exit)> ").strip()
+    donor_db[name].append(float(amount))
+
+    print(create_letter(name, donor_db))
+
+
+def add_new_donor(donor_db):
+    name = input("Enter a donor's name "
+                 "(or 'list' to see all donors or 'menu' to exit)> ").strip()
+
+    add_donor_info(name, donor_db)
+
 
 
 
@@ -222,5 +253,7 @@ if __name__ == '__main__':
             send_letters_to_all(donor_db)
         elif selection == "4":
             running = False
+        elif selection == "5":
+            add_new_donor(donor_db)
         else:
             print("Please select an option 1-4 from the menu")
