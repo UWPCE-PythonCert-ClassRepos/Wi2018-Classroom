@@ -206,14 +206,22 @@ def add_donor_info(name, donor_db):
     :params: name/string/name of donor db key, donor_db: dictionary of donor names/amts.
     :return:
     """
+    if name == "list" or name == "menu":
+        print('Please select a name other than list or menu.')
+        return 15
     if name not in donor_db:
         "create a name in the donor_db if it does not already exist"
         donor_db.update({name.lower():[]})
 
 
-    amount = input("Enter amount of donor's contribution "
-                 "(or 'list' to see all donors or 'menu' to exit)> ").strip()
-    donor_db[name].append(float(amount))
+    try:
+        amount = input("Enter amount of donor's contribution "
+                     "(or 'list' to see all donors or 'menu' to exit)> ").strip()
+        donor_db[name].append(float(amount))
+    except ValueError:
+        print("\nPlease resubmit a the donor amount information in dollars and cents with a format matching: 10.11\n")
+        return
+
 
     print(create_letter(name, donor_db))
 
@@ -231,19 +239,9 @@ def add_new_donor(donor_db):
 if __name__ == '__main__':
     print("this is the main section")
 
-    # #donor=['w golf',(200.02)]
-    # #donor='Paul Allen'
-    # menuValue=print_menu()
-    # print_eg_letter()
-    # print_donor_report()
-    # print('debug')
-    # print(create_letter('jeff bezos', donor_db))
-
-
     ### code below works, need work on called functions (works)
     running = True
     while running:
-#       selection = main_menu_selection()
         selection=print_menu()
         if selection == "1":
             send_thank_you()
@@ -256,4 +254,4 @@ if __name__ == '__main__':
         elif selection == "5":
             add_new_donor(donor_db)
         else:
-            print("Please select an option 1-4 from the menu")
+            print("Please select an option 1-5 from the menu")
