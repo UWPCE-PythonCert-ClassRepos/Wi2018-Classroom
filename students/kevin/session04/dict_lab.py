@@ -63,9 +63,10 @@ def main():
     # Create frozen set with 'marathon'
     mSet = set()
     for i in 'marathon': mSet.add(i)
+    frozenMSet = frozenset(mSet)
 
     # Show union and intersection of two sets
-    print('Union:', pSet.union(mSet), '\nIntersection:', pSet.intersection(mSet))
+    print('Union:', pSet.union(frozenMSet), '\nIntersection:', pSet.intersection(frozenMSet))
 
     
 if __name__=="__main__":
