@@ -13,26 +13,20 @@ def thankYou():
     if resp == 'list':
         print(donate.keys())
     else:
+        name = resp
         try:
-            for name, gifts in donate.items():
-                countMatches = 0
-                if resp in donate:
-                    amount = input("Please input the donation amount or leave blank to quit:  ")
-                    if amount == "":
-                        quit()
-                    donate[name].append(int(amount))
-                    countMatches += 1
-                    break
-            if countMatches == 0:
-                amount = input("Please input the donation amount or leave blank to quit:  ")
-                if amount == "":
-                    quit()
-                donate[resp] = [(int(amount))]
-            print(f"{resp},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team")
+            amount = input("Please input the donation amount or leave blank to quit:  ")
+            if amount == "":
+                quit()
+            amount = int(amount)
+            donate[name].append(int(amount))
         except ValueError:
-            print('Donation amount must be a number.')
-            switcher['1']()
-
+            print('Donation amount must be a number. Restarting...')
+            thankYou()
+        except KeyError:
+            donate[name] = [int(amount)]
+            print(f"{resp},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team")
+    return True
 
 def createReport():
     donateReport = []
@@ -40,12 +34,7 @@ def createReport():
 
     # Calculate donation summary for each donor and add to the report
     for name, gifts in donate.items():
-        dName = name
-        donations = gifts
-        total = sum(donations)
-        count = len(donations)
-        avg = total // count
-        donateReport.append([dName, total, count, avg])
+        donateReport.append([name, sum(gifts), len(gifts), total // count])
 
     # get total donations for sort
     def totalDonations(elem):
@@ -79,6 +68,7 @@ def createReport():
 
 def letters():
     """For all the donors in the donor data structure, generate a thank you letter, and write it to disk as a text file."""
+
     response = input("Type the directory where these letters should be saved:  ")
     os.chdir(response)
     for donor, gifts in donate.items():
