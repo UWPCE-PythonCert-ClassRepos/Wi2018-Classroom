@@ -35,20 +35,20 @@ def get_donor():
     global donor_name
     donor_name = input("Please Enter the Donor's Full Name:").lower().title()
     if donor_name != "List":
-        if donor_name in donor_db.keys():
+        if donor_name in donor_db:
             print("Existing Donor")
             return donor_name
-        elif donor_name not in donor_db.keys():
+        elif donor_name not in donor_db:
             donor_db[donor_name] = []
             print("New Donor")
             return donor_name
     elif donor_name == "List":
         print(donor_db.keys())
         donor_name = input("Please Enter the Donor's Full Name:").lower().title()
-        if donor_name in donor_db.keys():
+        if donor_name in donor_db:
             print("Existing Donor")
             return donor_name
-        elif donor_name not in donor_db.keys():
+        elif donor_name not in donor_db:
             donor_db[donor_name] = []
             print("New Donor")
             return donor_name
@@ -58,8 +58,6 @@ def get_donation(donor_name):
     global donation
     donation = int(input("Please Enter the Donation Amount:"))
     donor_db[donor_name].append(donation)
-    #global total_donation
-    #total_donation = sum(donor_db[donor_name])
     return donation
 
 def write_note(donor_name,donation):
@@ -68,17 +66,16 @@ def write_note(donor_name,donation):
 def create_report():
     print("Donor Name "+""*4+"| Total Given | "+""*4+"Num of Gifts | "+""*4+"Avg Gift"+ "\n" + "-"*50)
     for k,v in sorted(donor_db.items(),key=lambda i:sum(i[1]),reverse=True):
-        #need to figure out how to print avg as float in the code below
-        print("{:<} ${:>10} {:>10} ${:>}".format(k,sum(v),len(v),(sum(v)/len(v))))
+        #need to figure out how to properly align items below
+        print(f"{k:<} ${sum(v):^10,.2f} {len(v):^5} ${(sum(v)/len(v)):>20,.2f}")
 
 #save location does not work with desktop when used
 def send_letters():
     for donor in donor_db:
-        file_name = f"{donor.replace(' ','_')}.txt"
-        letter_location = os.path.join(os.path.expanduser("~"),file_name)
+        letter_location = os.path.join(os.path.expanduser("~"),f"{donor.replace(' ','_')}.txt")
         total_donation = sum(donor_db[donor])
-        letter_contents = f"Dear {donor}, \n Thank you for your very kind donation of {total_donation}. \n " \
-                          "It will be put to very good use \n Sincerely, \n The Team"
+        letter_contents = f"Dear {donor}, \n Thank you for your very kind donation of ${total_donation:,.2f}. \n " \
+                          f"It will be put to very good use \n Sincerely, \n The Team"
         with open(letter_location,"w") as f:
             f.write(letter_contents)
     print("Letter Generation Complete")
