@@ -3,7 +3,7 @@ import os
 donation_dict = {
 "Bob": [1.00, 2.00],
 "Jon": [1.50, 100.00],
-"Sally": [1000.00], 
+"Sally": [1000.00],
 "Barry": [50.00],
 "Ellen": [1.25]
 }
@@ -38,7 +38,7 @@ def thank_you():
         donation_dict[donor_name] = [donation_amt]
     print(email(donor_name, donation_amt))
 
-  
+
 def email(donor_name, amt):
 	return "\nDear " + donor_name + "," \
   	    + "\n\n Thank you for your generous donation of $" + '%.2f' % amt \
@@ -46,8 +46,8 @@ def email(donor_name, amt):
   	    + "Please send more money soon \n\n Best, \n Kahyee \n"
 
 def default_prompt():
-    return int(input("Select Action \n 1. Send a Thank You \n 2. Create a Report \n 3. Send Letters to Everyone \n 4. Quit \n"))    
-      
+    return int(input("Select Action \n 1. Send a Thank You \n 2. Create a Report \n 3. Send Letters to Everyone \n 4. Quit \n"))
+
 def all_email():
   for donor, amounts in donation_dict.items():
     thank_you_letter = open(os.getcwd() + '/' + donor + '.txt', 'w+')
@@ -64,7 +64,9 @@ switch_prompt_dict = {
 }
 
 while user_prompt != 4:
-  if user_prompt in [1, 2, 3]:
+  try:
     switch_prompt_dict[user_prompt]()
-    
-  user_prompt = default_prompt()
+  except KeyError:
+    print("Enter a value from 1 to 4")
+  finally:
+    user_prompt = default_prompt()
