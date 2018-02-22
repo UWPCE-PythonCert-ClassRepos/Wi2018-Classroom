@@ -20,6 +20,7 @@ except NameError:
     print(f'Sorry, no joke for found for: {first_try[0]}.')
 try:
     not_joke = fun(first_try[2])
+    print(not_joke)
 except SyntaxError:
     print('Run Away!')
 
@@ -45,3 +46,5 @@ try:
     more_joke = more_fun(langs[0])
 except IndexError:
     print('Out of range.')
+finally:
+    last_fun()
