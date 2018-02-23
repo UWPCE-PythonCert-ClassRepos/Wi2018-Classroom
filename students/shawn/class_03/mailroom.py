@@ -1,5 +1,8 @@
 import statistics as stat
-import math as m
+from collections import  namedtuple
+
+
+
 #-----------------------------------------------------------------------*
 # Classes to manage the interactions with database
 #-----------------------------------------------------------------------*
@@ -13,9 +16,12 @@ class Donor(object):
 
     def __str__(self):
         """
-        :return: return formatted string
+        :return: return formatted string for report
         """
-        return f"{self.fnam} {self.lnam} has {len([i for i in self.donation if i>0])} donations totalling {sum([i for i in self.donation])}"
+        return f"{'{:<20}'.format(self.fnam + ' ' + self.lnam)}" \
+               f"{'{:>20.2f}'.format( sum([i for i in self.donation]))}" \
+               f"{'{:>20}'.format(len([i for i in self.donation if i>0]))}" \
+               f"{'{:>20.2f}'.format(stat.mean([i for i in self.donation if i>0]))}"
 
     def add_donation(self,donation):
         """
@@ -79,26 +85,13 @@ class Donors(object):
 
     def report(self):
         """
-        Writes report to console
+        Writes report to console.
         :return: None
         """
-        result=[]
-        for i,v in self.donors.items():
-            line=[]
-            line.append(v.fnam)
-            line.append(v.lnam)
-            line.append(v.donation)
-            result.append(line)
-
-        print(f"{'{:<20}'.format('Donor')}{'{:<15}'.format('Total')}{'{:<15}'.format('Donations')}"
-              f"{'{:>10}'.format('Average')}")
-        print(f"{63*'-'}")
-        for r in result:
-            print(f"{'{:<20}'.format(r[0] + ' ' + r[1])}",end=" ")
-            print(f"{'{:<15.2f}'.format(sum(r[2]))}", end=" ")
-            print(f"{'{:<15.0f}'.format( len([i for i in r[2] if i>0])  )}", end=" ")
-            print(f"{'{:>10.2f}'.format(stat.mean(r[2]))}")
-        print(f"{63*'-'}")
+        print(f"{'{:<20}'.format('Donor')}{'{:>20}'.format('Total')}{'{:>20}'.format('Donations')}"f"{'{:>20}'.format('Average')}")
+        print(f"{90*'-'}")
+        [print(i) for i in self.donors.values()]
+        print(f"{90*'-'}")
 
     def load_default(donors):
         """
@@ -120,11 +113,15 @@ class Donors(object):
                 ['Jim', 'Rice', 225.98],
                 ['Jim', 'Rice', 125.19],
                 ['Jim', 'Rice', 352.76]]
-        for i in data:
-            donors.read_data(i[0], i[1], i[2])
 
+        [donors.read_data(i[0],i[1],i[2]) for i in data]
 
-
+        # data = [['Bill', 'Buckner', [1000.25,2300.00,300.33,950.00,250.25]],
+        #         ['Don', 'Baylor', [1141.50]],
+        #         ['Wade', 'Boggs', [5000.15,125.55,1000.00]],
+        #         ['Ted', 'Williams', [333.45]],
+        #         ['Jim', 'Rice', [225.98,125.19,352.76]]]
+        #
 
 #-----------------------------------------------------------------------*
 # Prompt user for arg
