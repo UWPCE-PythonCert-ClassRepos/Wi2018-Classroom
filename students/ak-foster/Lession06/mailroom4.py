@@ -4,37 +4,61 @@ from datetime import datetime
 
 donate = {'Merv': [10, 500, 100], 'Linda': [300, 62, 7], 'Larry': [25, 50, 100], 'Sue': [20, 50, 1000]}
 
-def thankYou():
-    """Add new donations to record and display a thank you note when provided a name and donation amount."""
+def sendThankYou(name=False, amount=False):
+    """Add new donations to record and displays a thank you note when provided a NAME and donation AMOUNT."""
+    if not name:
+        name = promptForName()
+    if not amount:
+        amount = promptForAmount()
+    recordDonation(name, amount)
+    print(thankYouNote(name, amount))
 
-    resp = input("Type 'list' to see donor list, otherwise, type a name or leave blank to quit:  ")
-    if resp == "":
+
+def recordDonation(name, amount):
+    try:
+        donate[name].append(amount)
+    except KeyError:
+        donate[name] = [amount]
+
+
+def thankYouNote(name, amount):
+    """Return string containing thank you note message which is customized for given NAME and donation AMOUNT"""
+    return f"{name},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team"
+
+
+
+def promptForName():
+    name = input("\nPlease enter the donor's name. Type 'list' to display all donors or leave blank to quit.\n")
+
+    if name == "":
         quit()
-    if resp == 'list':
+    elif name == 'list':
         print(donate.keys())
+        promptForName()
     else:
-        name = resp
-        try:
-            amount = input("Please input the donation amount or leave blank to quit:  ")
-            if amount == "":
-                quit()
-            amount = int(amount)
-            donate[name].append(int(amount))
-        except ValueError:
-            print('Donation amount must be a number. Restarting...')
-            thankYou()
-        except KeyError:
-            donate[name] = [int(amount)]
-            print(f"{resp},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team")
-    return True
+        return name
+
+
+def promptForAmount():
+    try:
+        amount = input("\nPlease enter the donation amount or leave blank to quit:\n")
+        if amount == "":
+            quit()
+        amount = int(amount)
+        return amount
+    except ValueError:
+        print('Donation amount must be a number.')
+        promptForAmount()
+
+
+###############
+
 
 def createReport():
-    donateReport = []
     """Print donors names, total donations, # of donations, and avg donation- sorted highest to lowest total donation"""
 
     # Calculate donation summary for each donor and add to the report
-    for name, gifts in donate.items():
-        donateReport.append([name, sum(gifts), len(gifts), total // count])
+    donateReport = [[name, sum(gifts), len(gifts), sum(gifts) // len(gifts)] for name, gifts in donate.items()]
 
     # get total donations for sort
     def totalDonations(elem):
@@ -72,14 +96,16 @@ def letters():
     response = input("Type the directory where these letters should be saved:  ")
     os.chdir(response)
     for donor, gifts in donate.items():
-        total = sum(gifts)
         with open(donor + '_' + str(datetime.now().date()) + '.txt', 'w+') as f:
-            f.write(f"{donor},\n\nThank you for your gift of {total} dollars. Your donation will be put to good use.\n\n - The Team")
+            f.write(thankYouNote(donor, sum(gifts)))
     print(f"\nLetters have been saved to the {response} directory.\n")
 
 
+
 # Prompt with menu
-switcher = {'1': thankYou, '2': createReport, '3': letters, '0': quit}
+switcher = {'1': sendThankYou, '2': createReport, '3': letters, '0': quit}
+"""
 while True:
-    res = input("Type '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit:  ")
+    res = input("\nType '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit.\n")
     switcher[res]()
+"""
