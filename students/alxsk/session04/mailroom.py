@@ -49,17 +49,16 @@ def PrintReport():
         new_row.append(donation_count)
         new_row.append(total_donation)
         new_row.append(avg_amount)
-        report.append(new_row)
-        # ***EDIT***Creates string. Instead make a multiple lists for each donor. 
+        report.append(new_row) 
       
 	#3.Create a layout fo the report, then pass variables into the report and print 
-    print("{:20s}|{:20s}|{:20s}|{:20s}".format("Name","Number of Donations","Total $ Donated","Average Donation Amount"))
-    print("_"*80)
+    print("{:20s}|{:20s}|  {:16s}|{:23s}|".format("Name","Number of Donations","Total $ Donated","Average Donation Amount"))
+    print("_"*83)
     
-    print(report)
     for row in report:
-    	#***EDIT***not working. needs to be iterable?
-        print("{:20s} {:20.2f} {:20d} {:20.2f} ".format(*row))
+        print("{:20s}|{:18.2f}  |{:16d}  |{:23.2f}| ".format(*row))
+    
+print()
 
 def SendThankYou():
 	pass
