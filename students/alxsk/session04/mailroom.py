@@ -13,18 +13,18 @@ prompt handler.
 import math
 
 #First step. Donor List in global namespace. 
-DonorList= [('Alis Smith',500,350,400),
-('Neha Johnson', 1000, 3452,431,333),
-('Mohan Judge', 780,570),
-('Sree Richards', 1500),
-('Yash Kim',800)]
+DonorList= [['Alis Smith',500,350,400],
+['Neha Johnson', 1000, 3452,431,333],
+['Mohan Judge', 780,570],
+['Sree Richards', 1500],
+['Yash Kim',800]]
 
 def FindOrAddDonor(EnterName):
     for row in DonorList:
         if EnterName.strip().lower() == row[0].lower():
             return row
     #Creating tuple of one item (the donor name)
-    DonorList.append((EnterName,))
+    DonorList.append([EnterName])
     return DonorList[-1]
     
 
@@ -50,7 +50,7 @@ def PrintReport():
     print("_"*87)
     
     for row in report:
-        print("{:20s}|{:20.2f}|{:^20d}|{:^23.2f}| ".format(*row))
+        print("{:20s}|{:20d}|{:^20.2f}|{:^23.2f}| ".format(*row))
     print()
     
 def Letter(name):
@@ -80,7 +80,8 @@ def SendThankYou():
     donor = FindOrAddDonor(EnterName)
     # Record the donation
     # Note how the donor object can be manipulated while it is in the donors list.
-    donor[0].append(NewDonation)
+    #donor is a list
+    donor.append(NewDonation)
 
     print(Letter(donor))
 
