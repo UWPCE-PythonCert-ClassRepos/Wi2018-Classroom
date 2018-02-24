@@ -1,9 +1,8 @@
+#!/usr/bin/env python3
+
+
 def fibonacci(n):
-    """
-    Produces
-    :param n:
-    :return: 
-    """
+    """ Generate the first n numbers in the fibonacci sequence. """
 
     fibList = [0, 1]
 
@@ -14,9 +13,7 @@ def fibonacci(n):
 
 
 def lucas(n):
-    """
-    Docstring goes here
-    """
+    """ Generate the first n numbers in the lucas sequence. """
 
     lucList = [2, 1]
 
@@ -26,7 +23,7 @@ def lucas(n):
     return lucList[n-1]
 
 
-# NOTE: Would be way more efficient to not append a list, but rather keep two variables only
+# TODO: Would be way more efficient to not append a list, but rather keep two variables only
 def sumSeries(n, a=0, b=1):
     """
     Docstring goes here
@@ -38,6 +35,13 @@ def sumSeries(n, a=0, b=1):
         sumList.append(sumList[-2] + sumList[-1])
 
     return sumList[n-1]
+
+
+
+if __name__ == '__main__':
+    main()
+
+
 
 
 assert (fibonacci(8) == 13),"The 8th value in the Fibonacci sequence should be 13"
