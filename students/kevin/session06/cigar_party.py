@@ -12,4 +12,12 @@ or False otherwise.
 
 
 def cigar_party(cigars, is_weekend):
-    pass
+    if is_weekend == True:
+        if cigars >= 40: return True
+
+    if is_weekend == False:
+        if cigars >= 40 and cigars <= 60: return True
+
+    return False
+
+    
