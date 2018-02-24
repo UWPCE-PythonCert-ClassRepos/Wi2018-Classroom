@@ -23,7 +23,7 @@ def FindOrAddDonor(EnterName):
     for row in DonorList:
         if EnterName.strip().lower() == row[0].lower():
             return row
-    #Creating tuple of one item (the donor name)
+    #Creating list of one item (the donor name)
     DonorList.append([EnterName])
     return DonorList[-1]
     
