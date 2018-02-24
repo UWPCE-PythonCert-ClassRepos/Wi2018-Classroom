@@ -12,6 +12,7 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
 
 
 def show_donor_list():
+    """print list of donors to terminal."""
     donor_list = [donor for donor in donor_data]
     sort_donors = sorted(donor_list)
     [print(donor) for donor in sort_donors]
@@ -41,9 +42,7 @@ def split_name(name):
 
 
 def make_letter_files():
-    '''
-    write thank you letter as text files for each donor and save to disk
-    '''
+    '''write thank you letter as text files for each donor and save to disk'''
     letter_dict = {}
     for donor in donor_data:
         letter_dict["first name"], letter_dict["last name"] = split_name(donor)
@@ -74,7 +73,7 @@ def make_donor_dict(name, amount):
     """
     donor_dict = {}
     donor = get_donor(name)
-    donor_dict["first name"], donor_dict["last name"] = split_name(name)
+    donor_dict["first name"], donor_dict["last name"] = split_name(donor)
     donor_dict["amt"] = amount
     return donor_dict
 
@@ -89,7 +88,8 @@ def add_donor(name, amount):
 
 def donor_selection():
     name = input("Please enter a donor's name in the form of 'Last name, First name' "
-        "(or 'list' to see a list of all donors, or 'menu' to exit)> ")
+        "(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+    #print(name)
     return name
 
 
