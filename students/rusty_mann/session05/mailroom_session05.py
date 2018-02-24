@@ -72,12 +72,23 @@ def make_donor_email(dct):
         '''.format(**dct)
 
 
+def make_donor_dict(name, amount):
+    donor_dict = {}
+    donor = get_donor(name)
+    if donor is None:
+        donor_data.setdefault(name, [])
+    donor_dict["first name"], donor_dict["last name"] = split_name(name)
+    donor_data[name].append(amount)
+    donor_dict["amt"] = amount
+    return donor_dict
+
+
 def send_donor_email():
     donor_dict = {}
     while True:
         name = input("Please enter a donor's name in the form of 'Last name, First name' "
-            "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip().lower()
-        if name == "list":
+            "(or 'list' to see a list of all donors, or 'menu' to exit)> ")
+        if name == "list".strip().lower():
             show_donor_list()
         elif name == "menu".strip().lower():
             return None
@@ -87,17 +98,20 @@ def send_donor_email():
         amount_str = input("Please enter a donation amount (or 'menu' to exit)> ").strip().lower()
         if amount_str == "menu":
             return None
-        else:
+        else: #this part could be broken into two functions, one that adds donor to donor_data
+                   #and one that makes donor_dict for make_donor_email function.
             amount = float(amount_str)
-        donor = get_donor(name)
-        if donor is None:
-            #donor = (name)
-            donor_data.setdefault(name, [])
-            donor_dict["first name"], donor_dict["last name"] = split_name(name)
-        donor_data[name].append(amount)
-        donor_dict["amt"] = amount   
+        donor_dic = make_donor_dict(name, amount)
         break
-    print(make_donor_email(donor_dict))
+    print(make_donor_email(donor_dic))
+        #donor = get_donor(name)
+        #if donor is None:
+            #donor_data.setdefault(name, [])
+        #donor_dict["first name"], donor_dict["last name"] = split_name(name)
+        #donor_data[name].append(amount)
+        #donor_dict["amt"] = amount   
+        #break
+    #print(make_donor_email(donor_dict))
 
 
 def sort_key(item):
