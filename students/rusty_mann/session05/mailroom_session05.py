@@ -12,9 +12,10 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
 
 
 def show_donor_list():
+    """print list of donors to terminal."""
     donor_list = [donor for donor in donor_data]
     sort_donors = sorted(donor_list)
-    [print(donor) for donor in donor_data]
+    [print(donor) for donor in sort_donors]
 
 
 def get_donor(name):
@@ -29,10 +30,6 @@ def get_donor(name):
     return None
 
 
-#def add_donor(name):
-    #donor_data.
-
-
 def split_name(name):
     '''
     split donor name and reverse the order
@@ -45,9 +42,7 @@ def split_name(name):
 
 
 def make_letter_files():
-    '''
-    write thank you letter as text files for each donor and save to disk
-    '''
+    '''write thank you letter as text files for each donor and save to disk'''
     letter_dict = {}
     for donor in donor_data:
         letter_dict["first name"], letter_dict["last name"] = split_name(donor)
@@ -58,11 +53,10 @@ def make_letter_files():
 
 def make_donor_email(dct):
     """
-    Make a thank you email for the donor
-    :param: donor tuple
+    make a thank you email for the donor
+    param: donor tuple
     returns: string containing text of email
     """
-    #for donor, amt in donor_data.items():
     return '''\n
         Dear {first name} {last name}, 
         Thank you for your donation of ${amt:.2f}.
@@ -73,52 +67,90 @@ def make_donor_email(dct):
 
 
 def make_donor_dict(name, amount):
+    """
+    return dictionary containing first name, last name, and donation amount
+    params: name of donor and donation amount
+    """
     donor_dict = {}
     donor = get_donor(name)
-    if donor is None:
-        donor_data.setdefault(name, [])
-    donor_dict["first name"], donor_dict["last name"] = split_name(name)
-    donor_data[name].append(amount)
+    donor_dict["first name"], donor_dict["last name"] = split_name(donor)
     donor_dict["amt"] = amount
     return donor_dict
 
 
-def send_donor_email():
-    donor_dict = {}
+def add_donor(name, amount):
+    """add donor to donor_data database"""
+    donor = get_donor(name)
+    if donor is None:
+        donor_data.setdefault(name, [])
+    donor_data [name].append(amount)
+
+
+def donor_selection():
+    name = input("Please enter a donor's name in the form of 'Last name, First name' "
+        "(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+    #print(name)
+    return name
+
+
+def get_donor_name():
+    """handle exceptions and return donor name"""
     while True:
-        name = input("Please enter a donor's name in the form of 'Last name, First name' "
-            "(or 'list' to see a list of all donors, or 'menu' to exit)> ")
+        name = donor_selection()
         if name == "list".strip().lower():
             show_donor_list()
         elif name == "menu".strip().lower():
             return None
         else:
-            break
+            try:
+                first, last = split_name(name)
+                name = last + ", " + first
+            except IndexError:
+                print("Please enter a full name: ""Last name"", ""First name"": ")
+            else:
+                return name
+
+
+def donation_selection():
+    amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
+    return amount_str
+
+
+def get_donation_amount():
+    """handle exceptions and return donation amount"""
     while True:
-        amount_str = input("Please enter a donation amount (or 'menu' to exit)> ").strip().lower()
-        if amount_str == "menu":
+        donation = donation_selection()
+        if donation == "menu".strip().lower():
             return None
-        else: #this part could be broken into two functions, one that adds donor to donor_data
-                   #and one that makes donor_dict for make_donor_email function.
-            amount = float(amount_str)
-        donor_dic = make_donor_dict(name, amount)
-        break
+        else:
+            try:
+                amount = float(donation)
+            except ValueError:
+                print("Error: Please enter a number")
+            else:
+                return amount
+
+
+def send_donor_email():
+    """print thank you message to terminal"""
+    name = get_donor_name()
+    if name == None:
+        return None
+    amount = get_donation_amount()
+    if amount == None:
+        return None
+    add_donor(name, amount)
+    donor_dic = make_donor_dict(name, amount)
     print(make_donor_email(donor_dic))
-        #donor = get_donor(name)
-        #if donor is None:
-            #donor_data.setdefault(name, [])
-        #donor_dict["first name"], donor_dict["last name"] = split_name(name)
-        #donor_data[name].append(amount)
-        #donor_dict["amt"] = amount   
-        #break
-    #print(make_donor_email(donor_dict))
 
 
 def sort_key(item):
+    """return second item in sequence for sorting donor report"""
     return item[1]
 
 
 def make_report():
+    """print full donor report to terminal"""
     rows = []
     for donor in donor_data:
         total = sum(donor_data[donor])
@@ -133,6 +165,7 @@ def make_report():
 
 
 def quit_program():
+    print("Thank you, come again!")
     sys.exit(0)
 
 
