@@ -113,8 +113,8 @@ def saveLetters():
 
 # Prompt with menu
 switcher = {'1': sendThankYou, '2': createReport, '3': letters, '0': quit}
-
+"""
 while True:
     res = input("\nType '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit.\n")
     switcher[res]()
-
+"""
