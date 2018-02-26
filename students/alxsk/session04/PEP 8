@@ -1,0 +1,37 @@
+PEP 8
+
+Tells you when the code formatting is not in style
+import pip
+
+import packages at top of script after shebang
+
+to only import one function 
+	from pandas import .csv, dataformat
+
+
+Module - group of scripts. Main script calls subscript.
+*mailroom is a module (script)
+
+standard packages are math 
+
+
+Documentation
+put doc string at top.
+	name
+	purpose
+	exceptions
+
+List comprehensions
+	method 1
+
+test=[]
+for element in some_variable:
+	test.append(element)
+
+method 1 rewrite: for list in list
+
+[element for element in some_variable]
+[int(element) for element in some_variable]
+
+
+
