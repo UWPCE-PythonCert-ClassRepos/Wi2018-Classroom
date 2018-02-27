@@ -20,8 +20,10 @@ def copy_file(fin,fout=None):
 
     with open(fin,'rb') as f:
         data=f.read()
+
     with open(fout,'wb') as w:
         w.write(data)
+
     print(f"File copied to {fout}")
 
 copy_file("dict_lab.py")

@@ -92,6 +92,7 @@ class Donors(object):
         print(f"{90*'-'}")
         [print(i) for i in self.donors.values()]
         print(f"{90*'-'}")
+        return self
 
     def load_default(donors):
         """
@@ -239,8 +240,11 @@ if __name__ == '__main__':
     # -----------------------------------------------------------------------*
     # seed the database
     # -----------------------------------------------------------------------*
+
+
     donor_list=Donors()
     donor_list.load_default()
+
     dd = {"1":send_thankyou, "2":report, "3":close}
 
     # -----------------------------------------------------------------------*
