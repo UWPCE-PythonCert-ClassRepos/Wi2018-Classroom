@@ -1,4 +1,4 @@
-from mailroom import Donor ,Donors
+from mailroom import Donor ,Donors,main,send_thankyou,report,close
 
 
 #-----------------------------------------------------------------------*
@@ -17,7 +17,7 @@ def test_donor_str():
     attr=[i for i in dir(donor) if not i.startswith('__')]
     assert set(attr).difference(expected).__len__()==0
 
-def test_donor_constructor():
+def test_donor_initializer():
     d=Donor("Shawn","Hopkins",100)
     assert d.fnam=='Shawn'
     assert d.lnam=='Hopkins'
@@ -52,6 +52,14 @@ def test_read_data():
     t2=donor_list.read_data("Bill","Buckner",100000)
     assert t2[0] is False
     assert sum(t2[1].donation) > 100000
+
+def test_main():
+    dd = {"1": send_thankyou, "2": report, "3": close}
+    assert main("test",dd,"1") is send_thankyou
+    assert main("test",dd,"2") is report
+    assert main("test", dd, "3") is close
+    assert(main("test", dd, "4") is None)
+
 
 
 
