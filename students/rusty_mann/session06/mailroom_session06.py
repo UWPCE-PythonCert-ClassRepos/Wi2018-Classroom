@@ -88,13 +88,14 @@ def add_donor(name, amount):
 
 
 def donor_selection():
-    name = "mann, rusty".title()
-    name = "allen paul".title()
-    name = "Menu".title()
-    name = "LIST ".title()
-    name = input("Please enter a donor's name in the form of 'Last name, First name' "
-    "(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
-    print(name)
+    name = "mann rusty".title()
+    #name = "mann, rusty".title()
+    #name = "allen paul".title()
+    #name = "Menu".title()
+    #name = "LIST ".title()
+    #name = input("Please enter a donor's name in the form of 'Last name, First name' "
+    #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+    #print(name)
     return name
 
 
@@ -113,12 +114,16 @@ def get_donor_name():
                 name = last + ", " + first
             except IndexError:
                 print("Error: Please enter a last name and first name seperated by a comma!")
+                #break
             else:
                 return name
 
 
 def donation_selection():
-    amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
+    #amount_str = "menu "
+    #amount_str = "money"
+    amount_str = "100"
+    #amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
     return amount_str
 
 
@@ -133,6 +138,7 @@ def get_donation_amount():
                 amount = float(donation)
             except ValueError:
                 print("Error: Please enter a number")
+                break
             else:
                 return amount
 
