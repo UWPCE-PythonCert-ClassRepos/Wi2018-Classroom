@@ -28,9 +28,15 @@ def test_promptForDir():
     assert 'testPath' == promptForDir('testPath')
     # assert os.path.exists(resp) # looks like this should work-- suspect pytest doesn't run in CWD or impacted by venv
 
-def test_letters():
-    letters('test')
-    print(os.getcwd())
-    assert os.getcwd() == '/Users/affoste/PycharmProjects/Wi2018-Classroom/students/ak-foster/Lesson06/test'
 
-test_letters()
+def test_letters():
+    """Unit tests for letters() and saveLetters()."""
+    letters('test')
+    assert os.getcwd() == '/Users/affoste/PycharmProjects/Wi2018-Classroom/students/ak-foster/Lesson06/test'
+    assert os.path.isfile('Larry_2018-02-27.txt')
+
+def test_createReport():
+    assert (createReport('test')) == [['Sue', 1070, 3, 356], ['Merv', 610, 3, 203], ['Linda', 369, 3, 123], ['Larry', 175, 3, 58]]
+
+
+test_createReport()

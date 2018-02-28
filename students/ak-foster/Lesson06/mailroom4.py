@@ -53,7 +53,7 @@ def promptForAmount(amount=False):
         promptForAmount()
 
 
-def createReport():
+def createReport(test=False):
     """Print donors names, total donations, # of donations, and avg donation- sorted highest to lowest total donation"""
 
     # Calculate donation summary for each donor and add to the report
@@ -86,6 +86,8 @@ def createReport():
 
     # print report footer
     print(line)
+    if test:
+        return sortedDonateReport
 
 
 def letters(filePath=False):
