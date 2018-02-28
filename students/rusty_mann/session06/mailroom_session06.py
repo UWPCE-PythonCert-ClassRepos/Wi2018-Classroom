@@ -88,13 +88,13 @@ def add_donor(name, amount):
 
 
 def donor_selection():
-    #name = "mann, rusty".title()
-    #name = "allen paul".title()
-    #name = "Menu".title()
+    name = "mann, rusty".title()
+    name = "allen paul".title()
+    name = "Menu".title()
     name = "LIST ".title()
-    #name = input("Please enter a donor's name in the form of 'Last name, First name' "
-    #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
-    #print(name)
+    name = input("Please enter a donor's name in the form of 'Last name, First name' "
+    "(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+    print(name)
     return name
 
 
