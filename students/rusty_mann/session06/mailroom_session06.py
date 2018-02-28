@@ -88,8 +88,8 @@ def add_donor(name, amount):
 
 
 def donor_selection():
-    name = "mann rusty".title()
-    #name = "mann, rusty".title()
+    #name = "mann rusty".title()
+    name = "mann, rusty".title()
     #name = "allen paul".title()
     #name = "Menu".title()
     #name = "LIST ".title()
@@ -138,7 +138,7 @@ def get_donation_amount():
                 amount = float(donation)
             except ValueError:
                 print("Error: Please enter a number")
-                break
+                #break
             else:
                 return amount
 
