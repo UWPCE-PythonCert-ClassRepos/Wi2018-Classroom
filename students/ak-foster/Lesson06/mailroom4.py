@@ -88,15 +88,18 @@ def createReport():
     print(line)
 
 
-def letters():
+def letters(filePath=False):
     """For all the donors, generate a thank you letter and write it to disk as a text file."""
-    filePath = promptForDir()
+    if not filePath:
+        filePath = promptForDir()
+    promptForDir(filePath)
     saveLetters()
     print(f"\nLetters have been saved to the {filePath} directory.\n")
 
 
 def promptForDir(filePath=False):
-    "Get directory from user-- create if directory doesn't exist, then change to the directory."
+    """Get directory from user and create if directory doesn't exist, then change to the directory."""
+
     if not filePath:
         filePath = input("Please enter the directory where these letters should be saved:\n")
     if not os.path.exists(filePath):

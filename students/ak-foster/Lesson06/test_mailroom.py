@@ -26,4 +26,11 @@ def test_promptForAmount():
 
 def test_promptForDir():
     assert 'testPath' == promptForDir('testPath')
-    # assert os.path.exists(resp) # looks like this should work-- suspect pytest doesn't run in CWD
+    # assert os.path.exists(resp) # looks like this should work-- suspect pytest doesn't run in CWD or impacted by venv
+
+def test_letters():
+    letters('test')
+    print(os.getcwd())
+    assert os.getcwd() == '/Users/affoste/PycharmProjects/Wi2018-Classroom/students/ak-foster/Lesson06/test'
+
+test_letters()
