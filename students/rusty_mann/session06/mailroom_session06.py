@@ -7,7 +7,7 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
                     "Gates, Bill": [5000000.00, 80000.00, 700000.00], 
                     "Bezos, Jeff": [30000.00], 
                     "Musk, Elon": [1000000.00, 30000.00], 
-                    "Zuckerberg, Mark":[10000.00, 50000.00, 2000.00, 400000.00]
+                    "Zuckerberg, Mark": [10000.00, 50000.00, 2000.00, 400000.00]
                     }
 
 
@@ -88,12 +88,9 @@ def add_donor(name, amount):
 
 
 def donor_selection():
-    #name = "mann, rusty".title()
-    #name = "allen paul".title()
-    #name = "Menu".title()
-    name = "LIST ".title()
+    name = "mann rusty"
     #name = input("Please enter a donor's name in the form of 'Last name, First name' "
-    #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+        #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
     #print(name)
     return name
 
@@ -112,7 +109,7 @@ def get_donor_name():
                 first, last = split_name(name)
                 name = last + ", " + first
             except IndexError:
-                print("Error: Please enter a full name: ""Last name"", ""First name"": ")
+                print("Error: Please enter a last name and first name seperated by a comma!")
             else:
                 return name
 
