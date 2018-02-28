@@ -220,14 +220,17 @@ def report(donors):
 # -----------------------------------------------------------------------*
 # Main menu
 # -----------------------------------------------------------------------*
-def main(msg,disp_dict):
-    action = prompt_user(msg)
-    if action[0]:
-        if action[1] in ("1","2","3"):
-            if action[1]=="2":
-                return disp_dict[action[1]](donor_list)
-            else:
-                return disp_dict[action[1]]()
+def main(msg,disp_dict,testarg=0):
+    if msg == "test":
+        return disp_dict.get(testarg)
+    else:
+        action = prompt_user(msg)
+        if action[0]:
+            if action[1] in ("1","2","3"):
+                if action[1]=="2":
+                    return disp_dict[action[1]](donor_list)
+                else:
+                    return disp_dict[action[1]]()
         else:
             print("Invalid selection\n")
             return True
