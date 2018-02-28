@@ -47,6 +47,8 @@ def test_get_donor_name():
     #with "Menu" passed as input
     #assert mr.get_donor_name() == None
     #with "LIST " passed as input
-    assert mr.get_donor_name() == print(["Allen, Paul",
-     "Bezos, Jeff", "Gates, Bill", "Musk, Elon", "Zuckerberg, Mark"])
-    #assert mr.get_donor_name() is True
+    #assert mr.get_donor_name() == print(["Allen, Paul",
+     #"Bezos, Jeff", "Gates, Bill", "Musk, Elon", "Zuckerberg, Mark"])
+    assert mr.get_donor_name() == print("Error: Please enter a last name and first name seperated by a comma!")
+
+
