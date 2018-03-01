@@ -8,10 +8,20 @@ A class-based system for rendering html.
 class Element(object):
 
     def __init__(self, content=None):
-        pass
+        self.content = content or ''
 
     def append(self, new_content):
-        pass
+        self.content += new_content
 
     def render(self, file_out, cur_ind=""):
-        file_out.write("just something as a place holder...")
+        file_out.write(self.content)
+
+
+class Html():
+    pass
+
+class Body(Element):
+    pass
+
+class P():
+    pass
