@@ -10,15 +10,18 @@ import mailroom as mr
 def test_build_thankyou():
     # Clear donor_list.
     # Add an entry to donor_list and test.
+    pass
 
 
 def test_add_donation():
     # Clear donor_list.
     # Add an entry to donor_list and test.
+    pass
 
 
 def test_generate_stats():
     # Clear donor_list.
     # Add an entry to donor_list and test.
+    pass
 
 
