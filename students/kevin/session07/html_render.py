@@ -15,3 +15,16 @@ class Element(object):
 
     def render(self, file_out, cur_ind=""):
         file_out.write(self.content)
+
+        
+# NOTE: need "object" in Python2!
+class Html(object):
+
+    def __init__(self, content=None):
+        pass
+
+
+class Body():
+
+
+class P():

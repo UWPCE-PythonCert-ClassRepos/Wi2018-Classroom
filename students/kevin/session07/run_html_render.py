@@ -45,10 +45,10 @@ render_page(page, "test_html_output1.html")
 # The rest of the steps have been commented out.
 #  Uncomment them as you move along with the assignment.
 
-# ## Step 2
-# ##########
+## Step 2
+##########
 
-# page = hr.Html()
+page = hr.Html()
 
 # body = hr.Body()
 
