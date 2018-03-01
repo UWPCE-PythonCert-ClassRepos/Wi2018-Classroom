@@ -22,7 +22,11 @@ def init_script():
 
     user_input = input("> ")
 
-    menu_dict[user_input]()
+    try:
+        menu_dict[user_input]()
+    except KeyError:
+        print("Not a valid option.")
+        sys.exit()
 
 
 def send_thanks():
