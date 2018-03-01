@@ -72,15 +72,15 @@ def send_donor_email():
     donor_dict = {}
     while True:
         name = input("Please enter a donor's name in the form of 'Last name, First name' "
-            "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip()
+            "(or 'list' to see a list of all donors, or 'menu' to exit)> ").strip().lower()
         if name == "list":
             show_donor_list()
-        elif name == "menu":
+        elif name == "menu".strip().lower():
             return None
         else:
             break
     while True:
-        amount_str = input("Please enter a donation amount (or 'menu' to exit)> ").strip()
+        amount_str = input("Please enter a donation amount (or 'menu' to exit)> ").strip().lower()
         if amount_str == "menu":
             return None
         else:
@@ -122,7 +122,7 @@ def quit():
 
 def menu_selection(prompt, dispatch_dict):
     while True:
-        response = input(prompt)
+        response = input(prompt).strip().lower()
         if dispatch_dict[response]() == "exit menu":
             break
 
