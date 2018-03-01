@@ -7,15 +7,21 @@ A class-based system for rendering html.
 # This is the framework for the base class
 class Element(object):
 
-    self.open_tag=''
-    self.close_tag=''
-    self.empty_tag=''
+
+    open_tag=u''
+    close_tag=u''
+    empty_tag=u''
 
     def __init__(self, content=None):
         self.content = content or ''
 
     def append(self, new_content):
-        self.content += new_content
+        try:
+            self.content += new_content
+        except TypeError:
+            import pdb; pdb.set_trace()
+            print('debug')
+
 
     def render(self, file_out, cur_ind=""):
         self.content = self.open_tag + self.content + self.close_tag
@@ -23,7 +29,7 @@ class Element(object):
 
 
 class Html():
-    def __init__(self):
+    def __init__(self, content=None):
         self.open_tag="<html>"
         self.close_tag="</html>"
         self.empty_tag="</>"
@@ -31,7 +37,7 @@ class Html():
 
 
 class Body(Element):
-    def __init__(self):
+    def __init__(self, content=None):
         self.open_tag="<body>"
         self.close_tag="</body>"
         self.empty_tag="</>"
@@ -39,7 +45,7 @@ class Body(Element):
 
 
 class P():
-    def __init__(self):
+    def __init__(self, content=None):
         self.open_tag="<p>"
         self.close_tag="</p>"
         self.empty_tag="</>"
