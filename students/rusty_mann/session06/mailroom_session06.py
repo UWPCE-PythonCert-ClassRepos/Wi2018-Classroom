@@ -88,13 +88,13 @@ def add_donor(name, amount):
 
 
 def donor_selection():
-    name = "mann rusty".title()
+    #name = "mann rusty".title()
     #name = "mann, rusty".title()
     #name = "allen paul".title()
     #name = "Menu".title()
     #name = "LIST ".title()
-    #name = input("Please enter a donor's name in the form of 'Last name, First name' "
-    #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
+    name = input("Please enter a donor's name in the form of 'Last name, First name' "
+    "(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
     #print(name)
     return name
 
@@ -122,8 +122,8 @@ def get_donor_name():
 def donation_selection():
     #amount_str = "menu "
     #amount_str = "money"
-    amount_str = "100"
-    #amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
+    #amount_str = "100"
+    amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
     return amount_str
 
 
@@ -138,19 +138,21 @@ def get_donation_amount():
                 amount = float(donation)
             except ValueError:
                 print("Error: Please enter a number")
-                break
+                #break
             else:
                 return amount
 
 
-def send_donor_email():
+def send_donor_email(name=False, amount=False):
     """print thank you message to terminal"""
-    name = get_donor_name()
-    if name == None:
-        return None
-    amount = get_donation_amount()
-    if amount == None:
-        return None
+    if not name:
+        name = get_donor_name()
+        if name == None:
+            return None
+    if not amount:
+        amount = get_donation_amount()
+        if amount == None:
+            return None
     add_donor(name, amount)
     donor_dic = make_donor_dict(name, amount)
     print(make_donor_email(donor_dic))
