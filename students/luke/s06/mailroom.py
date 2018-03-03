@@ -20,6 +20,7 @@ def get_action():
                         "[S]end a thank-you (add users and donations)\n"
                         "[W]rite thank-you letters to file\n"
                         "[C]reate a report\n"
+                        "[E]rase donor database\n"
                         "[Q]uit\n"
                         "> ")).lower()
 
@@ -39,6 +40,8 @@ def do_action(action):
         add_donations()
     elif action == "w":
         write_thankyous()
+    elif action == "e":
+        clear_db()
     elif action == "q":
         return False
     else:
@@ -79,7 +82,7 @@ def add_donation(name, amount):
         print("Adding new donor: " + name)
         donor_list[name] = []
 
-    donor_list[name].append(donation_amount)
+    donor_list[name].append(amount)
 
 
 def add_donations():
@@ -151,17 +154,22 @@ def get_db():
     return donor_list
 
 
-if __name__ == '__main__':
-    # Store donors/history in dictionary
+def clear_db():
+    """ Clear donor_list """
+    global donor_list  # Don't create new local donor_list
+    donor_list = {}
+
+
+def prepopulate_db():
     donor_list["alice"] = [5]
     donor_list["bob"] = [1, 2]
     donor_list["carol"] = [1, 5, 100]
     donor_list["dan"] = [5]
     donor_list["erin"] = [2, 1]
 
-# Non-interactive unit tests
-    assert(build_thankyou("dan") == "Thank you, dan, for your donation(s) of $5!\n")
-    assert(generate_stats("carol") == (106, 3, 106/3))
 
+if __name__ == '__main__':
+    # Store donors/history in dictionary
+    prepopulate_db()
     # Start main loop
     driver()
