@@ -3,12 +3,12 @@
 import mailroom_session06 as mr
 
 
-def test_1():
+def test_show_donor_list():
     assert mr.show_donor_list() == print(["Allen, Paul",
      "Bezos, Jeff", "Gates, Bill", "Musk, Elon", "Zuckerberg, Mark"])
 
 
-def test_2():
+def test_get_donor():
     assert mr.get_donor("Allen, Paul") == "Allen, Paul"
     assert mr.get_donor("Mann, Rusty") == None
 
@@ -54,10 +54,20 @@ def test_add_donor():
     #with "mann, rusty" passed as input
     #assert mr.get_donor_name() == "Mann, Rusty"
 
-def test_get_donation_amount():
+
+#def test_get_donation_amount():
     #with "menu " passed as input
     #assert mr.get_donation_amount() == None
     #with "money" passed as input
     #assert mr.get_donation_amount() == print("Error: Please enter a number")
-    assert mr.get_donation_amount() == 100.0
+    #assert mr.get_donation_amount() == 100.0
 
+
+def test_send_donor_email():
+    #with "mann, rusty" and "100" passed as inputs
+    assert mr.send_donor_email() == print('''\n
+        Dear Rusty Mann, 
+        Thank you for your donation of $100.00.
+        You are a good person.
+                            Sincerely,
+                            -Me''')

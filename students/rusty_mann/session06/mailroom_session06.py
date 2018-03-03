@@ -89,7 +89,7 @@ def add_donor(name, amount):
 
 def donor_selection():
     #name = "mann rusty".title()
-    #name = "mann, rusty".title()
+    #name = "mann, rusty".tit
     #name = "allen paul".title()
     #name = "Menu".title()
     #name = "LIST ".title()
