@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 a simple script can run and test your html rendering classes.
@@ -26,7 +26,7 @@ def render_page(page, filename):
     page.render(f, "    ")
 
     print(f.getvalue())
-    with open(filename, 'wb') as outfile:
+    with open(filename, 'w') as outfile:
         outfile.write(f.getvalue())
 
 
@@ -59,6 +59,8 @@ body.append(hr.P("And here is another piece of text -- you should be able to add
 
 page.append(body)
 
+render_page(P, "test_P_output.html")
+render_page(body, "test_body_output.html")
 render_page(page, "test_html_output2.html")
 
 # # Step 3

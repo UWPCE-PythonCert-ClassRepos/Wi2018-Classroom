@@ -36,9 +36,15 @@ def test_add_donor():
                     "Zuckerberg, Mark": [10000.00, 50000.00, 2000.00, 400000.00],
                     "Mann, Rusty": [100]}
 
-#def test_donor_selection():
+
+def test_get_donor_name():
+    assert mr.get_donor_name("Mann, Rusty") == "Mann, Rusty"
+    assert mr.get_donor_name("Menu") == None
+
+
+def test_donor_selection():
     #with "mann, rusty" passed as input
-    #assert mr.donor_selection() == "Mann, Rusty"
+    assert mr.donor_selection("mann, rusty") == "Mann, Rusty"
     #with "allen paul" passed as input
     #assert mr.donor_selection() == "Allen Paul"
 
@@ -63,11 +69,11 @@ def test_add_donor():
     #assert mr.get_donation_amount() == 100.0
 
 
-def test_send_donor_email():
+#def test_send_donor_email():
     #with "mann, rusty" and "100" passed as inputs
-    assert mr.send_donor_email() == print('''\n
-        Dear Rusty Mann, 
-        Thank you for your donation of $100.00.
-        You are a good person.
-                            Sincerely,
-                            -Me''')
+    #assert mr.send_donor_email() == print('''\n
+        #Dear Rusty Mann, 
+        #Thank you for your donation of $100.00.
+        #You are a good person.
+                            #Sincerely,
+                            #-Me''')
