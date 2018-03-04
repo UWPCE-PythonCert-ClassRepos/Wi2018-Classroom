@@ -56,6 +56,11 @@ def print_letter(letter_content):
     print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
 
 
+def send_letters_all():
+    """  """
+    pass
+
+
 def letter_preamble(name):
     """ Return Thank You letter preamble. """
     preamble = dt.datetime.now().strftime('%d %B %Y')
@@ -100,10 +105,17 @@ def main_menu_prompt():
                      "   (3) quit\n"
                      "--> ")
 
-    return response
+    if response.lower() in ['1', 'send', 'send a thank you', 'thank you']:
+        return 0
+
+    elif response.lower() in ['2', 'create', 'report', 'create a report']:
+        return 1
+
+    elif response.lower() in ['3', 'q', 'quit', 'exit']:
+        return 3
 
 
-def thank_you_prompt(donors):
+def thank_you_prompt():
     """ Direct Thank You letter menu user input """
     print(hor_bar())
     print("[Send 'Thank You' menu]\n"
@@ -221,21 +233,20 @@ def main():
         print('[Main menu]\n'
               'What would you like to do? (Select one):')
 
-        while True:
+        switch_func_dict = {
+            0: thank_you_prompt,
+            1: report_prompt,
+            2: send_letters_all
+        }
+
+        response = None
+
+        while response not in switch_func_dict.keys():
             response = main_menu_prompt()
 
-            if response.lower() in ['1', 'send', 'send a thank you', 'thank you']:
-                thank_you_prompt(donors)
-                break
+            if response == 3: return
 
-            elif response.lower() in ['2', 'create', 'report', 'create a report']:
-                report_prompt()
-                break
-
-            elif response.lower() in ['3', 'q', 'quit', 'exit']: return
-
-            else:
-                print("Invalid input. Please select one:")
+            switch_func_dict.get(response, "Invalid input. Please select one:")()
 
     return
 
