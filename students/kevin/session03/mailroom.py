@@ -48,9 +48,7 @@ def compose_letter(name, amount):
     letter += letter_body(name, amount)
     letter += letter_closing()
 
-    print(letter)
-
-    return
+    return letter
 
 
 def letter_preamble(name):
@@ -85,9 +83,9 @@ def letter_closing():
     return closing
     
 
-def hor_bar():
+def hor_bar(count=35):
     """   """
-    print("-----------------------------------")
+    return "-" * count
 
 
 def main_menu_prompt():
@@ -101,8 +99,8 @@ def main_menu_prompt():
 
 
 def thank_you_prompt(donors):
-    """   """
-    hor_bar()
+    """ Direct Thank You letter menu user input """
+    print(hor_bar())
     print("[Send 'Thank You' menu]\n"
           "Type 'menu' to return to main menu.")
     
@@ -125,7 +123,9 @@ def thank_you_prompt(donors):
                 amount = prompt_for_amount(new_donor)
                 add_new_donor(new_donor, amount)
 
-                compose_letter(new_donor, amount)
+                letter = compose_letter(new_donor, amount)
+
+                print(f'<BEGIN EMAIL>\n{letter}\n<END EMAIL>')
                 
                 return
 
@@ -143,20 +143,76 @@ def thank_you_prompt(donors):
     # the donors object in the global namespace
     # return donors
 
-def donation_prompt():
-    """   """
-    pass
-
 
 def report_prompt():
-    """   """
-    pass
+    """ Direct report menu user input. """
+    print(hor_bar())
+    print("[Donor Summary Report]\n")
 
+    print(assemble_report())
+
+    return
+    # return donors
+
+
+def assemble_report():
+    """ Return nicely formatted donor report. """
+    col_widths = [25, 20, 12, 20]
+    headers = ['Donor Name', 'Total Given', 'Num Gifts', 'Average Gift']
+
+    header_row = assemble_header(headers, col_widths)
+    hor_line = hor_bar(len(header_row))
+    table_body = assemble_table(col_widths)
+
+    return f'{header_row}\n{hor_line}\n{table_body}'
+
+
+def assemble_header(headers, col_widths):
+    """ Return header row for donor report table. """
+    header = f'{headers[0]:<{col_widths[0]-1}}'
+
+    count = 1
+    for field in headers[1:]:
+        header += f'|{headers[count]:^{col_widths[count]+1}}'
+        count+=1
+
+    return header
+
+
+def assemble_table(col_widths):
+    """ Return table body, fetching all computed values from other functions. """
+    table = ''
+
+    for k, v in donors.items():
+        total = get_total(k)
+        num_gifts = get_num_gifts(k)
+        avg_gift = get_avg_gift(k)
+        # import pdb; pdb.set_trace()
+        table += (f'{k:<{col_widths[0]}}${total:{col_widths[1]},.2f}'
+                  f'{num_gifts:{col_widths[2]}d}   ${avg_gift:{col_widths[3]},.2f}\n')
+
+    return table
+
+
+def get_total(name):
+    """ Return total donations for supplied donor name """
+    return sum(donors[name]['donations'])
+
+
+def get_num_gifts(name):
+    """ Return total number of gifts given by supplied donor name. """
+    return len(donors[name]['donations'])
+
+
+def get_avg_gift(name):
+    """ Return the average of all of the supplied donor's donations. """
+    return get_total(name) / get_num_gifts(name)
+    
 
 def main():
     """ Show main menu, prompting user for selection.  """
     while True:
-        hor_bar()
+        print(hor_bar())
         print('[Main menu]\n'
               'What would you like to do? (Select one):')
 
