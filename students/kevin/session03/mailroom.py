@@ -103,7 +103,7 @@ def main_menu_prompt():
     return response
 
 
-def thank_you_prompt(donors):
+def thank_you_prompt():
     """ Direct Thank You letter menu user input """
     print(hor_bar())
     print("[Send 'Thank You' menu]\n"
@@ -225,7 +225,7 @@ def main():
             response = main_menu_prompt()
 
             if response.lower() in ['1', 'send', 'send a thank you', 'thank you']:
-                thank_you_prompt(donors)
+                thank_you_prompt()
                 break
 
             elif response.lower() in ['2', 'create', 'report', 'create a report']:
