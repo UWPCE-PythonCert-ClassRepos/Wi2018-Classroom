@@ -223,11 +223,11 @@ def main():
                 thank_you_prompt(donors)
                 break
 
-            if response.lower() in ['2', 'create', 'report', 'create a report']:
+            elif response.lower() in ['2', 'create', 'report', 'create a report']:
                 report_prompt()
                 break
 
-            if response.lower() in ['3', 'q', 'quit', 'exit']: return
+            elif response.lower() in ['3', 'q', 'quit', 'exit']: return
 
             else:
                 print("Invalid input. Please select one:")
