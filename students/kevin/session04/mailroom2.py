@@ -16,7 +16,7 @@ def add_new_donor(name, amount):
 
 def add_donation_to_history(name, amount):
     """ Add new donation to existing donor's records """
-    donors[name]['donations'].append(amount)
+    donors[name]['donations'].append(float(amount))
 
 
 def verify_add_donor(name):
@@ -49,6 +49,11 @@ def compose_letter(name, amount):
     letter += letter_closing()
 
     return letter
+
+
+def print_letter(letter_content):
+    """ Style beginning and end of letter and print to console. """
+    print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
 
 
 def letter_preamble(name):
@@ -124,8 +129,7 @@ def thank_you_prompt(donors):
                 add_new_donor(new_donor, amount)
 
                 letter = compose_letter(new_donor, amount)
-
-                print(f'<BEGIN EMAIL>\n{letter}\n<END EMAIL>')
+                print_letter(letter)
                 
                 return
 
@@ -134,7 +138,8 @@ def thank_you_prompt(donors):
             new_amount = prompt_for_amount(donor)
             add_donation_to_history(donor, new_amount)
 
-            compose_letter(donor, amount)
+            letter = compose_letter(donor, new_amount)
+            print_letter(letter)
 
             return
 
