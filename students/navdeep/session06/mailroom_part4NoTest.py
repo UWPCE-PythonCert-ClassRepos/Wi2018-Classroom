@@ -38,17 +38,17 @@ def menu(donor_dict, menu_dict):
     user_option = ""
     while user_option.lower() != 'e':
         displayMenu()
-        #user_option = input("Select an option from the menu: ")
-        user_option = 't' #for testing purposes
+        user_option = input("Select an option from the menu: ")
+        #user_option = 't' #for testing purposes
         user_option = user_option.strip()
         user_option = user_option.lower()
-        return user_option #used to test menu produces correct user input
-        #try:
-         #   menu_dict[user_option](donor_dict)
-        #except KeyError as e:
-         #   print("Invalid option selected. Please try again")
+        #return user_option #used to test menu produces correct user input
+        try:
+            menu_dict[user_option](donor_dict)
+        except KeyError as e:
+            print("Invalid option selected. Please try again")
 
-def askUserForDonor(donor_list):
+def askUserForDonor(donor_dict):
     """
     Allows user to add a new donor to the dictionary or print out
     the names of the current donors or exit back to the main menu.
@@ -66,9 +66,9 @@ def askUserForDonor(donor_list):
 
         user_donor_option = user_donor_option.strip().lower()
         if user_donor_option == 'new':
-            addNewDonor(donor_list)
+            addNewDonor(donor_dict)
         elif user_donor_option == 'list':
-            showDonorNames(donor_list)
+            showDonorNames(donor_dict)
         elif user_donor_option == 'exit':
             return
         else:
@@ -82,10 +82,10 @@ def addNewDonor(donor_dict):
     invalid = True
     while invalid == True:
         try:
-            #first_name = input("Enter first name for donor: ")
-            #last_name = input("Enter last name for donor: ")
-            first_name = "Kelly"
-            last_name = "Pratt"
+            first_name = input("Enter first name for donor: ")
+            last_name = input("Enter last name for donor: ")
+            #first_name = "Kelly" used for testing
+            #last_name = "Pratt" used for testing
             first_name, last_name = first_name.strip(),last_name.strip()
             if first_name == "" or last_name == "":
                 raise ValueError
@@ -97,8 +97,8 @@ def addNewDonor(donor_dict):
             invalid = False
     full_name = first_name + ' ' + last_name
     #Return statement used for testing purposes
-    return full_name
-    #addNewDonation(donor_dict, full_name)
+    #return full_name
+    addNewDonation(donor_dict, full_name)
 
 def addNewDonation(donor_dict, new_donor):
     """
@@ -113,7 +113,7 @@ def addNewDonation(donor_dict, new_donor):
     :param new_donor: the name of the new donor
     """
     try:
-        #new_donation = float(input("Enter a new donation amount: "))
+        new_donation = float(input("Enter a new donation amount: "))
         new_donation = 1000
         while new_donation < 0:
             new_donation = float(input("Enter something greater than 0: "))
@@ -127,8 +127,8 @@ def addNewDonation(donor_dict, new_donor):
         #Return used for testing purposes. Testing
         #To see if dictionary updated with new donor
         #and new donation
-        return donor_dict
-        #printThankYou(new_donor, new_donation)
+        #return donor_dict
+        printThankYou(new_donor, new_donation)
 
 def donorExists(donor_dict, new_donor):
     """
@@ -165,9 +165,9 @@ def printThankYou(newest_donor, newest_donation):
                         "of ${:.2f}.".format(newest_donor.title(), round(newest_donation,2))
     #return statement used for testing purposes to determine
     #if thank you message is printed correctly
-    return thank_you_message
-    #print(thank_you_message)
-    #print()
+    #return thank_you_message
+    print(thank_you_message)
+    print()
 
 def reportHeader():
     """
@@ -194,8 +194,8 @@ def createReport(donor_dict):
         report_dict[donor] = [round(total_give,2), num_gifts, round(avg_gift, 2)]
     #Return statement used for testing purposes
     #Determine if report_dict is correct
-    return report_dict
-    #printReport(report_dict)
+    #return report_dict
+    printReport(report_dict)
 
 def printReport(report_dict):
     reportHeader()
