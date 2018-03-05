@@ -59,6 +59,8 @@ body.append(hr.P("And here is another piece of text -- you should be able to add
 
 page.append(body)
 
+render_page(P, "test_P_output.html")
+render_page(body, "test_body_output.html")
 render_page(page, "test_html_output2.html")
 
 # # Step 3
