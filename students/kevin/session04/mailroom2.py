@@ -12,7 +12,7 @@ def prompt_for_amount(name):
 def add_new_donor(name, amount):
     """ Add new donor and donation amount to donor database. """
     donors[name] = dict([('name', name), ('donations', [float(amount)]),
-                         ('latest_don', float(amount)])
+                         ('latest_don', float(amount))])
 
 
 def add_donation_to_history(name, amount):
@@ -102,18 +102,18 @@ def letter_closing():
 
 def compose_letter_dict(name):
     """ Return Thank You letter composed from single template, filled with dict. """
-    import pdb; pdb.set_trace()
     letter = (
         f'{letter_date()}'
         f'{blank_lines(2)}'
-        'Dear {name},\n\nThank you for your generous donation of ${donations}. '.format(**donors[name])
+        'Dear {name},\n\nThank you for your generous donation of ${latest_don:,.2f}. '
+        'Your gracious support helps us continue our important work doing what we do. '
+        'We look forward to continuing to partner with you in the future. Please contact '
+        'us if you have any questions or have any interest in arranging a visit.'
+        f'{blank_lines()}Sincerely,{blank_lines(2)}Mr. F\nActing Director\n'
+        '(800) 555_1234'.format(**donors[name])
         )
-        # 'Your gracious support '
-        # 'helps us continue our important work doing what we do. We look forward to continuing to '
-        # 'partner with you in the future. Please contact us if you have any questions or have any '
-        # 'interest in arranging a visit.\n'
-        # f'{blank_lines()}\nSincerely,\n{blank_lines(2)}Mr. F\nActing Director\n(800) 555_1234'
-        # )
+
+    return letter
     
 
 def hor_bar(count=35):
