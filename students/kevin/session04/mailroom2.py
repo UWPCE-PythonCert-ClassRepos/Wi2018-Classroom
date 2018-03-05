@@ -42,6 +42,11 @@ def blank_lines(number_lines=1):
     return '\n' * (number_lines + 1)
     
 
+def print_letter(letter_content):
+    """ Style beginning and end of letter and print to console. """
+    print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
+
+
 def compose_letter(name, amount):
     """ Print donation Thank You letter to screen. """
     letter = letter_preamble(name)
@@ -51,19 +56,19 @@ def compose_letter(name, amount):
     return letter
 
 
-def print_letter(letter_content):
-    """ Style beginning and end of letter and print to console. """
-    print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
-
-
 def send_letters_all():
     """  """
     pass
 
 
+def letter_date():
+    """ Return today's date, formatted for letter preamble. """
+    return dt.datetime.now().strftime('%d %B %Y')
+
+
 def letter_preamble(name):
     """ Return Thank You letter preamble. """
-    preamble = dt.datetime.now().strftime('%d %B %Y')
+    preamble = letter_date()
     preamble += blank_lines(2)
     preamble += f"Dear {name},"
     preamble += blank_lines()
@@ -91,6 +96,17 @@ def letter_closing():
     closing += 'Mr. F\nActing Director\n(800) 555-1234'
 
     return closing
+
+
+def compose_letter_dict(name):
+    """ Return Thank You letter composed from single template, filled with dict. """
+    letter = (
+        f'{letter_date()}'
+        f'Thank you for your generous donation of ${float(amount):,.2f}. Your gracious support '
+        'helps us continue our important work doing what we do. We look forward to continuing to '
+        'partner with you in the future. Please contact us if you have any questions or have any '
+        'interest in arranging a visit.'
+        )
     
 
 def hor_bar(count=35):
