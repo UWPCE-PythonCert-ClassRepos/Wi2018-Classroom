@@ -23,18 +23,10 @@ def test_donor_dict():
 
 
 def test_add_donor():
-    assert mr.add_donor("Allen, Paul", 10) == {"Allen, Paul": [1000000.00, 50000.00, 300000.00, 10], 
-                    "Gates, Bill": [5000000.00, 80000.00, 700000.00], 
-                    "Bezos, Jeff": [30000.00], 
-                    "Musk, Elon": [1000000.00, 30000.00], 
-                    "Zuckerberg, Mark": [10000.00, 50000.00, 2000.00, 400000.00]}
-    #assert 10 in donor_data["Allen, Paul"]
-    assert mr.add_donor("Mann, Rusty", 100) == {"Allen, Paul": [1000000.00, 50000.00, 300000.00, 10], 
-                    "Gates, Bill": [5000000.00, 80000.00, 700000.00], 
-                    "Bezos, Jeff": [30000.00], 
-                    "Musk, Elon": [1000000.00, 30000.00], 
-                    "Zuckerberg, Mark": [10000.00, 50000.00, 2000.00, 400000.00],
-                    "Mann, Rusty": [100]}
+    mr.add_donor("Allen, Paul", 10) 
+    assert 10 in mr.donor_data["Allen, Paul"]
+    mr.add_donor("Mann, Rusty", 100)
+    assert 100 in mr.donor_data["Mann, Rusty"] 
 
 
 def test_donor_selection():
