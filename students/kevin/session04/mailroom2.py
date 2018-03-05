@@ -11,7 +11,7 @@ def prompt_for_amount(name):
 
 def add_new_donor(name, amount):
     """ Add new donor and donation amount to donor database. """
-    donors[name] = dict([('donations', [float(amount)])])
+    donors[name] = dict([('name', name), ('donations', [float(amount)])])
 
 
 def add_donation_to_history(name, amount):
@@ -100,9 +100,12 @@ def letter_closing():
 
 def compose_letter_dict(name):
     """ Return Thank You letter composed from single template, filled with dict. """
+    single_donor_dict = {k:donors[k] for k in [name]}
+
     letter = (
         f'{letter_date()}'
-        f'Thank you for your generous donation of ${float(amount):,.2f}. Your gracious support '
+        f'{blank_lines(2)}'
+        'Dear {key},\n\nThank you for your generous donation of ${float(amount):,.2f}. Your gracious support '
         'helps us continue our important work doing what we do. We look forward to continuing to '
         'partner with you in the future. Please contact us if you have any questions or have any '
         'interest in arranging a visit.'
@@ -269,11 +272,16 @@ def main():
 
 if __name__ == '__main__':
     # Initialize 5 donors and at least 1 donation for each.
-    donors = dict([('William Gates, III', {'donations': [1, 5, 100000000]}),
-                   ('Mark Zuckerberg', {'donations': [378000, 5000, 20.01]}),
-                   ('Jeff Bezos', {'donations': [29000000, 34000, 709000]}),
-                   ('Paul Allen', {'donations': [750000, 513895, 30592.50]}),
-                   ('John Ferrell', {'donations': [520000000000]})])
+    donors = dict([('William Gates, III', {'name': 'William Gates, III',
+                                           'donations': [1, 5, 100000000]}),
+                   ('Mark Zuckerberg', {'name': 'Mark Zuckerberg',
+                                        'donations': [378000, 5000, 20.01]}),
+                   ('Jeff Bezos', {'name': 'Jeff Bezos',
+                                   'donations': [29000000, 34000, 709000]}),
+                   ('Paul Allen', {'name': 'Paul Allen',
+                                   'donations': [750000, 513895, 30592.50]}),
+                   ('John Ferrell', {'name': 'John Ferrell',
+                                     'donations': [520000000000]})])
 
     print('\nWelcome to the Mailroom applicaton.')
 
