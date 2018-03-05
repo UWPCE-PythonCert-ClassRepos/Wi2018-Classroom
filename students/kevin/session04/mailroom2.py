@@ -59,7 +59,7 @@ def compose_letter(name, amount):
 
 
 def send_letters_all():
-    """  """
+    """ Write to file Thank You letters to everyone in donor dict """
     pass
 
 
@@ -125,16 +125,20 @@ def main_menu_prompt():
     """   """
     response = input("   (1) Send a 'Thank You'\n"
                      "   (2) Create a Report\n"
-                     "   (3) quit\n"
+                     "   (3) Send letters to everyone\n"
+                     "   (4) quit\n"
                      "--> ")
 
-    if response.lower() in ['1', 'send', 'send a thank you', 'thank you']:
+    if response.lower() in ['1', 'send a thank you', 'thank you']:
         return 0
 
     elif response.lower() in ['2', 'create', 'report', 'create a report']:
         return 1
 
-    elif response.lower() in ['3', 'q', 'quit', 'exit']:
+    elif response.lower() in ['3', 'send letters to everyone']
+        return 2
+
+    elif response.lower() in ['4', 'q', 'quit', 'exit']:
         return 3
 
 
