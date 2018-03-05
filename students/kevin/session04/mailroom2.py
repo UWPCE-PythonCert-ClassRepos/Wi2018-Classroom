@@ -270,7 +270,11 @@ def main():
 
             if response == 3: return
 
-            switch_func_dict.get(response, "Invalid input. Please select one:")()
+            if response in switch_func_dict.keys():
+                switch_func_dict.get(response)()
+                break
+
+            print("Invalid input. Please select one:")
 
     return
 
