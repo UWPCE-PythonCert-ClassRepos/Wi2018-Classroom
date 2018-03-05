@@ -11,12 +11,14 @@ def prompt_for_amount(name):
 
 def add_new_donor(name, amount):
     """ Add new donor and donation amount to donor database. """
-    donors[name] = dict([('name', name), ('donations', [float(amount)])])
+    donors[name] = dict([('name', name), ('donations', [float(amount)]),
+                         ('latest_don', float(amount)])
 
 
 def add_donation_to_history(name, amount):
     """ Add new donation to existing donor's records """
     donors[name]['donations'].append(float(amount))
+    donors[name]['latest_don'] = float(amount)
 
 
 def verify_add_donor(name):
@@ -100,16 +102,18 @@ def letter_closing():
 
 def compose_letter_dict(name):
     """ Return Thank You letter composed from single template, filled with dict. """
-    single_donor_dict = {k:donors[k] for k in [name]}
-
+    import pdb; pdb.set_trace()
     letter = (
         f'{letter_date()}'
         f'{blank_lines(2)}'
-        'Dear {key},\n\nThank you for your generous donation of ${float(amount):,.2f}. Your gracious support '
-        'helps us continue our important work doing what we do. We look forward to continuing to '
-        'partner with you in the future. Please contact us if you have any questions or have any '
-        'interest in arranging a visit.'
+        'Dear {name},\n\nThank you for your generous donation of ${donations}. '.format(**donors[name])
         )
+        # 'Your gracious support '
+        # 'helps us continue our important work doing what we do. We look forward to continuing to '
+        # 'partner with you in the future. Please contact us if you have any questions or have any '
+        # 'interest in arranging a visit.\n'
+        # f'{blank_lines()}\nSincerely,\n{blank_lines(2)}Mr. F\nActing Director\n(800) 555_1234'
+        # )
     
 
 def hor_bar(count=35):
@@ -159,7 +163,8 @@ def thank_you_prompt():
                 amount = prompt_for_amount(new_donor)
                 add_new_donor(new_donor, amount)
 
-                letter = compose_letter(new_donor, amount)
+                # letter = compose_letter(new_donor, amount)
+                letter = compose_letter_dict(new_donor)
                 print_letter(letter)
                 
                 return
@@ -273,15 +278,20 @@ def main():
 if __name__ == '__main__':
     # Initialize 5 donors and at least 1 donation for each.
     donors = dict([('William Gates, III', {'name': 'William Gates, III',
-                                           'donations': [1, 5, 100000000]}),
+                                           'donations': [1, 5, 100000000],
+                                           'latest_don': 100000000}),
                    ('Mark Zuckerberg', {'name': 'Mark Zuckerberg',
-                                        'donations': [378000, 5000, 20.01]}),
+                                        'donations': [378000, 5000, 20.01],
+                                        'latest_don': 20.01}),
                    ('Jeff Bezos', {'name': 'Jeff Bezos',
-                                   'donations': [29000000, 34000, 709000]}),
+                                   'donations': [29000000, 34000, 709000],
+                                   'latest_don': 709000}),
                    ('Paul Allen', {'name': 'Paul Allen',
-                                   'donations': [750000, 513895, 30592.50]}),
+                                   'donations': [750000, 513895, 30592.50],
+                                   'latest_don': 30592.50}),
                    ('John Ferrell', {'name': 'John Ferrell',
-                                     'donations': [520000000000]})])
+                                     'donations': [520000000000],
+                                     'latest_don': 520000000000})])
 
     print('\nWelcome to the Mailroom applicaton.')
 
