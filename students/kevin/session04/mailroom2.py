@@ -60,7 +60,15 @@ def compose_letter(name, amount):
 
 def send_letters_all():
     """ Write to file Thank You letters to everyone in donor dict """
-    pass
+    for k, v in donors.items():
+        fout_path = 'letters/'
+        fout_name = f'{k.replace(",", "").replace(" ", "_")}.txt'
+
+        fout_path += fout_name
+        with open(fout_path, 'w') as file:
+            file.write(compose_letter_dict(k))
+
+    return
 
 
 def letter_date():
@@ -135,7 +143,7 @@ def main_menu_prompt():
     elif response.lower() in ['2', 'create', 'report', 'create a report']:
         return 1
 
-    elif response.lower() in ['3', 'send letters to everyone']
+    elif response.lower() in ['3', 'send letters to everyone']:
         return 2
 
     elif response.lower() in ['4', 'q', 'quit', 'exit']:
