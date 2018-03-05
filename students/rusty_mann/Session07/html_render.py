@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 """
 A class-based system for rendering html.
@@ -24,7 +24,7 @@ class Element(object):
 
     def render(self, file_out, cur_ind=""):
         self.content = self.open_tag + self.content + self.close_tag
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         file_out.write(self.content)
 
 

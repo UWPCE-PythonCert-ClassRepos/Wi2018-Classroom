@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 a simple script can run and test your html rendering classes.
@@ -26,7 +26,7 @@ def render_page(page, filename):
     page.render(f, "    ")
 
     print(f.getvalue())
-    with open(filename, 'wb') as outfile:
+    with open(filename, 'w') as outfile:
         outfile.write(f.getvalue())
 
 
