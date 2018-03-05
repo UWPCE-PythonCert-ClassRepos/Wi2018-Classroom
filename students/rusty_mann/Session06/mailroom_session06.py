@@ -11,11 +11,9 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
                     }
 
 
-def show_donor_list():
-    """print list of donors to terminal."""
-    donor_list = [donor for donor in donor_data]
-    sort_donors = sorted(donor_list)
-    [print(donor) for donor in sort_donors]
+def make_donor_list():
+    """makes alphabetical list of donors."""
+    return sorted(donor_data.keys())
 
 
 def get_donor(name):
@@ -94,31 +92,35 @@ def donor_selection(name=False):
     return name.title()
 
 
-def get_donor_name(name=False):
+def get_donor_name(name=None):
     """handle exceptions and return donor name"""
     while True:
         if not name:
             name = donor_selection()
         if name.strip().lower() == "list":
-            show_donor_list()
+            show_list = make_donor_list()
+            print("List of donors:")
+            [print(donor) for donor in show_list]
             break
+            name = None
         elif name.strip().lower() == "menu":
             return None
         else:
-            try:
+            try:  # test for two names separate by comma
                 first, last = split_name(name)
                 name = last + ", " + first
             except IndexError:
                 print("Error: Please enter a last name and first name seperated by a comma!")
-                #break
+                name = None
+                break # break statement for testing only; comment out when running program
             else:
                 return name
 
 
-def donation_selection(amount_str):
+def donation_selection(amount_str=False):
     if not amount_str:
-        amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> ")) 
-    return amount_str
+        amount_str = input("Please enter a donation amount (or 'menu' to exit)> ") 
+    return str(amount_str)
 
 
 def get_donation_amount(donation=False):
@@ -133,7 +135,8 @@ def get_donation_amount(donation=False):
                 amount = float(donation)
             except ValueError:
                 print("Error: Please enter a number")
-                #break
+                donation = None
+                break # break statement for testing only; comment out when running program
             else:
                 return amount
 
@@ -142,15 +145,18 @@ def send_donor_email(name=False, amount=False):
     """print thank you message to terminal"""
     if not name:
         name = get_donor_name()
-        if name == None:
-            return None
+    if name == None:
+        return None
     if not amount:
         amount = get_donation_amount()
-        if amount == None:
-            return None
+    if amount == None:
+        return None
     add_donor(name, amount)
     donor_dic = make_donor_dict(name, amount)
-    print(make_donor_email(donor_dic))
+    email = make_donor_email(donor_dic)
+    return email
+    print(email)
+    #print(make_donor_email(donor_dic))
 
 
 def sort_key(item):
