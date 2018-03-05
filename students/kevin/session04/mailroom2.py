@@ -60,6 +60,8 @@ def compose_letter(name, amount):
 
 def send_letters_all():
     """ Write to file Thank You letters to everyone in donor dict """
+    # TODO prompt user for dir to store letters in, test for existence,
+    # and create if necessary. Use letters/ as default
     for k, v in donors.items():
         fout_path = 'letters/'
         fout_name = f'{k.replace(",", "").replace(" ", "_")}.txt'
@@ -165,9 +167,6 @@ def thank_you_prompt():
         elif response in ['m', 'menu']: break
 
         elif response.lower() not in [k.lower() for k in donors.keys()]:
-            # TODO see if I need to return add_new_donor to donors object
-            # here or if global namespace donors will get updated in
-            # add_new_donor function
             new_donor = response
             verify = verify_add_donor(new_donor)
 
@@ -192,9 +191,6 @@ def thank_you_prompt():
             return
 
     return
-    # TODO see if I need to return donors to get any updates back into
-    # the donors object in the global namespace
-    # return donors
 
 
 def report_prompt():
