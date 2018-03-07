@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 An exercise in playing with Exceptions.
@@ -13,18 +13,24 @@ from except_test import fun, more_fun, last_fun
 # Figure out what the exception is, catch it and while still
 # in that catch block, try again with the second item in the list
 first_try = ['spam', 'cheese', 'mr death']
+first_try_idx = 0
 
-joke = fun(first_try[0])
+try:
+    joke = fun(first_try[first_try_idx])
+except NameError:
+    print(f'{first_try[first_try_idx].capitalize()} is no joke!')
+    
 
 # Here is a try/except block. Add an else that prints not_joke
 try:
     not_joke = fun(first_try[2])
 except SyntaxError:
     print('Run Away!')
+else: print(not_joke)
 
 # What did that do? You can think of else in this context, as well as in
 # loops as meaning: "else if nothing went wrong"
-# (no breaks in  loops, no exceptions in try blocks)
+# (no breaks in loops, no exceptions in try blocks)
 
 # Figure out what the exception is, catch it and in that same block
 #
@@ -40,4 +46,9 @@ except SyntaxError:
 
 langs = ['java', 'c', 'python']
 
-more_joke = more_fun(langs[0])
+try:
+    more_joke = more_fun(langs[1])
+except IndexError:
+    print("Something's out of index!")
+finally:
+    last_fun()
