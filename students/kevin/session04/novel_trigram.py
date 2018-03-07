@@ -34,6 +34,30 @@ def split_sentences(string):
     return string
 
 
+def split_sent_search(string):
+    """ Split string by some common sentence endings by searching through list. """
+    # Remove '\n' and rejoin with ' '--this assumes string lines are
+    # broken by '\n'
+    string = string.split(' ')
+
+    # TODO Don't split at 'Mr.', 'Ms.', etc.
+    sent_seps = ['. ', '? ', '! ', '." ', '?" ', '!" ', '\n']
+    sent_keeps = ['Mr. ', 'Ms. ', 'Mrs. ', 'Dr. ']
+
+    sentences = []
+    beg_idx = 0
+    for idx, bit in enumerate(string):
+        if any(keep in bit for keep in sent_keeps): continue
+
+        if any(sep in bit for sep in sent_seps):
+            next_idx = idx + 1
+            sentence = ' '.join(string[beg_idx:next_idx])
+            sentences.append(sentence)
+            beg_idx = next_idx
+
+    return sentences
+
+
 def parse_sent(string):
     """ Take a string, parse by words, and return list containing words. """
     return re.findall(r'[\w]+', string)
@@ -94,8 +118,6 @@ def gen_trigram(strings):
     """ Peform trigram analysis on input string list and return results as dict.  """
     tri_dict = {}
     for idx, line in enumerate(strings):
-        # print(idx, type(line), line)
-
         if type(line) == str:
             words = parse_sent(line)
 
@@ -124,7 +146,8 @@ if __name__ == '__main__':
 
     fin = read_text(in_filepath)
 
-    sentences = split_sentences(fin)
+    # sentences = split_sentences(fin)
+    sentences = split_sent_search(fin)
 
     trigram_dict = gen_trigram(sentences)
 
