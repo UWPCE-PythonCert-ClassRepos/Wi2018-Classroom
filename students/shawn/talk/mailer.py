@@ -13,13 +13,12 @@ from flask import request
 import re
 
 app = Flask(__name__)
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """
-    Service entrypoint
+    Service entry point. The app.route decorator indicates this function responds to the request
 
-    :return: (json) status and msg from execution
+    :return: (json) status [0=Fail,1=Success] and a text message and returns it in the response
     """
 
     if request.method == 'POST':
@@ -33,6 +32,7 @@ def index():
         except Exception as e:
             return json.dumps({"status":"0","msg": f"{e.args}"})
 
+
 class Report:
 
     def __init__(self
@@ -41,7 +41,7 @@ class Report:
                  ,server='SG6367\SQLEXPRESS;'
                  ,smtp="sendsmtp.seagen.com"):
         """
-        Create instance of report class from fields in the Report Automation database
+        Create instance of Report class from fields in the Report Automation database
 
         :param report_id: (int) Id that uniquely identifies report to distribute
         :param zip_out: (str) Name of the archive file to contain report files
