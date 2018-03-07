@@ -100,13 +100,13 @@ class Report:
 
         :return: self
         """
-        msg = MIMEMultipart()
+        msg = MIMEMultipart('alternative')
         msg['From'] = self.send_from
         msg['To'] = COMMASPACE.join(self.send_to)
         msg['Date'] = formatdate(localtime=True)
         msg['Subject'] = self.subject.title()
 
-        msg.attach(MIMEText(self.body))
+        msg.attach(MIMEText(self.body,'html'))
 
         if self.attach is not None:
             with open(self.attach, "rb") as fil:
