@@ -278,11 +278,11 @@ def main():
 
             if response == 3: return
 
-            if response in switch_func_dict.keys():
+            try:
                 switch_func_dict.get(response)()
                 break
-
-            print("Invalid input. Please select one:")
+            except TypeError:
+                print("Invalid input. Please select one:")
 
     return
 
