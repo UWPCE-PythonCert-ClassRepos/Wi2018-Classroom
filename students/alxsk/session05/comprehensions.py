@@ -39,8 +39,9 @@ print()
 # Use food_prefs dictionary. Using the same keys but with the number of ‘a’s in each value.
 print("exercise 3.")
 
+new_food_prefs ={food_prefs.keys(): value.count('a') for value in food_prefs.values()}
 '''
-new_food prefs ={}
+
 def food_prefs_counta():
     {food_prefs.keys(): food_pref.values() for food_prefs_keys in food_prefs}
 [{v for v in food_prefs.values()} for divisor in divisors]
