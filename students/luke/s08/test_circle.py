@@ -69,3 +69,5 @@ def test_lt():
     myc2 = circle.Circle(4)
     assert myc1 < myc2
     assert not myc1 > myc2
+    assert not myc1 >= myc2
+    assert not myc1 == myc2
