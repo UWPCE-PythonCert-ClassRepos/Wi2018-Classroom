@@ -18,6 +18,14 @@ class Element():
         return " " * spaces
 
     def make_tag(self,indent=0,is_break=True):
+        """
+        Create an HTML tag as either an opening or closing tag or a complete tag and add inline styles and
+        indentation for printing as text
+
+        :param indent: (int) number of spaces to indent the element in the file
+        :param is_break: (bool) indicates if there should be a newline at the end of the line
+        :return: (str) HTML element
+        """
         self.tag=""
         self.tag +=   f"{self.add_spaces(indent)}<{ r'/' if self.tag_type==Tag.Close else ''}{self.markup}"
         if self.inline:
@@ -42,6 +50,11 @@ class Unord_list(Element):
 
 
     def make_list(self):
+        """
+        Create an unordered list with optional inline styles
+
+        :return: (str) HTML list element
+        """
         self.ele = Element(Tag.Open, markup="ul", val=self.label).make_tag(indent=self.indent)
 
         for i,j in self.li.items():
@@ -62,6 +75,11 @@ class Table(Element):
         self.indent=indent
 
     def make_table(self):
+        """
+        Create an HTML table with optional inline styles
+        :return:
+        """
+
         self.ele = Element(Tag.Open,markup="table",
                            inline="border: 1px solid black;border-collapse: collapse;")\
                             .make_tag(indent=self.indent)

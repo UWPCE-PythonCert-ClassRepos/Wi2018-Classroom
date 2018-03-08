@@ -2,7 +2,7 @@ import  os
 from html_render import Element,Tag,Unord_list,Table
 
 
-
+# Demonstrate the functionality of the html_render.py classes
 
 with open("mydoc.html",'w') as file:
     file.write(Element(Tag.Open,markup="html").make_tag())
