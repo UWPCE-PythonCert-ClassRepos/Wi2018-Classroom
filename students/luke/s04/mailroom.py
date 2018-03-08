@@ -89,9 +89,9 @@ def create_report():
         for amt in d_list:
             total += amt
         print(f"{d:10} | "
-              "{total:11.2f} | "
-              "{len(d_list):9d} | "
-              "{total/len(d_list):12.2f}")
+              f"{total:11.2f} | "
+              f"{len(d_list):9d} | "
+              f"{total/len(d_list):12.2f}")
     print()
     return
 

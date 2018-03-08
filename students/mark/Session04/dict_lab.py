@@ -81,3 +81,60 @@ are_you_true(are_you_in_dict('frog', a_dict))
 print("[+] A simple use case to get true/false values")
 print('name' in a_dict)
 print('frog' in a_dict)
+
+
+print('##################################################################')
+print('[*] Dictionary 2 (sets) / working with sets')
+
+"""
+
+a_dict={"name":"Chris",
+        "city":"Seattle",
+        "cake":"Chocolate"}
+
+
+Dictionaries 2
+
+    Using the dictionary from item 1: Make a dictionary using the same
+    keys but with the number of ‘t’s in each value as the value (consider upper and lower case?).
+
+Sets
+
+    Create sets s2, s3 and s4 that contain numbers from zero through twenty, divisible by 2, 3 and 4.
+    Display the sets.
+    Display if s3 is a subset of s2 (False)
+    and if s4 is a subset of s2 (True).
+
+Sets 2
+
+    Create a set with the letters in ‘Python’ and add ‘i’ to the set.
+    Create a frozenset with the letters in ‘marathon’.
+    display the union and intersection of the two sets.
+"""
+
+t_set = set(['t','T'])
+
+print('[-] set union/insec testing')
+print(len(set.intersection(set("SeattleT"),t_set)))
+
+a2_dict={"name": len(set.intersection(set(a_dict['city']),t_set)),
+        "city": len(set.intersection(set(a_dict['city']),t_set)),
+        "cake": len(set(set(a_dict['city']),t_set))
+        }
+
+for k, v in a2_dict.items():
+    print(k, v)
+
+print(a_dict['city'])
+# print(set.intersection(set([a_dict['city']]),t_set)
+print(len(set.intersection(set(a_dict['city']),t_set)))
+
+#print(len(set.intersection(set(a_dict['city']),t_set)) - 1)
+
+# a3_dict={"name": len(set.intersection(set(a_dict['city']),t_set)),
+#         "city": 2,
+#         "cake": 1}
+
+
+
+#
