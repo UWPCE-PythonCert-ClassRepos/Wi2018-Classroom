@@ -62,3 +62,10 @@ def test_eq():
     myc1 = circle.Circle(4)
     myc2 = circle.Circle(4)
     assert myc1 == myc2
+
+
+def test_lt():
+    myc1 = circle.Circle(2)
+    myc2 = circle.Circle(4)
+    assert myc1 < myc2
+    assert not myc1 > myc2
