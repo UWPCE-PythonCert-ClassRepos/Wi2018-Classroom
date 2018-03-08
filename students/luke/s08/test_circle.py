@@ -56,3 +56,9 @@ def test_add():
     myc1 = circle.Circle(4)
     myc2 = circle.Circle(4)
     assert repr(myc1 + myc2) == repr(circle.Circle(8))
+
+
+def test_eq():
+    myc1 = circle.Circle(4)
+    myc2 = circle.Circle(4)
+    assert myc1 == myc2

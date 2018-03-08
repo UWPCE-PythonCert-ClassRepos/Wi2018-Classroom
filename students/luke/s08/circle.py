@@ -48,8 +48,8 @@ class Circle:
 
 
     def __eq__(self, other):
-        self._radius == other.radius
+        return self._radius == other.radius
 
 
     def __lt__(self, other):
-        self._radius < other.radius
+        return self._radius < other.radius
