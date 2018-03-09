@@ -58,15 +58,15 @@ user_prompt = default_prompt()
 
 
 switch_prompt_dict = {
-  1: thank_you,
-  2: create_report,
-  3: all_email
+    1: thank_you,
+    2: create_report,
+    3: all_email
 }
 
 while user_prompt != 4:
-  try:
-    switch_prompt_dict[user_prompt]()
-  except KeyError:
-    print("Enter a value from 1 to 4")
-  finally:
-    user_prompt = default_prompt()
+    try:
+        switch_prompt_dict[user_prompt]()
+    except KeyError:
+        print("Enter a value from 1 to 4")
+    finally:
+        user_prompt = default_prompt()
