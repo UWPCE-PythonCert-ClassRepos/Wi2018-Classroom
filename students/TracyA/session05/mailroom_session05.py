@@ -17,7 +17,6 @@ donor_data = {"Allen, Paul": [1000000, 50000, 300000],
 
 # Donor data comprehension
 def show_list():
-    print(">>>>> donor data", donor_data)
     donor_list = [donor for donor in donor_data]
     sort_donors = sorted(donor_list)
     [print(donor) for donor in sort_donors]
@@ -63,7 +62,6 @@ def donor_selection():
     name = input("Please enter a donor's name in the form "
                  "of 'Last Name, First name' or 'list' to see a list of donors"
                  " or menu to exit > ").title()
-    print(">>>>>>> name", name)
     return name
 
 
@@ -131,8 +129,8 @@ def get_donation_amount():
 
 def split_name(name):
     """ I can now split the names into first and last name"""
-    first_name = name.split(" , ")[1].strip()
-    last_name = name.split(" , ")[0].strip()
+    first_name = name.split(",")[1].strip()
+    last_name = name.split(",")[0].strip()
     return first_name, last_name
 
 
