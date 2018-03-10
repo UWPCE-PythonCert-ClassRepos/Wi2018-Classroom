@@ -8,12 +8,16 @@ A class-based system for rendering html.
 
 
 class Element(object):
-    open_tag = ''
-    close_tag = ''
-    empty_tag = ''
+
+    tag = 'html'
+    #open_tag = ''
+    #close_tag = ''
+    #empty_tag = ''
 
     def __init__(self, content=None):
-        self.content = content or ''
+        self.content = []
+        if content:
+            self.content.append(content)
 
     def append(self, new_content):
         '''should only append'''
