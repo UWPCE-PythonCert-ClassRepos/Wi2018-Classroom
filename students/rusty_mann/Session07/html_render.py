@@ -17,15 +17,25 @@ class Element(object):
 
     def append(self, new_content):
         '''should only append'''
-        try:
-            self.content += new_content
-        except TypeError:
-            pass
+        self.content = list(content)
+        if hasattr(new_content, 'render'):
+            self.content.append(new_content)
+        else:
+            self.content.append(TextWrapper(str(new_content)))
 
     def render(self, file_out, cur_ind=""):
         self.content = self.open_tag + self.content + self.close_tag
         #import pdb; pdb.set_trace()
         file_out.write(self.content)
+
+
+class TextWrapper:
+    def __init__(self, text):
+        self.text = text
+
+    def render(self, file_out, current_ind=""):
+        file_out.write(current_ind)
+        file_out.write(self.text)
 
 
 class Html(Element):

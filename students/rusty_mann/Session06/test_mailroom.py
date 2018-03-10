@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 
+import os
 import mailroom_session06 as mr
 
 
 def test_make_donor_list():
     assert mr.make_donor_list() == ["Allen, Paul", "Bezos, Jeff", "Gates, Bill", "Musk, Elon", "Zuckerberg, Mark"]
-    #assert "Allen, Paul" in donor_list
 
 
 def test_get_donor():
     assert mr.get_donor("Allen, Paul") == "Allen, Paul"
     assert mr.get_donor("Mann, Rusty") == None
+
+
+def test_make_letter_files():
+    assert os.path.isfile('Allen_Paul.txt')
+    with open('Allen_Paul.txt') as f:
+        size = len(f.read())
+    assert size > 0
 
 
 def test_split_name():
@@ -37,11 +44,6 @@ def test_donor_selection():
 def test_get_donor_name():
     assert mr.get_donor_name("Mann, Rusty") == "Mann, Rusty"
     assert mr.get_donor_name("Menu") == None
-    #mr.get_donor_name("List")
-    #assert 
-    #assert mr.get_donor_name("LIST") == print('List of donors:', 'Allen, Paul', 'Bezos, Jeff', 'Gates, Bill', 'Musk, Elon', 'Zuckerberg, Mark')
-    #with break statement at line 123 to stop loop
-    #assert mr.get_donor_name("Allen Paul") == print("Error: Please enter a last name and first name seperated by a comma!")
 
 
 def test_donation_selection():
@@ -61,23 +63,10 @@ def test_send_donor_email():
     assert "Bill Gates" in mr.send_donor_email ("Gates, Bill", 100.0)
     assert "$100.00" in mr.send_donor_email("Gates, Bill", 100.0)
 
-#def test_get_donor_name():
-    #with "Menu" passed as input
-    #assert mr.get_donor_name() == None
-    #with "LIST " passed as input
-    #assert mr.get_donor_name() == print(["Allen, Paul",
-    #"Bezos, Jeff", "Gates, Bill", "Musk, Elon", "Zuckerberg, Mark"])
-    #with "mann rusty" passed as input
-    #assert mr.get_donor_name() == None #print("Error: Please enter a last name and first name seperated by a comma!")
-    #with "mann, rusty" passed as input
-    #assert mr.get_donor_name() == "Mann, Rusty"
 
+def test_make_report():
+    report = mr.make_report()
+    print(report)
+    assert report.startswith("Donor Name          |  Total Given |  Num Gifts  |  Average Gift\n")
+    assert "Gates, Bill          $  5780200.00       5         $ 1156040.00" in report
 
-#def test_send_donor_email():
-    #with "mann, rusty" and "100" passed as inputs
-    #assert mr.send_donor_email() == print('''\n
-        #Dear Rusty Mann, 
-        #Thank you for your donation of $100.00.
-        #You are a good person.
-                            #Sincerely,
-                            #-Me''')

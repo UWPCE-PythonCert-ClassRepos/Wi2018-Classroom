@@ -101,7 +101,7 @@ def get_donor_name(name=None):
             show_list = make_donor_list()
             print("List of donors:")
             [print(donor) for donor in show_list]
-            break
+            #break
             name = None
         elif name.strip().lower() == "menu":
             return None
@@ -112,7 +112,6 @@ def get_donor_name(name=None):
             except IndexError:
                 print("Error: Please enter a last name and first name seperated by a comma!")
                 name = None
-                break # break statement for testing only; comment out when running program
             else:
                 return name
 
@@ -136,7 +135,6 @@ def get_donation_amount(donation=False):
             except ValueError:
                 print("Error: Please enter a number")
                 donation = None
-                break # break statement for testing only; comment out when running program
             else:
                 return amount
 
@@ -173,10 +171,17 @@ def make_report():
         avg = total / num
         rows.append((donor, total, num, avg))
     rows.sort(key=sort_key, reverse=True)
-    print("{:20s}{:15s}{:15s}{:12s}".format(
+    report = []
+    report.append("{:20s}{:14s} {:14s}{:15s}".format(
         "Donor Name", "|  Total Given", "|  Num Gifts", "|  Average Gift"))
-    print("_" * 67)
-    [print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row)) for row in rows]
+    report.append("_" * 67)
+    for row in rows:
+        report.append('{:20s} ${:12.2f}{:^15d}  ${:11.2f}'.format(*row))
+    return "\n".join(report)
+
+
+def print_report():
+    print(make_report())
 
 
 def quit_program():
@@ -202,7 +207,7 @@ if __name__ == "__main__":
     running = True
 
     dispatch_dict = {"1": send_donor_email,
-                           "2": make_report,
+                           "2": print_report,
                            "3": make_letter_files,
                            "4": quit_program
                            }
