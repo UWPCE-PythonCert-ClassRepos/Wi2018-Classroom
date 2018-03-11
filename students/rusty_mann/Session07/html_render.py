@@ -36,8 +36,8 @@ class Element(object):
             self.content.append(TextWrapper(str(content)))
 
     def make_tags(self):
-        attrs = " '".join(['{}="{}"'.format(key, val) for key, val in self.attributes.items()])
-        if attrs:
+        attrs = " ".join(['{}="{}"'.format(key, val) for key, val in self.attributes.items()])
+        if attrs.strip():
             open_tag = "<{} {}>".format(self.tag, attrs.strip())
         else:
             open_tag = "<{}>".format(self.tag)
@@ -47,20 +47,43 @@ class Element(object):
     def render(self, file_out, cur_ind=""):
         open_tag, close_tag = self.make_tags()
         file_out.write(cur_ind + open_tag + "\n")
-        #file_out.write("{}<{}>\n".format(cur_ind, self.tag))
+#       file_out.write("{}<{}>\n".format(cur_ind, self.tag))
         for stuff in self.content:
             stuff.render(file_out, cur_ind + self.indent)
             file_out.write("\n")
         file_out.write(cur_ind + close_tag)
-        #file_out.write("{}</{}>".format(cur_ind, self.tag))
+#       file_out.write("{}</{}>".format(cur_ind, self.tag))
 
 
 class OneLineTag(Element):
     def render(self, file_out, cur_ind=""):
-        file_out.write("{}<{}>".format(cur_ind, self.tag))
+        open_tag, close_tag = self.make_tags()
+        file_out.write(cur_ind + open_tag)
+#        file_out.write("{}<{}>".format(cur_ind, self.tag))
         for stuff in self.content:
             stuff.render(file_out)
-        file_out.write("</{}>".format(self.tag))
+        file_out.write(close_tag)
+#        file_out.write("</{}>".format(self.tag))
+
+
+class SelfClosingTag(Element):
+    """Base class for tags that have no content"""
+
+    def append(self, *args, **kwargs):
+        raise TypeError("content cannot be added to self closing tags")
+
+    def render(self, file_out, cur_ind=""):
+
+        open_tag, _ = self.make_tags()
+        file_out.write(cur_ind + open_tag.replace(">", "/>"))
+
+
+class Hr(SelfClosingTag):
+    tag = 'hr'
+
+
+class Br(SelfClosingTag):
+    tag = 'br'
 
 
 class Title(OneLineTag):
@@ -78,8 +101,20 @@ class Body(Element):
 class P(Element):
     tag = 'p'
 
+
 class Head(Element):
     tag = 'head'
 
 
+class A(OneLineTag):
+    """
+    anchor element
+    """
+    tag = "a"
+
+    def __init__(self, link, *args, **kwargs):
+        kwargs['href'] = link
+        super().__init__(*args, **kwargs)
+        # this could also be direct:
+        # Element.__init__(self, *args, **kwargs)
 
