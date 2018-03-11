@@ -7,33 +7,8 @@ A class-based system for rendering html.
 # This is the framework for the base class
 
 
-class Element(object):
-
-    tag = 'html'
-    #open_tag = ''
-    #close_tag = ''
-    #empty_tag = ''
-
-    def __init__(self, content=None):
-        self.content = []
-        if content:
-            self.content.append(content)
-
-    def append(self, new_content):
-        '''should only append'''
-        self.content = list(content)
-        if hasattr(new_content, 'render'):
-            self.content.append(new_content)
-        else:
-            self.content.append(TextWrapper(str(new_content)))
-
-    def render(self, file_out, cur_ind=""):
-        self.content = self.open_tag + self.content + self.close_tag
-        #import pdb; pdb.set_trace()
-        file_out.write(self.content)
-
-
 class TextWrapper:
+
     def __init__(self, text):
         self.text = text
 
@@ -42,24 +17,69 @@ class TextWrapper:
         file_out.write(self.text)
 
 
+class Element(object):
+
+    tag = 'html'
+    indent = "    "
+
+    def __init__(self, content=None, **kwargs):
+        self.attributes = kwargs
+        self.content = []
+        if content:
+            self.append(content)
+
+    def append(self, content):
+        '''should only append'''
+        if hasattr(content, 'render'):
+            self.content.append(content)
+        else:
+            self.content.append(TextWrapper(str(content)))
+
+    def make_tags(self):
+        attrs = " '".join(['{}="{}"'.format(key, val) for key, val in self.attributes.items()])
+        if attrs:
+            open_tag = "<{} {}>".format(self.tag, attrs.strip())
+        else:
+            open_tag = "<{}>".format(self.tag)
+        close_tag = "</{}>".format(self.tag)
+        return open_tag, close_tag
+
+    def render(self, file_out, cur_ind=""):
+        open_tag, close_tag = self.make_tags()
+        file_out.write(cur_ind + open_tag + "\n")
+        #file_out.write("{}<{}>\n".format(cur_ind, self.tag))
+        for stuff in self.content:
+            stuff.render(file_out, cur_ind + self.indent)
+            file_out.write("\n")
+        file_out.write(cur_ind + close_tag)
+        #file_out.write("{}</{}>".format(cur_ind, self.tag))
+
+
+class OneLineTag(Element):
+    def render(self, file_out, cur_ind=""):
+        file_out.write("{}<{}>".format(cur_ind, self.tag))
+        for stuff in self.content:
+            stuff.render(file_out)
+        file_out.write("</{}>".format(self.tag))
+
+
+class Title(OneLineTag):
+    tag = 'title'
+
+
 class Html(Element):
-    def __init__(self, content=None):
-        self.open_tag = "<html>"
-        self.close_tag = "<html/>"
-        super().__init__(content)
+    tag = 'html'
 
 
 class Body(Element):
-    def __init__(self, content=None):
-        self.open_tag = "<body>"
-        self.close_tag = "<body/>"
-        super().__init__(content)
+    tag = 'body'
 
 
 class P(Element):
-    def __init__(self, content=None):
-        self.open_tag = "<p>"
-        self.close_tag = "<p/>"
-        super().__init__(content)
+    tag = 'p'
+
+class Head(Element):
+    tag = 'head'
+
 
 
