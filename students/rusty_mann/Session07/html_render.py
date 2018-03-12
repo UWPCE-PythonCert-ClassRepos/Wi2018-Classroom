@@ -79,19 +79,29 @@ class SelfClosingTag(Element):
 
 
 class Hr(SelfClosingTag):
+    """Horizontal Rule"""
+
     tag = 'hr'
 
 
 class Br(SelfClosingTag):
+    """Line Break"""
+
     tag = 'br'
 
 
 class Title(OneLineTag):
+    """Title"""
+
     tag = 'title'
 
 
 class Html(Element):
     tag = 'html'
+
+    def render(self, file_out, cur_ind=""):
+        file_out.write(cur_ind + "<!DOCTYPE html>\n")
+        super().render(file_out, cur_ind = cur_ind)
 
 
 class Body(Element):
@@ -107,14 +117,42 @@ class Head(Element):
 
 
 class A(OneLineTag):
-    """
-    anchor element
-    """
+    """Anchor Element"""
+
     tag = "a"
 
     def __init__(self, link, *args, **kwargs):
+        #how does this get run through make_tags()if it overwrites __init__ without creating self.attributes which is required for make_tags()
         kwargs['href'] = link
         super().__init__(*args, **kwargs)
         # this could also be direct:
         # Element.__init__(self, *args, **kwargs)
+
+
+class Ul(Element):
+    """Unordered List"""
+
+    tag = "ul"
+
+
+class Li(Element):
+    """List Element"""
+
+    tag = "li"
+
+
+class H(OneLineTag):
+    """Section Head"""
+
+    tag = "h"
+
+    def __init__(self, level, *args, **kwargs):
+        self.tag += str(int(level))
+        super().__init__(*args, **kwargs)
+
+
+class Meta(SelfClosingTag):
+    """metatag tag"""
+
+tag = "meta"
 
