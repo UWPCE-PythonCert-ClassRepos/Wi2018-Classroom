@@ -154,5 +154,5 @@ class H(OneLineTag):
 class Meta(SelfClosingTag):
     """metatag tag"""
 
-tag = "meta"
+    tag = "meta"
 
