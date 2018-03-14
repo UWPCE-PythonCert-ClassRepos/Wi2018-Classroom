@@ -1,1 +1,4 @@
-{}
+{
+  "test_circle.py": true,
+  "test_circle.py::test_lt": true
+}

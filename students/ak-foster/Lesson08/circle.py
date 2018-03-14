@@ -23,3 +23,17 @@ class Circle:
 
     def __repr__(self):
         return "Circle({})".format(self.radius)
+
+    def __add__(self, other):
+        rad = self.radius + other.radius
+        return Circle(rad)
+
+    def __mul__(self, other):
+        rad = self.radius * other
+        return Circle(rad)
+
+    def __lt__(self, other):
+        return self.radius < other.radius
+
+    def __le__(self, other):
+        return self.radius <= other.radius

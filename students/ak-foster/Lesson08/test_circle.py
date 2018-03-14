@@ -33,3 +33,23 @@ def test_str():
 def test_repr():
     my_circle = Circle(4)
     assert repr(my_circle) == 'Circle(4)'
+
+def test_add():
+    c1 = Circle(2)
+    c2 = Circle(4)
+    assert print(c1 + c2) == print(Circle(6))
+
+def test_mul():
+    c1 = Circle(2)
+    assert print(c1 * 3) == print(Circle(6))
+
+def test_lt_le():
+    c1 = Circle(2)
+    c2 = Circle(4)
+    c3 = Circle(4)
+    assert (c1 > c2) == False
+    assert (c1 < c2) == True
+    assert (c1 == c2) == False
+    assert (c2 <= c3) == True
+
+
