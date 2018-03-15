@@ -59,3 +59,12 @@ class Circle:
                 return False
         except AttributeError:
             return False
+
+    def __eq__(self, other):
+        try:
+            if self.rad == other.rad:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
