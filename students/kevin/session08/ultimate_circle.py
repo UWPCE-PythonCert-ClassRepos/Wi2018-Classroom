@@ -39,3 +39,15 @@ class Circle(object):
     def __mul__(self, other):
         self.radius *= other
         return self
+
+
+    def __rmul__(self, other):
+        self.radius *= other
+        return self
+
+
+    def __lt__(self, other):
+        return self.radius < other.radius
+
+    def __eq__(self, other):
+        return self.radius == other.radius
