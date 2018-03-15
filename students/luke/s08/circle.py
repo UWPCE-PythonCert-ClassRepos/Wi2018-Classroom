@@ -1,8 +1,15 @@
 import math
+import functools
 
+@functools.total_ordering
 class Circle:
     def __init__(self, radius=0):
         self._radius = radius
+
+
+    @classmethod
+    def from_diameter(myclass, diameter=0):
+        return myclass(diameter / 2)
 
 
     @property

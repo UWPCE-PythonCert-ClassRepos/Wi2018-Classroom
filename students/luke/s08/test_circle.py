@@ -71,3 +71,8 @@ def test_lt():
     assert not myc1 > myc2
     assert not myc1 >= myc2
     assert not myc1 == myc2
+
+
+def test_diameter_constructor():
+    myc1 = circle.Circle.from_diameter(4)
+    assert myc1.radius == 2
