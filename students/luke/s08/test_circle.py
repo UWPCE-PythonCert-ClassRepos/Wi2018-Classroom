@@ -86,3 +86,10 @@ def test_lt():
     circles.sort()
 
     assert(circles == [myc2, myc1])
+
+
+def test_mul():
+    myc1 = circle.Circle(4)
+    myc2 = myc1 * 3
+    assert myc2 == circle.Circle(12)
+    assert myc2 == 3 * myc1

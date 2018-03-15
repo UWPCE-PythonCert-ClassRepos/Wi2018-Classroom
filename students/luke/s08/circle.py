@@ -54,6 +54,14 @@ class Circle:
         return Circle(self._radius + other.radius)
 
 
+    def __mul__(self, other):
+        return Circle(self._radius * other)
+
+
+    def __rmul__(self, other):
+        return Circle(self._radius * other)
+
+
     def __eq__(self, other):
         return self._radius == other.radius
 
