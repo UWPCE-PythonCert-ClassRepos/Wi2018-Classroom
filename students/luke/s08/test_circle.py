@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# Run me in pytest
 
 """
 https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/circle_class.html#exercise-circle-class
@@ -76,3 +76,13 @@ def test_lt():
 def test_diameter_constructor():
     myc1 = circle.Circle.from_diameter(4)
     assert myc1.radius == 2
+
+
+def test_lt():
+    myc1 = circle.Circle(10)
+    myc2 = circle.Circle(5)
+
+    circles = [myc1, myc2]
+    circles.sort()
+
+    assert(circles == [myc2, myc1])
