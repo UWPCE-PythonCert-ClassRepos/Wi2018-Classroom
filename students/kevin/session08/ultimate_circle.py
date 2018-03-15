@@ -29,3 +29,13 @@ class Circle(object):
 
     def __repr__(self):
         return f'Circle({int(self.radius)})'
+
+
+    def __add__(self, other):
+        self.radius += other.radius
+        return self
+
+
+    def __mul__(self, other):
+        self.radius *= other
+        return self
