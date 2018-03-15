@@ -40,3 +40,22 @@ class Circle:
 
     def __rmul__(self, mult):
         return self.__mul__(mult)
+
+    def __lt__(self, other):
+        print(self.rad, other.rad)
+        try:
+            if self.rad < other.rad:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
+
+    def __le__(self, other):
+        try:
+            if self.rad <= other.rad:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
