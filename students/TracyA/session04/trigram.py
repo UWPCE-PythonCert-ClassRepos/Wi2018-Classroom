@@ -39,11 +39,11 @@ def make_words(text):
     print(words)
 
 
+# Update per codedragon's (teachers) suggestion
 def read_in_data(infilename):
-    infile = open(infilename, 'r')
-    # strip out the header, table of contents, etc.
-    for i in range(61):
-        infile.readline()
+    with open(infilename, 'r') as infile:
+        for i in range(61):
+            infile.readline()
     full_text = []
     # read the rest of the file line by line
     for line in infile:
@@ -53,6 +53,22 @@ def read_in_data(infilename):
 
     # put all the lines together into one big string:
     return u" ".join(full_text)
+
+
+# def read_in_data(infilename):
+#     infile = open(infilename, 'r')
+#     # strip out the header, table of contents, etc.
+#     for i in range(61):
+#         infile.readline()
+    # full_text = []
+    # # read the rest of the file line by line
+    # for line in infile:
+    #     if line.startswith(u"End of the Project Gutenberg EBook"):
+    #         break
+    #     full_text.append(line)
+    #
+    # # put all the lines together into one big string:
+    # return u" ".join(full_text)
 
 
 def build_trigram(words):
