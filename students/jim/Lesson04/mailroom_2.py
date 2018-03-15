@@ -16,14 +16,16 @@ def init_script():
     print("(2) Create a report")
     print("(3) Quit")
 
-    user_input = input("> ")
-    user_input = int(user_input)
+    menu_dict = {"1" : send_thanks,\
+                 "2" : create_report,\
+                 "3" : sys.exit }
 
-    if user_input == 1:
-        send_thanks()
-    elif user_input == 2:
-        create_report()
-    elif user_input == 3:
+    user_input = input("> ")
+
+    try:
+        menu_dict[user_input]()
+    except KeyError:
+        print("Not a valid option.")
         sys.exit()
 
 
@@ -73,6 +75,7 @@ def print_letter(donor_name, donation_amt):
     print("Sincerely,")
     print("The Management.")
     return
+
 
 if __name__ == '__main__':
     init_script()
