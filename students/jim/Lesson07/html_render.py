@@ -1,10 +1,13 @@
 class Element():
     tag = ""
 
-    def __init__(self, content=None):
+    def __init__(self, content=None, **kwargs):
         self.content_items = []
+        self.attributes = {}
         if content is not None:
             self.content_items.append(content)
+        for key, value in kwargs.items():
+            self.attributes[key] = value
 
     def append(self, content):
         self.content_items.append(content)
