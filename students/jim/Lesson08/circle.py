@@ -35,5 +35,8 @@ class Circle:
                 rad_sum += arg.rad
         return Circle(rad_sum)
 
-c1 = Circle(5)
-c2 = Circle(3)
+    def __mul__(self, mult):
+        return Circle(self.rad * mult)
+
+    def __rmul__(self, mult):
+        return self.__mul__(mult)
