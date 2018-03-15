@@ -17,7 +17,6 @@ donor_data = {"Allen, Paul": [1000000, 50000, 300000],
 
 # Donor data comprehension
 def show_list():
-    print(">>>>> donor data", donor_data)
     donor_list = [donor for donor in donor_data]
     sort_donors = sorted(donor_list)
     [print(donor) for donor in sort_donors]
@@ -61,9 +60,8 @@ def make_donor_dict(name, amount):
 
 def donor_selection():
     name = input("Please enter a donor's name in the form "
-                 "of 'Last Name, First name' or 'list' to see a list of donors"
-                 " or menu to exit > ").title()
-    print(">>>>>>> name", name)
+                 "of 'Last Name, First name'. \n Enter 'list' to see a list of "
+                 "donors or 'menu' to exit > ").title()
     return name
 
 
@@ -71,7 +69,6 @@ def get_donor_name():
     """Attempt to break up and handle exceptions"""
     while True:
         name = donor_selection()
-        print(">>>> name2", name)
         if name == "List":
             show_list()
         elif name == "Menu":
@@ -131,8 +128,11 @@ def get_donation_amount():
 
 def split_name(name):
     """ I can now split the names into first and last name"""
-    first_name = name.split(" , ")[1].strip()
-    last_name = name.split(" , ")[0].strip()
+    print(">>>> is split name being called")
+    first_name = name.split(",")[1].strip()
+    print(">>>First Last", first_name)
+    last_name = name.split(",")[0].strip()
+    print(">>>First and Last", first_name, last_name)
     return first_name, last_name
 
 
@@ -236,7 +236,6 @@ def init_prompt():
         '3' - Send letters to everyone
         '4' - Quit
         > ''')
-    print(">>>>>> answer", answer)
     return answer
 
 
@@ -249,7 +248,6 @@ if __name__ == "__main__":
                            "4": quit_program}
     while running:
         response = init_prompt()
-        print(">>>> response", response)
         try:
             dispatch_dictionary[response]()
         except KeyError:
