@@ -1,4 +1,5 @@
 from circle import Circle
+from circle import Sphere
 import math
 import  pytest
 import random as r
@@ -63,4 +64,18 @@ def test_aug_add():
 def test_aug_mul():
     c = Circle(10)
     c *= 10
-    assert(c.radius == 60)
+    assert(c.radius == 100)
+
+def test_alternate_circle_constructor():
+    c=Circle.from_diameter(10)
+    assert(c.radius==5)
+
+def test_static_area():
+    assert(Circle.get_area(1) == math.pi)
+
+def test_reflex_mul():
+    assert(data()*2 == 2*data())
+
+def test_alternate_sphere_constructor():
+    s=Sphere.from_diameter(10)
+    assert(s.radius==5)
