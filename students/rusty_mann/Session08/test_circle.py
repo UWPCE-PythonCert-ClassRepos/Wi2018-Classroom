@@ -32,3 +32,9 @@ def test_str():
 def test_repr():
     my_circle = Circle(4)
     assert repr(my_circle) == "Circle(4.0)"
+
+def test_add_circles():
+    c1 = Circle(4)
+    c2 = Circle(3)
+    assert c3.radius == 7
+
