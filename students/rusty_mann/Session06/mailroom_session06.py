@@ -7,15 +7,13 @@ donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
                     "Gates, Bill": [5000000.00, 80000.00, 700000.00], 
                     "Bezos, Jeff": [30000.00], 
                     "Musk, Elon": [1000000.00, 30000.00], 
-                    "Zuckerberg, Mark":[10000.00, 50000.00, 2000.00, 400000.00]
+                    "Zuckerberg, Mark": [10000.00, 50000.00, 2000.00, 400000.00]
                     }
 
 
-def show_donor_list():
-    """print list of donors to terminal."""
-    donor_list = [donor for donor in donor_data]
-    sort_donors = sorted(donor_list)
-    [print(donor) for donor in sort_donors]
+def make_donor_list():
+    """makes alphabetical list of donors."""
+    return sorted(donor_data.keys())
 
 
 def get_donor(name):
@@ -87,45 +85,48 @@ def add_donor(name, amount):
     return donor_data
 
 
-def donor_selection():
-    #name = "mann, rusty".title()
-    #name = "allen paul".title()
-    #name = "Menu".title()
-    name = "LIST ".title()
-    #name = input("Please enter a donor's name in the form of 'Last name, First name' "
-    #"(or 'list' to see a list of all donors, or 'menu' to exit)> ").title()
-    #print(name)
-    return name
+def donor_selection(name=False):
+    if not name:
+        name = input("Please enter a donor's name in the form of 'Last name, First name' "
+        "(or 'list' to see a list of all donors, or 'menu' to exit)> ")
+    return name.title()
 
 
-def get_donor_name():
+def get_donor_name(name=None):
     """handle exceptions and return donor name"""
     while True:
-        name = donor_selection()
+        if not name:
+            name = donor_selection()
         if name.strip().lower() == "list":
-            show_donor_list()
-            break
+            show_list = make_donor_list()
+            print("List of donors:")
+            [print(donor) for donor in show_list]
+            #break
+            name = None
         elif name.strip().lower() == "menu":
             return None
         else:
-            try:
+            try:  # test for two names separate by comma
                 first, last = split_name(name)
                 name = last + ", " + first
             except IndexError:
-                print("Error: Please enter a full name: ""Last name"", ""First name"": ")
+                print("Error: Please enter a last name and first name seperated by a comma!")
+                name = None
             else:
                 return name
 
 
-def donation_selection():
-    amount_str = str(input("Please enter a donation amount (or 'menu' to exit)> "))
-    return amount_str
+def donation_selection(amount_str=False):
+    if not amount_str:
+        amount_str = input("Please enter a donation amount (or 'menu' to exit)> ") 
+    return str(amount_str)
 
 
-def get_donation_amount():
+def get_donation_amount(donation=False):
     """handle exceptions and return donation amount"""
     while True:
-        donation = donation_selection()
+        if not donation:
+            donation = donation_selection()
         if donation.strip().lower() == "menu":
             return None
         else:
@@ -133,21 +134,27 @@ def get_donation_amount():
                 amount = float(donation)
             except ValueError:
                 print("Error: Please enter a number")
+                donation = None
             else:
                 return amount
 
 
-def send_donor_email():
+def send_donor_email(name=False, amount=False):
     """print thank you message to terminal"""
-    name = get_donor_name()
+    if not name:
+        name = get_donor_name()
     if name == None:
         return None
-    amount = get_donation_amount()
+    if not amount:
+        amount = get_donation_amount()
     if amount == None:
         return None
     add_donor(name, amount)
     donor_dic = make_donor_dict(name, amount)
-    print(make_donor_email(donor_dic))
+    email = make_donor_email(donor_dic)
+    return email
+    print(email)
+    #print(make_donor_email(donor_dic))
 
 
 def sort_key(item):
@@ -164,10 +171,17 @@ def make_report():
         avg = total / num
         rows.append((donor, total, num, avg))
     rows.sort(key=sort_key, reverse=True)
-    print("{:20s}{:15s}{:15s}{:12s}".format(
+    report = []
+    report.append("{:20s}{:14s} {:14s}{:15s}".format(
         "Donor Name", "|  Total Given", "|  Num Gifts", "|  Average Gift"))
-    print("_" * 67)
-    [print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row)) for row in rows]
+    report.append("_" * 67)
+    for row in rows:
+        report.append('{:20s} ${:12.2f}{:^15d}  ${:11.2f}'.format(*row))
+    return "\n".join(report)
+
+
+def print_report():
+    print(make_report())
 
 
 def quit_program():
@@ -193,7 +207,7 @@ if __name__ == "__main__":
     running = True
 
     dispatch_dict = {"1": send_donor_email,
-                           "2": make_report,
+                           "2": print_report,
                            "3": make_letter_files,
                            "4": quit_program
                            }

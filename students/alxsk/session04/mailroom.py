@@ -13,11 +13,11 @@ prompt handler.
 import math
 
 #First step. Donor List in global namespace. 
-DonorList= [['Alis Smith',500,350,400],
-['Neha Johnson', 1000, 3452,431,333],
-['Mohan Judge', 780,570],
-['Sree Richards', 1500],
-['Yash Kim',800]]
+DonorList= {'Alis Smith':[500,350,400],
+'Neha Johnson': [1000, 3452,431,333],
+'Mohan Judge': [780,570],
+'Sree Richards': [1500],
+'Yash Kim':[800]}
 
 def FindOrAddDonor(EnterName):
     for row in DonorList:
@@ -30,7 +30,7 @@ def FindOrAddDonor(EnterName):
 
 def PrintReport():
 	#1. Create and empty list
-    report=[]
+    report={}
 	#2. loop through donor_list computing values. Append new values to empty list using variables
     for row in DonorList:
         new_row = []
