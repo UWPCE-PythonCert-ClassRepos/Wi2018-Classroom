@@ -38,8 +38,7 @@ def printTaskFive(taskFive):
     #print(f'The weight of an {chopLastChar[:-1].upper()} is {(taskFive[1]*0.2) + (taskFive[1])} and the weight of a {chopLastChar2[:-1].upper()} is {(taskFive[-1]*.2)+ (taskFive[-1])}')
 
 def printAtable(table_of_rows):
-    """"This method accepts a tuple or list with 9 values and prints into a table. 
-        This method could be improvd by not hardcoding headers, or requiring 9 values to work. """ 
+    """"This method accepts a tuple or list with 9 values and prints into a table."""
     print('{:<10}'.format("Name"),'{:>5}'.format("Age"),'{:>10}'.format("Cost")) 
     print('_'*33)    
     print('{:<10}'.format(table_of_rows[0]),'{:>5}'.format(table_of_rows[1]),'{:>15}'.format(table_of_rows[2]))
@@ -59,7 +58,7 @@ if __name__ == "__main__" :
     in_tuple = (1, 2, 3)
     taskFour = ( 4, 30, 2017, 2, 27)
     taskFive = ['oranges', 1.3, 'lemons', 1.1]
-    table_of_rows=['Albert', 52,   '$5000.00', 'Marry',28,'$8999', 'Leonardo', 48,   '6000.00','Jon', 52, "$100.00", 'Mario',48, '$1000.00', 'Addis', 35, '7000']
+    table_of_rows=['Albert', 52.00,   '$5000.00', 'Marry',28,'$8999.00', 'Leonardo', 48,   '6000.00','Jon', 52, "$100.00", 'Mario',48, '$1000.00', 'Addis', 35, '7000.00']
     rev_tuple = (1,2,3,4,5,6,7,8,9,10)
     printtupleEle(tupleEle)
     printtupleEle(tupleEle)
