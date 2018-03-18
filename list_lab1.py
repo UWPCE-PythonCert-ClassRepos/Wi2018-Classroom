@@ -28,7 +28,6 @@ for fruit in List_fruits:
         print(fruit)
 print()
 
-# list duplicated entries - to test removal
 d_List_fruits = List_fruits * 2
 
 print("All the List_fruits are:", List_fruits)
@@ -72,4 +71,7 @@ for fruit in List_fruits:
     r_fruits.append(fruit[::-1])
 print("Reversed list of the fruits")
 print(r_fruits)
+
+
+
 
