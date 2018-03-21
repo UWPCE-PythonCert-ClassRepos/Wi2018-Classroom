@@ -256,6 +256,27 @@ def get_num_gifts(name):
 def get_avg_gift(name):
     """ Return the average of all of the supplied donor's donations. """
     return get_total(name) / get_num_gifts(name)
+
+
+def init_database():
+    # Initialize 5 donors and at least 1 donation for each.
+    donors = dict([('William Gates, III', {'name': 'William Gates, III',
+                                           'donations': [1, 5, 100000000],
+                                           'latest_don': 100000000}),
+                   ('Mark Zuckerberg', {'name': 'Mark Zuckerberg',
+                                        'donations': [378000, 5000, 20.01],
+                                        'latest_don': 20.01}),
+                   ('Jeff Bezos', {'name': 'Jeff Bezos',
+                                   'donations': [29000000, 34000, 709000],
+                                   'latest_don': 709000}),
+                   ('Paul Allen', {'name': 'Paul Allen',
+                                   'donations': [750000, 513895, 30592.50],
+                                   'latest_don': 30592.50}),
+                   ('John Ferrell', {'name': 'John Ferrell',
+                                     'donations': [520000000000],
+                                     'latest_don': 520000000000})])
+
+    return donors
     
 
 def main():
@@ -288,25 +309,10 @@ def main():
 
 
 if __name__ == '__main__':
-    # Initialize 5 donors and at least 1 donation for each.
-    donors = dict([('William Gates, III', {'name': 'William Gates, III',
-                                           'donations': [1, 5, 100000000],
-                                           'latest_don': 100000000}),
-                   ('Mark Zuckerberg', {'name': 'Mark Zuckerberg',
-                                        'donations': [378000, 5000, 20.01],
-                                        'latest_don': 20.01}),
-                   ('Jeff Bezos', {'name': 'Jeff Bezos',
-                                   'donations': [29000000, 34000, 709000],
-                                   'latest_don': 709000}),
-                   ('Paul Allen', {'name': 'Paul Allen',
-                                   'donations': [750000, 513895, 30592.50],
-                                   'latest_don': 30592.50}),
-                   ('John Ferrell', {'name': 'John Ferrell',
-                                     'donations': [520000000000],
-                                     'latest_don': 520000000000})])
-
     print('\nWelcome to the Mailroom applicaton.')
 
+    donors = init_database()
+    
     main()
 
     print('\nThank you for using Mailroom. Have a nice day!')

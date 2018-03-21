@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 
+@pytest.fixture
+def clean_database():
+    from mailroom4 import 
+    return 
+
 def test_prompt_for_amount(monkeypatch):
     from mailroom4 import prompt_for_amount
     
