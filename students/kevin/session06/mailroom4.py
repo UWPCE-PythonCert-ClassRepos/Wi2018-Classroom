@@ -9,13 +9,13 @@ def prompt_for_amount(name):
     return ''.join(amount.split('$')[-1].split(','))
 
 
-def add_new_donor(name, amount):
+def add_new_donor(donors, name, amount):
     """ Add new donor and donation amount to donor database. """
     donors[name] = dict([('name', name), ('donations', [float(amount)]),
                          ('latest_don', float(amount))])
 
 
-def add_donation_to_history(name, amount):
+def add_donation_to_history(donors, name, amount):
     """ Add new donation to existing donor's records """
     donors[name]['donations'].append(float(amount))
     donors[name]['latest_don'] = float(amount)
@@ -32,7 +32,7 @@ def verify_add_donor(name):
         if response.lower() in ['y', 'n', 'yes', 'no']: return response.lower()
 
 
-def list_donor_names():
+def list_donor_names(donors):
     """ Print current list of donors to screen.  """
     [print(k) for k in donors.keys()]
 
@@ -43,35 +43,6 @@ def blank_lines(number_lines=1):
     """ Return number_lines '\n' as string """
     return '\n' * (number_lines + 1)
     
-
-def print_letter(letter_content):
-    """ Style beginning and end of letter and print to console. """
-    print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
-
-
-def compose_letter(name, amount):
-    """ Print donation Thank You letter to screen. """
-    letter = letter_preamble(name)
-    letter += letter_body(name, amount)
-    letter += letter_closing()
-
-    return letter
-
-
-def send_letters_all():
-    """ Write to file Thank You letters to everyone in donor dict """
-    # TODO prompt user for dir to store letters in, test for existence,
-    # and create if necessary. Use letters/ as default
-    for k, v in donors.items():
-        fout_path = 'letters/'
-        fout_name = f'{k.replace(",", "").replace(" ", "_")}.txt'
-
-        fout_path += fout_name
-        with open(fout_path, 'w') as file:
-            file.write(compose_letter_dict(k))
-
-    return
-
 
 def letter_date():
     """ Return today's date, formatted for letter preamble. """
@@ -88,7 +59,7 @@ def letter_preamble(name):
     return preamble
 
 
-def letter_body(name, amount):
+def letter_body(amount):
     """ Return body of Thank You letter. """
     body = (
         f'Thank you for your generous donation of ${float(amount):,.2f}. Your gracious support '
@@ -110,6 +81,35 @@ def letter_closing():
     return closing
 
 
+def compose_letter(name, amount):
+    """ Print donation Thank You letter to screen. """
+    letter = letter_preamble(name)
+    letter += letter_body(amount)
+    letter += letter_closing()
+
+    return letter
+
+
+def print_letter(letter_content):
+    """ Style beginning and end of letter and print to console. """
+    print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
+
+
+def send_letters_all():
+    """ Write to file Thank You letters to everyone in donor dict """
+    # TODO prompt user for dir to store letters in, test for existence,
+    # and create if necessary. Use letters/ as default
+    for k, v in donors.items():
+        fout_path = 'letters/'
+        fout_name = f'{k.replace(",", "").replace(" ", "_")}.txt'
+
+        fout_path += fout_name
+        with open(fout_path, 'w') as file:
+            file.write(compose_letter_dict(k))
+
+    return
+
+
 def compose_letter_dict(name):
     """ Return Thank You letter composed from single template, filled with dict. """
     letter = (
@@ -120,7 +120,7 @@ def compose_letter_dict(name):
         'We look forward to continuing to partner with you in the future. Please contact '
         'us if you have any questions or have any interest in arranging a visit.'
         f'{blank_lines()}Sincerely,{blank_lines(2)}Mr. F\nActing Director\n'
-        '(800) 555_1234'.format(**donors[name])
+        '(800) 555-1234'.format(**donors[name])
         )
 
     return letter
@@ -162,7 +162,7 @@ def thank_you_prompt():
         response = input('--> ')
 
         if response in ['list', 'l']:
-            list_donor_names()
+            list_donor_names(donors)
 
         elif response in ['m', 'menu']: break
 
@@ -172,7 +172,7 @@ def thank_you_prompt():
 
             if verify[0] == 'y':
                 amount = prompt_for_amount(new_donor)
-                add_new_donor(new_donor, amount)
+                add_new_donor(donors, new_donor, amount)
 
                 # letter = compose_letter(new_donor, amount)
                 letter = compose_letter_dict(new_donor)
@@ -183,7 +183,7 @@ def thank_you_prompt():
         elif response.lower() in [k.lower() for k in donors.keys()]:
             donor = response
             new_amount = prompt_for_amount(donor)
-            add_donation_to_history(donor, new_amount)
+            add_donation_to_history(donors, donor, new_amount)
 
             letter = compose_letter(donor, new_amount)
             print_letter(letter)
