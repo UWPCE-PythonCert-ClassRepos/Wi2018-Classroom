@@ -95,8 +95,8 @@ def print_letter(letter_content):
     print(f'<BEGIN EMAIL>\n{letter_content}\n<END EMAIL>')
 
 
-def send_letters_all():
-    """ Write to file Thank You letters to everyone in donor dict """
+def send_letters_all(donors):
+    """ Write Thank You letters to file for everyone in donor dict. """
     # TODO prompt user for dir to store letters in, test for existence,
     # and create if necessary. Use letters/ as default
     for k, v in donors.items():
@@ -105,12 +105,12 @@ def send_letters_all():
 
         fout_path += fout_name
         with open(fout_path, 'w') as file:
-            file.write(compose_letter_dict(k))
+            file.write(compose_letter_dict(donors, k))
 
     return
 
 
-def compose_letter_dict(name):
+def compose_letter_dict(donors, name):
     """ Return Thank You letter composed from single template, filled with dict. """
     letter = (
         f'{letter_date()}'
@@ -152,7 +152,7 @@ def main_menu_prompt():
         return 3
 
 
-def thank_you_prompt():
+def thank_you_prompt(donors):
     """ Direct Thank You letter menu user input """
     print(hor_bar())
     print("[Send 'Thank You' menu]\n"
@@ -175,7 +175,7 @@ def thank_you_prompt():
                 add_new_donor(donors, new_donor, amount)
 
                 # letter = compose_letter(new_donor, amount)
-                letter = compose_letter_dict(new_donor)
+                letter = compose_letter_dict(donors, new_donor)
                 print_letter(letter)
                 
                 return
@@ -279,7 +279,7 @@ def init_database():
     return donors
     
 
-def main():
+def main(donors):
     """ Show main menu, prompting user for selection.  """
     while True:
         print(hor_bar())
@@ -289,7 +289,7 @@ def main():
         switch_func_dict = {
             0: thank_you_prompt,
             1: report_prompt,
-            2: send_letters_all
+            2: send_letters_all(donors)
         }
 
         response = None
@@ -313,6 +313,6 @@ if __name__ == '__main__':
 
     donors = init_database()
     
-    main()
+    main(donors)
 
     print('\nThank you for using Mailroom. Have a nice day!')

@@ -84,7 +84,24 @@ def test_letter_preamble():
 
 
 def test_letter_body():
-    pass
+    from mailroom4 import letter_body
+
+    assert 'Thank you for your generous donation of $0.50.' in letter_body(0.50)
+    assert 'Thank you for your generous donation of $100.00.' in letter_body(100)
+
+
+def test_letter_closing():
+    from mailroom4 import letter_closing
+
+    assert letter_closing() == \
+        '\n\nSincerely,\n\n\nMr. F\nActing Director\n(800) 555-1234'
+
+
+def test_compose_letter():
+    from mailroom4 import compose_letter, letter_preamble, letter_body, letter_closing
+
+    assert compose_letter('Matt Smith', 0.50) == \
+        letter_preamble('Matt Smith') + letter_body(0.50) + letter_closing()
 
 
 def test_print_letter():
@@ -95,3 +112,18 @@ def test_print_letter():
     assert print_letter(brief_letter) == \
         print(f'<BEGIN EMAIL>\n{brief_letter}\n<END EMAIL>')
 
+
+def test_send_letters_all():
+    from mailroom4 import send_letters_all, letter_date
+    import os.path
+
+    db = clean_database()
+
+    send_letters_all(db)
+
+    for k, v in db.items():
+        fpath = f'letters/{k.replace(",", "").replace(" ", "_")}.txt'
+        assert os.path.isfile(fpath)
+
+        with open(fpath, 'r') as file:
+            start_file = 
