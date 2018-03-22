@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+#!/usr/bin/env python3
+
 
 """
 A class-based system for rendering html.
 """
 
-class TextWrapper:
+class TextWrapper():
     """
     A simple wrapper that creates a class with a render method
     for simple text
@@ -23,29 +25,103 @@ class Element(object):
     tag = 'html'
     indent = ' ' * 4
     
-    def __init__(self, content=None):
-        self.content = content or ''
+    def __init__(self, content=None, **kwargs):
+        self.attributes = kwargs
+        self.content = []
+        if content:
+            self.append(content)
 
     def append(self, new_content):
-        try:
-            self.content += new_content
-        except TypeError:
-            self.content += new_content.content
+        if hasattr(new_content, 'render'):
+            self.content.append(new_content)
+        else:
+            self.content.append(TextWrapper(str(new_content)))
 
     def render(self, file_out, cur_ind=""):
-        self.open_tag = '<' + self.tag + '>'
+        attributes = ' '.join([' {}="{}"'.format(k, v) for k, v in self.attributes.items()])
+        self.open_tag = '<' + self.tag + attributes + '>\n'
         self.close_tag = '</' + self.tag + '>'
-        self.content = self.open_tag + self.content + self.close_tag
-        file_out.write(self.content)
+        file_out.write(cur_ind + self.open_tag)
+        for element in self.content:
+            element.render(file_out, cur_ind + self.indent)
+            file_out.write("\n")
+        file_out.write(cur_ind + self.close_tag)
+        
+class OneLineTag(Element):
+    def render(self, file_out, cur_ind=""):
+        attributes = ' '.join([' {}="{}"'.format(k, v) for k, v in self.attributes.items()])
+        self.open_tag = '<' + self.tag + attributes + '>'
+        self.close_tag = '</' + self.tag + '>'
+        file_out.write(cur_ind + self.open_tag)
+        for element in self.content:
+            element.render(file_out)
+        file_out.write(self.close_tag)
+        
+class SelfClosingTag(Element):
+    def render(self, file_out, cur_ind=""):
+        attributes = ' '.join([' {}="{}"'.format(k, v) for k, v in self.attributes.items()])
+        only_tag = '<' + self.tag + attributes + ' />'
+        file_out.write(cur_ind + only_tag)
+        
+class A(Element):
+    
+    tag = "a"
+    
+    def __init__(self, link, content):
+        Element.__init__(self, content, href = link)
+        
+class H(OneLineTag):
+    
+    tag = "h"
+    
+    def __init__(self, level, content):
+        self.tag = "h" + str(level)
+        super().__init__(content)
+    
 
 class Html(Element):
     
-    self.tag = "html"
+    tag = "html"
+    
+    def render(self, file_out, cur_ind=""):
+        file_out.write('<DOCTYPE html>\n')
+        Element.render(self, file_out, cur_ind="")
     
 class Body(Element):
     
-    self.tag = "body"
+    tag = "body"
 
 class P(Element):
     
-    self.tag = "p"
+    tag = "p"
+
+class Ul(Element):
+    
+    tag = "Ul"
+
+class Li(Element):
+    
+    tag = "li"
+    
+class Head(Element):
+    
+    tag = "head"
+
+class Title(OneLineTag):
+    
+    tag = "title"
+    
+    
+class Hr(SelfClosingTag):
+    
+    tag = "hr"
+
+class Br(SelfClosingTag):
+    
+    tag = "br"
+    
+class Meta(SelfClosingTag):
+    
+    tag = "meta"
+    
+    
