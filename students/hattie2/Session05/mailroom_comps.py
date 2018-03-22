@@ -11,6 +11,7 @@ The script should prompt the user (you) to choose from a menu of 3 actions:
 import os
 import datetime
 
+# Dictionary created from this data below!:
 donors = ["Ann Annson","Bill Billson","Cal Calson","Dan Danson", "Elle Elleson"]
 donation_amounts = []
 donation_amounts.append([30.50, 10,9])
@@ -24,15 +25,15 @@ donors_directory = dict()
 """Using existing list data to create dictionary of donors"""
 donors_directory = {donor: donation_amounts[donors.index(donor)] for donor in donors}
 
-print(donors_directory)
-
-
 def thanks():
     while True:
-        name = input("Please enter Full Name\n")
+        try:
+            name = input("Please enter donor's full Name\n")
+        except KeyboardInterrupt:
+            print("Ok, closing program")
+            exit()
         if name == "list" or name == "List":
-            for key in donors_directory.keys():
-                print(key)
+            print([key for key in donors_directory.keys()])
             name = input("Please enter Full Name\n")
         if any(name not in n for n in donors):
             donors_directory[name] = []
@@ -73,11 +74,9 @@ def save_letters():
 
     if not os.path.exists('letters'):
         os.makedirs('letters')
-
     today = datetime.datetime.now().strftime("%y%m%d")
 
     for donor in donors_directory:
-
         with open('letters\\'+donor.replace(' ','_')+today+'.txt', 'w')as f:
             f.write(f'Dearest {donor}\n\n'
                     f'Thank you for your kind donation of {float(donors_directory[donor][-1])} dollars.\n'
@@ -86,7 +85,6 @@ def save_letters():
                     f'Thanks,\n'
                     f'Charitable Giving Department')
             f.close()
-
     return 0
 
 while True:
@@ -110,6 +108,3 @@ while True:
             exit()
         else:
             print("Please enter a number 1, 2, 3 or 4")
-
-
-
