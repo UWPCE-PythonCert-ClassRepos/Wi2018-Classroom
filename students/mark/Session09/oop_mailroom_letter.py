@@ -8,6 +8,9 @@ Import this class into oop_mailroom.py
 
 """
 
+import oop_mailroom_db
+
+
 class LetterOop(object):
 
 
@@ -44,7 +47,10 @@ class LetterOop(object):
                     if name.lower() not in donor_db.keys():
                         print("name: ", self.format_donor_name(name), "is NOT found.")
                         print("debug: adding a function call to add donor.")
-                        add_donor_info(name, donor_db)
+                        try:
+                            ddb.add_donor_info(name, donor_db)
+                        except NameError:
+                            print ('Name {} was not found.'.format(name))
                 break
 
 
@@ -91,6 +97,7 @@ class LetterOop(object):
             print(self.create_letter(k, donor_db))
 
         return 0
+
 
     def print_donor_name(self, donor_db):
         """

@@ -117,7 +117,7 @@ class DonorDB(object):
                     if name.lower() not in donor_db.keys():
                         print("name: ", format_donor_name(name), "is NOT found.")
                         print("debug: adding a function call to add donor.")
-                        add_donor_info(name, donor_db)
+                        self.add_donor_info(name, donor_db)
                 break
 
 
@@ -134,7 +134,7 @@ class DonorDB(object):
         # First, reduce the raw data into a summary list view
         report_rows = []
         for (name, gifts) in donor_database.items():
-            name = format_donor_name(name)
+            name = self.format_donor_name(name)
             total_gifts = sum(gifts)
             num_gifts = len(gifts)
             try:
@@ -144,7 +144,7 @@ class DonorDB(object):
             report_rows.append((name, total_gifts, num_gifts, avg_gift))
 
         # sort the report data
-        report_rows.sort(key=report_sort_key)
+        report_rows.sort(key=self.report_sort_key)
         # print it out in with a nice format.
         print("{:25s} | {:11s} | {:9s} | {:12s}".format(
               "Donor Name", "Total Given", "Num Gifts", "Average Gift"))
