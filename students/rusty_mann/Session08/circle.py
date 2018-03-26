@@ -17,7 +17,8 @@ class Circle():
 
     @diameter.setter
     def diameter(self, diameter):
-        self.radius = diameter / 2
+        self.diameter = diameter
+#        self.radius = diameter / 2
 
     def __str__(self):
         return "Circle with radius: {:.6f}".format(self.radius)
@@ -57,5 +58,5 @@ class Sphere(Circle):
         return 4 / 3 * math.pi * self.radius**3
 
     @property
-    def surfaceArea(self):
+    def surface_area(self):
         return 4 * math.pi * self.radius**2

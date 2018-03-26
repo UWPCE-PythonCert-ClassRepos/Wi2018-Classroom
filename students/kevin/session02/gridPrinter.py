@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from itertools import repeat
 
 def print_grid(n):
@@ -42,3 +43,8 @@ def print_grid2(c,n):
         grid += horLine
 
     return grid
+
+
+if __name__ == '__main__':
+    print(print_grid(5))
+    print(print_grid2(3,5))
