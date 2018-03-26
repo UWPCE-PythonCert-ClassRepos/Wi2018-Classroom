@@ -41,12 +41,7 @@ def send_thanks():
 
     donation_amt = int(input("How much is the donation? "))
     donor_data[donor_name].append(donation_amt)
-    print(donor_data[donor_name])
-    print("Dear {}:\n".format(donor_name))
-    print("Thank you so much for your kind donation of {} dollars.".format(donation_amt))
-    print("It will be put to great use. Give yourself a big pat on the back.\n")
-    print("Sincerely,")
-    print("The Management.")
+    print_letter(donor_name, donation_amt)
 
     # Back to the menu
     init_script()
@@ -69,6 +64,15 @@ def create_report():
 
     # Back to the  menu
     init_script()
+
+
+def print_letter(donor_name, donation_amt):
+    print("Dear {}:\n".format(donor_name))
+    print("Thank you so much for your kind donation of {} dollars.".format(donation_amt))
+    print("It will be put to great use. Give yourself a big pat on the back.\n")
+    print("Sincerely,")
+    print("The Management.")
+    return
 
 if __name__ == '__main__':
     init_script()

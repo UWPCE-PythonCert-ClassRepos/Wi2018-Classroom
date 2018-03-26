@@ -14,7 +14,7 @@ food_prefs = {"name": "Chris",
               "pasta": "lasagna"}
 
 
-dict_sentence = "{} is from {}, and he likes {}, {}, {}, and {}.".format(
+dict_sentence = "{} is from {}, and he likes {} cake, {} fruit, {} salad, and {} pasta.".format(
     food_prefs["name"],
     food_prefs["city"],
     food_prefs["cake"],
