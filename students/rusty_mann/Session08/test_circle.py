@@ -36,5 +36,6 @@ def test_repr():
 def test_add_circles():
     c1 = Circle(4)
     c2 = Circle(3)
+    c3 = c1 + c2
     assert c3.radius == 7
 
