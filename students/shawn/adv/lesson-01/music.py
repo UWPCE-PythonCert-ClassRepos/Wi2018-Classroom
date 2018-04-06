@@ -1,15 +1,17 @@
 import pandas as pd
 import csv
-import itertools
+import operator
+
 
 #------------------------------------------------------------------------
 # Pandas
 #------------------------------------------------------------------------
-songs=pd.read_csv("featuresdf.csv")
-result = songs[(songs.loudness < -5.0) & (songs.danceability > 0.8)]
+def read_songs(csv):
+    songs=pd.read_csv(csv)
+    return songs[(songs.loudness < -5.0) & (songs.danceability > 0.8)]
 
 #------------------------------------------------------------------------
-# OO way
+# OO
 #------------------------------------------------------------------------
 class Song():
 
@@ -37,6 +39,7 @@ class Songs():
     def __init__(self):
         self.songs=[]
 
+
     def add(self, other):
         self.songs.append(other)
 
@@ -47,9 +50,21 @@ class Songs():
             [self.add(s) for s in [Song(r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9],r[10],r[11],r[12],r[13],r[14],r[15]) for r in reader]]
             return self
 
-music=Songs().read_data("featuresdf.csv");
+#------------------------------------------------------------------------
+# Compare  OO version with pandas
+#------------------------------------------------------------------------
+#print OO
+music = sorted([i for i in Songs().read_data("featuresdf.csv").songs if i.danceability > 0.8 and i.loudness < -5.0],key=operator.attrgetter('danceability'),reverse=True)
+print(f"\n{'='*50}\nOO\n{'='*50}")
+for i in music:
+    print(f"'{i.artists}' singing '{i.name}' at danceability of '{i.danceability}'" )
+
+print(f"\n{'='*50}\nPandas\n{'='*50}")
+
+#print pandas
+[print(f"'{j[2]}' singing '{j[1]}' at danceability of '{j[3]}'") for j in read_songs("featuresdf.csv").sort_values("danceability",ascending=False).values]
 
 
-
+   
 
 
