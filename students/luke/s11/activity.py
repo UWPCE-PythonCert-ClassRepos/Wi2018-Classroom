@@ -23,5 +23,4 @@ def make_list(dataframe):
 if __name__ == '__main__':
     music = pd.read_csv('featuresdf.csv')
     dlist = make_list(music)
-    for it in dlist:
-        print(it)
+    print(dlist[:5])
