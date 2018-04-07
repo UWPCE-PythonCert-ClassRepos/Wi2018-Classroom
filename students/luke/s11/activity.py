@@ -10,10 +10,16 @@ order by danceability so that the most danceable tracks are up top.
 """
 
 import pandas as pd
-music = pd.read_csv("featuresdf.csv")
 
-dlist = [x for idx, x
+
+def make_list(dataframe):
+    return \
+        [x for idx, x
          in music.sort_values(by='danceability', ascending=False).iterrows()
          if x.danceability > 0.8 and x.loudness < -5]
 
-print(dlist)
+
+if __name__ == "__main__":
+    music = pd.read_csv("featuresdf.csv")
+    dlist = make_list(music)
+    print(dlist)
