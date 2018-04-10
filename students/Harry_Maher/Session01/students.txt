@@ -1,8 +1,0 @@
-Name: Languages
-Donald Duck: C, Python
-Mickey Mouse: C, Python
-Minnie Mouse: C, Python
-Daisy Duck: C, Python
-Huey Duck: C, Python
-Dewey Duck: C, Python
-Louie Duck: C, Python
