@@ -121,9 +121,18 @@ def test_send_letters_all():
 
     send_letters_all(db)
 
-    for k, v in db.items():
-        fpath = f'letters/{k.replace(",", "").replace(" ", "_")}.txt'
+    for name, v in db.items():
+        fpath = f'letters/{name.replace(",", "").replace(" ", "_")}.txt'
         assert os.path.isfile(fpath)
 
         with open(fpath, 'r') as file:
-            start_file = 
+            contents = file.read()
+            start_file = f'{letter_date()}\n\n\nDear {name},'
+            end_file = f'Sincerely,\n\n\nMr. F\nActing Director\n(800) 555-1234'
+
+            assert contents.startswith(start_file) and contents.endswith(end_file)
+
+
+def test_compose_letter_dict():
+
+    pass
