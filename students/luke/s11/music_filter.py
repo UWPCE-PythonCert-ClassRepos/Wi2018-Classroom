@@ -13,6 +13,7 @@ import pandas as pd
 
 
 def make_list(dataframe):
+    """ Add filtered name/artists to list """
     return \
         [f"{x.get('name')} by {x.get('artists')}"
          for idx, x
