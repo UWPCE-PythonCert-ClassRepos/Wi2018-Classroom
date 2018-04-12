@@ -12,11 +12,12 @@ class Element:
     # the tag gets overwritten in subclasses
     tag = "html"
     
-    def __init__(self, content=None):
+    def __init__(self, content=None, **kwargs):
         if content:
             self.content = [content]  # A list!
         else:
             self.content = []
+
 
     def append(self, new_content):
         self.content.append(new_content)
