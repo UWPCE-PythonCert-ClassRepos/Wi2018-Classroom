@@ -48,6 +48,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -90,7 +91,9 @@ celerybeat-schedule
 venv/
 ENV/
 vclassroom/
+advclassroom/
 edu-collections/
+
 
 # Spyder project settings
 .spyderproject
