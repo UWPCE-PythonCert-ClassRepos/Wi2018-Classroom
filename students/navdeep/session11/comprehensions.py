@@ -12,10 +12,13 @@ def zip_music():
 
 def sort_zip():
 	music_zip = zip_music()
-	music_zip_sorted = sorted(music_zip, key = lambda x: x[0])
+	music_zip_sorted = sorted(music_zip, key = lambda x: x[2], reverse = True)
 	return music_zip_sorted 
 
 for music_entry in sort_zip():
 	print(music_entry)
 
+print("Top 5 Songs:")
+for i in range(0, 6):
+	print(sort_zip())
 
