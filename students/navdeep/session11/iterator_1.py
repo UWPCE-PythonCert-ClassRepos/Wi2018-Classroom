@@ -32,12 +32,16 @@ class IterateMe_2(IterateMe_1):
         self.start = start
         self.stop = stop
         self.step = step
+        self.current = start - step
+
+    def __iter__(self):
+        self.current = self.start - self.step
+        return self
 
     def __next__(self):
-        if self.start < self.stop:
-            current_return = self.start
-            self.start += self.step
-            return current_return
+        self.current += self.step
+        if self.current < self.stop:
+            return self.current
         else:
             raise StopIteration
         
