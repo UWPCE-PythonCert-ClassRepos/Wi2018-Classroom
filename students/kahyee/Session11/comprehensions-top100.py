@@ -2,7 +2,7 @@ import pandas as pd
 
 music = pd.read_csv("featuresdf.csv")
 
-possible_songs = [(x,y,z) for x, y, z in zip(music.name, music.danceability, music.loudness) if y > 0.8 and z < 5.0]
+possible_songs = [(x,y,z) for x, y, z in zip(music.name, music.danceability, music.loudness) if y > 0.8 and z < -5.0]
 
 def dance_key(item):
     return item[1]
