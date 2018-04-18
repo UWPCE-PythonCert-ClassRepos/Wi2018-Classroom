@@ -88,14 +88,16 @@ def score_danceable(sexy_music):
     return sexy_music_stuff
 
 
-def print_dancable():
+def print_dancable(danceability_scored):
+    """Print output of the items after danceability (or required sorting value) has been selected"""
+
     print ('{:50s} | {:25s} | {:20s}'.format('Name', 'Artist', 'danceability'))
     print ('-' * 95)
-    for i in score_danceable(sexy_music):
+    for i in danceability_scored:
         print('{:50s} | {:25s} | {:20s}'.format(str(sexy_music[i[1]][0]),str(sexy_music[i[1]][1]),str(sexy_music[i[1]][2])))
 
 
 
-print ('[+] running print dancable')
-sexy_music=create_dict_data()
-print_dancable()
+if __name__ == '__main__':
+    sexy_music=create_dict_data()
+    print_dancable(score_danceable(sexy_music))
