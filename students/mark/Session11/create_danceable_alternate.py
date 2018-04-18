@@ -3,6 +3,12 @@
 """
 Session 11:
 
+### Attempt at doing this some other way than a straight list comprehension
+#Use pandas location to create a hash table
+"""
+
+
+"""
 Your job, now, is to:
 
 * get artists
@@ -37,101 +43,59 @@ Submit your code and the top five tracks to complete the assignment.
 import pandas as pd
 music = pd.read_csv("./data/featuresdf.csv")
 
-### Take a look around to get a sense of the general shape of the data.
-#### Uneeded after debugging (remove from production code / here only as example of looking around)
-# print(music.head())
-# print('#' * 3)
-# music.describe()
+LENGTH_OF_OUTPUT=5
 
-### Now we are ready for the analytics. This first one is a gimme.
-### We will use a comprehension to get danceability scores over 0.8.
-# print([x for x in music.danceability if x > 0.8])
-# print([x for x in music.loudness if x < -5.0])
-# print([x for (x,y) in zip(music.loudness, music.danceability) if x < -5.0])
-# print([(x,y) for (x,y) in zip(music.loudness, music.danceability) if x < -5.0 and y > 0.8])
-
-def create_sexy_music_list():
-
-    return [(z,n,x,y) for (n,x,y,z) in zip(music.name, music.artists, music.loudness, music.danceability) if y < -5.0 and z > 0.8]
-
-music_lc_ordered=create_sexy_music_list()
-
-
-def select_output():
-    while len(sorted(music_lc_ordered, reverse=True)) > 5:
-        music_lc_ordered.pop()
-
-    return (music_lc_ordered)
-
-
-def output_selected(music_lc_ordered):
-    print ('{:50s} | {:25s} | {:20s}'.format('Name', 'Artist', 'danceability'))
-    print ('-' * 95)
-    for i in sorted(music_lc_ordered, reverse=True):
-        print ('{:50s} | {:25s} | {:20s}'.format(i[1], str(i[2]), str(i[0])))
-
-select_output()
-output_selected(music_lc_ordered)
-
-
-"""
 ### Attempt at doing this some other way than a straight list comprehension
 #Use pandas location to create a hash table
-print(music.iloc[0][1], music.iloc[0][2], music.iloc[0][6])
 # 0 = id (assumption: ID is unique)
 # 1 = name
 # 2 = artist
 # 3 = danceability
 # 6 = loudness
-print(music.iloc[0][1], music.iloc[0][2], music.iloc[0][3], music.iloc[0][6])
+## debug output: print(music.iloc[0][1], music.iloc[0][2], music.iloc[0][3], music.iloc[0][6])
+
+def create_dict_data():
+    """Create the dict containing the data
+
+    returns: dict(key, (list)) / sexy_music """
+
+    i=0
+    sexy_music={}
+    while i < len(music):
+        if music.iloc[i][3] > 0.8 and music.iloc[i][6] < -5.0:
+            sexy_music.update({music.iloc[i][0]:
+                                [music.iloc[i][1],
+                                music.iloc[i][2],
+                                music.iloc[i][3],
+                                music.iloc[0][6]]})
+        i += 1
+
+    return sexy_music
 
 
-print("[+] NEXT DATA: ")
+def score_danceable(sexy_music):
+    """ use a dict comprehension to create the list of sorted items
+    and truncate the list to the desired length
 
-i=0
-sexy_music={}
-while i < len(music):
-    if music.iloc[i][3] > 0.8 and music.iloc[i][6] < -5.0:
-        sexy_music.update({music.iloc[i][0]:
-                            [music.iloc[i][1],
-                            music.iloc[i][2],
-                            music.iloc[i][3],
-                            music.iloc[0][6]]})
-    i += 1
+    returns: list / sexy_music_stuff
+    """
+    sexy_music_stuff = sorted({(v[2], k) for k, v in sexy_music.items()}, reverse=True)
 
-data_sorted_dance=[]
-for i in sexy_music.keys():
-    print(i, " ", sexy_music[i][2])
-    data_sorted_dance.append(sexy_music[i][2])
-print("DATA SORTED")
-print(data_sorted_dance)
+    # truncate the list at 5 items
+    while len(sexy_music_stuff) > LENGTH_OF_OUTPUT:
+        sexy_music_stuff.pop()
 
-### try this
-print("[+] Try this")
+    return sexy_music_stuff
 
-def score_danceable():
-    return sorted({(v[2], k) for k, v in sexy_music.items()}, reverse=True)
 
 def print_dancable():
-    for i in score_danceable():
-        print(sexy_music[i[1]][0])
+    print ('{:50s} | {:25s} | {:20s}'.format('Name', 'Artist', 'danceability'))
+    print ('-' * 95)
+    for i in score_danceable(sexy_music):
+        print('{:50s} | {:25s} | {:20s}'.format(str(sexy_music[i[1]][0]),str(sexy_music[i[1]][1]),str(sexy_music[i[1]][2])))
+
+
 
 print ('[+] running print dancable')
+sexy_music=create_dict_data()
 print_dancable()
-
-### TODO: sort the hash based on value of key music.loc[i][3]
-#print (sexy_music) # debug
-
-# for key in sorted(sexy_music.iterkeys()):
-#     print "%s: %s" % (key, mydict[key])
-
-### create a list with the values
-
-
-
-# if music.danceability > 0.8:
-#     print(music.loudness)
-
-
-#import pdb; pdb.set_trace()
-"""
