@@ -15,7 +15,7 @@ class IterateMe_1:
 
     def __init__(self, start=-1, stop=5, step=1):
 #        self.current = -1
-        self.start = start
+        self.start = start - step
         self.stop = stop
         self.step = step
 
