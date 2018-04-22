@@ -48,6 +48,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -84,13 +85,16 @@ celerybeat-schedule
 
 # dotenv
 .env
+*.csv
 
 # virtualenv
 .venv
 venv/
 ENV/
 vclassroom/
+advclassroom/
 edu-collections/
+
 
 # Spyder project settings
 .spyderproject
@@ -110,4 +114,5 @@ edu-collections/
 
 # my own
 scratch.py
+
 
