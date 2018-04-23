@@ -20,24 +20,30 @@ import pandas as pd
 
 def make_ed_gen(dataframe):
     """ Provide generator producing Ed Sheeran's tracks from dataframe """
-    def gen_ed(dataframe):
+    df = dataframe 
+    def ed_gen():
         """ Generator producing Ed Sheeran's tracks from dataframe """
-        # XXX TODO Write generator
-        # Raise StopIteration at end of data
-        pass
-    return gen_ed
+        for idx, row in df.iterrows():
+            if row['artists'] != 'Ed Sheeran':
+                continue
+            yield row['name']
+        raise StopIteration
 
-def make_list(dataframe):
+    return ed_gen
+
+def make_list(df):
     eds = []
-    my_gen_ed = make_ed_gen();
-    try:
-        while True:
-            x = my_gen_ed()
-            eds += (f"{x.get('name')}")
-    except StopIteration:
-        pass
+    my_ed_gen = make_ed_gen(df);
+    i = 0
+    while True:
+        try:
+            eds += my_ed_gen()
+        except StopIteration:
+            break
+        finally:
+            break
 
-    return
+    return eds
 
 if __name__ == '__main__':
     music = pd.read_csv('featuresdf.csv')
