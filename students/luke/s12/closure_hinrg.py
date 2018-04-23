@@ -11,32 +11,19 @@ it finds, artist name, track name and energy value.
 
 import pandas as pd
 
-def make_nrg_closure(nrg):
+def make_nrg_df_filter(energy):
     """ Partial function for filtering dataframe on energy field """
-    def filter_on_nrg(dataframe):
+    nrg = energy
+
+    def filter_on_nrg(df):
         """ Filter input on stored energy value """
-        # XXX TODO filter dataframe where energy > nrg
-        # Raise StopIteration at end of data
-        pass
+        return df[df['energy'] > nrg]
+
     return filter_on_nrg
-
-
-def make_list(dataframe):
-    """ Add filtered name/artists to list """
-    return \
-        [f"{x.get('name')} by {x.get('artists')}"
-         for idx, x
-         in music.sort_values(by='danceability', ascending=False).iterrows()
-         if x.danceability > 0.8 and x.loudness < -5]
 
 
 if __name__ == '__main__':
     music = pd.read_csv('featuresdf.csv')
-    hi_nrg = make_nrg_closure(0.8)
-    try:
-        while True:
-            print(hi_nrg(music))
-    except StopIteration:
-        pass
-
-    return
+    hi_nrg_df_filter = make_nrg_df_filter(0.8)
+    print(hi_nrg_df_filter(music)\
+            [['name', 'artists', 'energy']].to_string(index=False))
