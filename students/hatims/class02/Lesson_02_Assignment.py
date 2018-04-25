@@ -19,9 +19,23 @@ class artist_generator:
             if x[1] == 'Ed Sheeran':
                 return x[0]			
 				
-				
+
+def capture_high_energy_tracks(energy_level=8):
+    def tracks():
+        track =[]
+        music = pd.read_csv("featuresdf.csv")
+        names = [name for name in music.name]
+        energy = [energy for energy in music.energy]
+        myList = zip(names, energy)
+        for x in myList:
+            if x[1] > energy_level:
+                track.append(x[0])
+        print(tracks)
+    return tracks
+
 				
 if __name__ == '__main__':
+    capture_high_energy_tracks(8)
     g = artist_generator()
     for index in range(5):
         val = next(g)
