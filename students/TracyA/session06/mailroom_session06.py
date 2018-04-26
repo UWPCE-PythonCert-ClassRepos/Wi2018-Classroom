@@ -8,11 +8,11 @@ import sys
 # Tracy Allen - git repo https://github.com/tenoverpar/Wi2018-Classroom
 
 
-donor_data = {"Allen, Paul": [1000000, 50000, 300000],
-              "Gates, Bill": [5000000, 80000, 700000],
-              "Warren, Buffett": [30000, 30000, 40000],
-              "Musk, Elon": [1000000, 30000],
-              "Zuckerberg, Mark": [10000, 50000, 12000, 400000]}
+donor_data = {"Allen, Paul": [1000000.00, 50000.00, 300000.00],
+              "Gates, Bill": [5000000.00, 80000.00, 700000.00],
+              "Warren, Buffett": [30000.00, 30000.00, 40000.00],
+              "Musk, Elon": [1000000.00, 30000.00],
+              "Zuckerberg, Mark": [10000.00, 50000.00, 12000.00, 400000.00]}
 
 
 # Donor data comprehension
@@ -60,8 +60,8 @@ def make_donor_dict(name, amount):
 
 def donor_selection():
     name = input("Please enter a donor's name in the form "
-                 "of 'Last Name, First name' or 'list' to see a list of donors"
-                 " or menu to exit > ").title()
+                 "of 'Last Name, First name'. \n Enter 'list' to see a list of "
+                 "donors or 'menu' to exit > ").title()
     return name
 
 
@@ -69,7 +69,6 @@ def get_donor_name():
     """Attempt to break up and handle exceptions"""
     while True:
         name = donor_selection()
-        print(">>>> name2", name)
         if name == "List":
             show_list()
         elif name == "Menu":
@@ -102,29 +101,6 @@ def get_donation_amount():
                 print("Error: Please enter a number")
             else:
                 return amount
-
-
-# def add_donor_info(name, donor_db):
-#     """ Add donor info or add a new donor
-#     :params: name/string/name of donor db key, donor_db: dictionary of
-#     donor names/amts.
-#         :return:
-#     """
-#     if name == "list" or name == "menu":
-#         print('Please select a name other than list or menu.')
-#         return 12
-#     if name not in donor_db:
-#         "create a name in the donor_db if it does not already exist"
-#         donor_db.update({name.lower(): []})
-#
-#     try:
-#         amount = input("Enter amount of donor's contribution "
-#                        "(or 'list' to see all donors or 'menu' to exit)> ").strip()
-#         donor_db[name].append(float(amount))
-#     except ValueError:
-#         print("\nPlease resubmit a the donor amount information in \
-#             dollars and cents with a format matching: 10.11\n")
-#     return
 
 
 def split_name(name):
@@ -173,34 +149,6 @@ def send_donor_email():
     print(make_donor_email(donor_dict))
 
 
-#     while True:
-#         name = input("Please enter a donor's name in the form of \
-#          'Last name, First name' "
-#                      "(or 'list' to see a list of all donors, \
-#                      or 'menu' to exit)> ").strip()
-#         if name == "list":
-#             show_list()
-#         elif name == "menu":
-#             return None
-#         else:
-#             break
-#     while True:
-#         amount_str = input("Please enter a donation amount \
-#          (or 'menu' to exit)> ").strip()
-#         if amount_str == "menu":
-#             return None
-#         else:
-#             amount = float(amount_str)
-#         donor = get_donor(name)
-#         if donor is None:
-#             donor_data.setdefault(name, [])
-#             donor_dict["first name"], donor_dict["last name"] = split_name(name)
-#         donor_data[name].append(amount)
-#         donor_dict["amt"] = amount
-#         break
-#     print(make_donor_email(donor_dict))
-
-
 def sort_key(item):
     """ key function used to sort the list by first (not zeroth) item"""
     return item[1]
@@ -212,18 +160,31 @@ def quit_program():
 
 
 def make_report():
-    """print the people to the screen"""
-    rows = []
+    """Generate the report of the donors and amounts donated.
+    :returns: the donor report as a string.
+    """
+    # First, reduce the raw data into a summary list view
+    report_rows = []
     for donor in donor_data:
         total = sum(donor_data[donor])
         num = len(donor_data[donor])
         avg = total / num
-        rows.append((donor, total, num, avg))
-    rows.sort(key=sort_key, reverse=True)
-    print("{:20s}{:15s}{:15s}{:12s}".format(
-        "Donor Name", "|  Total Given", "|  Num Gifts", "|  Average Gift"))
-    print("_" * 67)
-    [print('{:20s}{:15.2f}{:^15d}{:12.2f}'.format(*row)) for row in rows]
+        report_rows.append((donor, total, num, avg))
+
+    # sort the report data
+    report_rows.sort(key=sort_key, reverse=True)
+    report = []
+    report.append("{:20s} | {:11s} | {:15s} | {:12s}".format(
+        "Donor Name", "Total Given", "Num Gifts", "Average Gift"))
+
+    report.append("-" * 67)
+    for row in report_rows:
+        report.append("{:20s}${:15.2f}{:^15d}${:12.2f}".format(*row))
+    return "\n".join(report)
+
+
+def print_donor_report():
+    print(make_report())
 
 
 def init_prompt():
@@ -234,7 +195,6 @@ def init_prompt():
         '3' - Send letters to everyone
         '4' - Quit
         > ''')
-    print(">>>>>> answer", answer)
     return answer
 
 
@@ -242,12 +202,11 @@ if __name__ == "__main__":
     running = True
 
     dispatch_dictionary = {"1": send_donor_email,
-                           "2": make_report,
+                           "2": print_donor_report,
                            "3": create_letter_files,
                            "4": quit_program}
     while running:
         response = init_prompt()
-        print(">>>> response", response)
         try:
             dispatch_dictionary[response]()
         except KeyError:
