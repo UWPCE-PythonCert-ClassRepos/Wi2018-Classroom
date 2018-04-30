@@ -1,8 +1,9 @@
 # simple.py
 import logging
 
-logging.basicConfig(level=logging.WARNING)  # Change the level from
-# logging.DEBUG to logging.WARNING
+format = "%(asctime)s %(filename)s:%(lineno)-4d %(levelname)s %(message)s"
+logging.basicConfig(level=logging.WARNING, format=format, filename='mylog.log')
+
 def my_fun(n):
     logging.info(f"Function my_fun called with value {n}")
     for i in range(0, n):
