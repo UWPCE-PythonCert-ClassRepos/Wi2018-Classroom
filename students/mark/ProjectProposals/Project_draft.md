@@ -15,10 +15,10 @@ predict and visualize current and future IP addres utilization in global IP netw
 
 ### IPAddres Visualizer
 
-### autodiscovery
+### Autodiscovery
+Discover the addressing objects in AWS cloud or on a configured vendor's gear. 
 
-
-### Subnet enumeration
+#### Subnet enumeration
 
 Can use:
  - aws cli
