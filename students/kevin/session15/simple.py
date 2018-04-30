@@ -3,15 +3,20 @@ import logging
 
 format = "%(asctime)s %(filename)s:%(lineno)-4d %(levelname)s %(message)s"
 
-# BEGIN NEW STUFF
 formatter = logging.Formatter(format)
 
 file_handler = logging.FileHandler('mylog.log')
+file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(formatter)
 
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(formatter)
+
 logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 logger.addHandler(file_handler)
-# END NEW STUFF
+logger.addHandler(console_handler)
 
 def my_fun(n):
     logging.info(f"Function my_fun called with value {n}")
