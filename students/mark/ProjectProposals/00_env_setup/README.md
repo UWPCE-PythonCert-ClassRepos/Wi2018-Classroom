@@ -7,7 +7,7 @@
 ## Network gear
 (only set this up if you're working on the network gear portion)
 - we'll be using Vyatta as the "hardware"
-- install oracle virtualbox:
+- install oracle virtualbox: [vbox](https://www.virtualbox.org/wiki/Downloads) or use the hypervisor of your choice
 - download VyOs release 1.1.8: [download VyOs](https://downloads.vyos.io/?dir=release/1.1.8)
 - install VyOS: [VyOs](https://vyos.io/)
 
