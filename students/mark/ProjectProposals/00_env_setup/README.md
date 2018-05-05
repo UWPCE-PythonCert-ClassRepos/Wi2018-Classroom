@@ -22,7 +22,7 @@
 - inside the 10.128.0.0/16 VPC subnet add the 10 subnets for testing
 
 
-## Add the following IP addresses to the VPC or to the vyatta virtual machine:
+## Add the following IP addresses to the AWS VPC or to the VyOS virtual machine:
 - 10.128.0.0/22
 - 10.128.4.0/22
 - 10.128.8.0/22
