@@ -13,15 +13,15 @@
   - Look for the README.md file (this is the project summary file)
 1. checkout the branch currentproject (this has all the thing we are working on, make your changes here)
   > - **alternate** *(skip this section if it sounds complex, just make changes in the branch **currentproject** )*
-    - checkout the branch currentproject
-    - from currentproject, create a branch with "your_name"
-    - do a git branch -a -v (you'll see you have the same hash number for your branch and the currentproject branch)
-    - checkout your branch: git checkout "your_name"
-    - make changes, commit, change, push pull, whatever 'till your heart is content
-    - git checkout currentproject
-    - git merge currentproject (fix any merge conflicts)
-    - git push when merge conflicts are resolved
-    - git checkout "your_name"
+    > - checkout the branch currentproject
+    > - from currentproject, create a branch with "your_name"
+    > - do a git branch -a -v (you'll see you have the same hash number for your branch and the currentproject branch)
+    > - checkout your branch: git checkout "your_name"
+    > - make changes, commit, change, push pull, whatever 'till your heart is content
+    > - git checkout currentproject
+    > - git merge currentproject (fix any merge conflicts)
+    > - git push when merge conflicts are resolved
+    > - git checkout "your_name"
 1. how to submit code to this repo?  Create a pull request from your currentproject branch **note I think once I add you to this project you won't have to fork it, so get me your "git name"!
 
 ### How to we submit code to the class repo?
