@@ -13,16 +13,17 @@
   - Look for the README.md file (this is the project summary file)
 1. checkout the branch currentproject (this has all the thing we are working on, make your changes here)
   > - **alternate** *(skip this section if it sounds complex, just make changes in the branch **currentproject** )*
-    - checkout the branch currentproject
-    - from currentproject, create a branch with "your_name"
-    - do a git branch -a -v (you'll see you have the same hash number for your branch and the currentproject branch)
-    - checkout your branch: git checkout "your_name"
-    - make changes, commit, change, push pull, whatever 'till your heart is content
-    - git checkout currentproject
-    - git merge currentproject (fix any merge conflicts)
-    - git push when merge conflicts are resolved
-    - git checkout "your_name"
-1. how to submit code to this repo?  Create a pull request from your currentproject branch **note I think once I add you to this project you won't have to fork it, so get me your "git name"!
+    1. checkout the branch currentproject
+    1. from currentproject, create a branch with "your_name"
+    1. do a git branch -a -v (you'll see you have the same hash number for your branch and the currentproject branch)
+    1. checkout your branch: git checkout "your_name"
+    1. make changes, commit, change, push pull, whatever 'till your heart is content
+    1. git checkout currentproject
+    1. git merge currentproject (fix any merge conflicts)
+    1. git push when merge conflicts are resolved
+    1. git checkout "your_name"
+1. how to submit code to this repo?  
+  - Create a pull request from your currentproject branch **note I think once I add you to this project you won't have to fork it, so get me your "git name"!
 
 ### How to we submit code to the class repo?
 1. The build master will merge the *currentproject* branch into the master branch, at regular intervals the master branch will be submitted to the class repository via a pull request and Instructor1 and Instructor2 will be asked to take a look at it (we all have copies of this code on our machines)
