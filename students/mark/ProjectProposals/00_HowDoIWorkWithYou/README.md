@@ -44,8 +44,7 @@ Create a pull request from your currentproject branch **note I think once I add 
 
 # I'm excited to get going and conribute code! What's next?
 - send me an @username slack message with your git ID and asking to be added to the mobycoder001 group
-- "Hi my name is "your_name_here" and my git ID is "git_id", I' like to join and contribute to your project, please add me to your org
--
+> "Hi my name is "your_name_here" and my git ID is "git_id", I' like to join and contribute to your project, please add me to your org
 
 
 # environment setup
