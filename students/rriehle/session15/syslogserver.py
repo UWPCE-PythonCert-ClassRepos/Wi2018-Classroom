@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # A small system log server in python that prints any
 # incoming messages.
 #
