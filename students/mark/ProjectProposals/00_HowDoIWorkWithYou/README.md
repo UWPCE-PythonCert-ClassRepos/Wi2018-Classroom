@@ -5,7 +5,7 @@
 1. create a directory named t25 *(this is for everyone's convenience in finding the repo after it's been downloaded)*
 1. cd into your t25 directory
 1. Log into your github.com account using a web browser
-1. navigate to [here](https://github.com/mobycoder001/Wi2018-Classroom)
+1. navigate to [here](https://github.com/mobycoder001/IPAVe)
 1. clone this repository *(it looks alot like the class repository (go to the next step))*
 1. cd to t25/Wi2018-Classroom/students/mark/ProjectProposals/ *(Look for the README.md file (this is the project summary file))*
 1. checkout the branch currentproject (this has all the thing we are working on, make your changes here)

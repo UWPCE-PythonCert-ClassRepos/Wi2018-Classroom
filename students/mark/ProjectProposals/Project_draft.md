@@ -4,6 +4,9 @@
 The IPAVe IP Address VisualizEr provides a useful and exciting way to build
 predict and visualize current and future IP addres utilization in global IP networks.
 
+Our project has moved!
+Visit us here: https://github.com/mobycoder001/IPAVe
+
 - Real world problems.
 - Discover IP addressing
 - Suggest additional available subnets
@@ -16,7 +19,7 @@ predict and visualize current and future IP addres utilization in global IP netw
 ### IPAddres Visualizer
 
 ### Autodiscovery
-Discover the addressing objects in AWS cloud or on a configured vendor's gear. 
+Discover the addressing objects in AWS cloud or on a configured vendor's gear.
 
 #### Subnet enumeration
 
@@ -48,7 +51,9 @@ Can use:
 ### IP calcuation
 - uses Python subnetting library
 - subnets VPC sized defaults (/16's into /22's and /24's)
--
+- calculate and display available /24's
+- future imaging / show a subnet tree
+  - (eg. subnet usage tree: docssite.s3.amazonaws.com/media/images/subnet-tree-availability-1.png )
 
 ### utilization based prediction
 - based on time over usage calculation
