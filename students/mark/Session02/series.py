@@ -22,7 +22,7 @@
             The function should return the nth value in the fibonacci series.
         Ensure that your function has a well-formed docstring
 
-    Note that the fibinacci series is naturally recursive – the value is defined by previous values:
+    Note that the fibinacci series is naturally recursive.py – the value is defined by previous values:
 
     fib(n) = fib(n-2) + fib(n-1)
 
