@@ -6,6 +6,10 @@ Prelim questions
 
 Any additions to the agenda?
 
+Zoom
+----
+
+Remind me to repeat questions, etc.
 
 Projects!
 ---------
@@ -19,9 +23,11 @@ Topics
 Meta Programming
 ----------------
 
-I think I did a crappy job of talking about getattr/setattr, because I never disceted their call signatures.
+I think I did a crappy job of talking about getattr/setattr, because I never disceted their call signatures....
 
 ...and noboday asked me any questions.  Ahem.
+
+Does everyone understand how they work or should we look at that?
 
 Meta-mailroom -- How's it going?
 
