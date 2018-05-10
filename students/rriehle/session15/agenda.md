@@ -53,6 +53,8 @@ Test frameworks
 
   Pytest  (we have a winner)
 
+How do these things work?
+
 Linting, Coverage, Flake, McCabe
 
   Some of this is built into your IDE, or perhaps there are plugins for your editor
