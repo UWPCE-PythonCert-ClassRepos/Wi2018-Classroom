@@ -39,11 +39,19 @@ https://github.com/UWPCE-PythonCert-ClassRepos/Wi2018-Classroom/tree/master/stud
 Testing
 -------
 
-Unittest
+Test frameworks
 
-Nose
+  Unittest
 
-Pytest
+  Nose/nose2
+
+  Pytest  (we have a winner)
+
+Linting & Coverage
+
+  Some of this is built into your IDE, or perhaps there are plugins for your editor
+
+  PyCharm, Sublime, vi, Atom
 
 Mocks
 
