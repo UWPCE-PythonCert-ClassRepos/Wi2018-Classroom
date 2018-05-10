@@ -47,7 +47,7 @@ Test frameworks
 
   Pytest  (we have a winner)
 
-Linting & Coverage
+Linting, Coverage, Flake, McCabe
 
   Some of this is built into your IDE, or perhaps there are plugins for your editor
 
@@ -60,6 +60,8 @@ Joe's example involves depencency injection... what's that?
 Shall we look at some real code?
 
 Missing rescources?  Ditto, see my folder in the repo.
+
+Hypothesis... if we have time maybe.
 
 
 Exercises
