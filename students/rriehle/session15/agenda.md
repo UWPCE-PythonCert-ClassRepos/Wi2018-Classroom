@@ -25,6 +25,8 @@ I think I did a crappy job of talking about getattr/setattr, because I never dis
 
 Meta-mailroom -- How's it going?
 
+Code, code, whose got some code?
+
 
 Logging & Debugging
 -------------------
@@ -43,6 +45,10 @@ Nose
 
 Pytest
 
+Mocks
+
+Joe's example involves depencency injection... what's that?
+
 Shall we look at some real code?
 
 Missing rescources?  Ditto, see my folder in the repo.
@@ -53,4 +59,13 @@ Exercises
 
 Let's read through them together.
 
+
+Random
+------
+
+I forgot my wallet today... and need to take a ferry after class tonight.
+
+Could I borrow $10 from someone?
+
+(fer real, no joke)
 
