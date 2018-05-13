@@ -18,25 +18,20 @@ class Locke:
         self.toggle_doors()
         return self
 
-    def __exit__(self):
+    def __exit__(self, exc, exc_val, tb):
         print("Called exit dunder.")
-        self.toggle_doors()
-        self.toggle_pumps()
 
     def move_boats_through(self, num_boats):
 
         try:
             assert self.capacity >= num_boats
+            print("Moved {} boats through successfully.".format(num_boats))
+            print("Returning locke to original state...")
+            self.__exit__(None, 0, 0)
         except AssertionError:
             print("Error: insufficient capacity!")
             print("Returning locke to original state...")
-            self.__exit__()
-            return
-
-        print("Moved {} boats through successfully.".format(num_boats))
-        print("Returning locke to original state...")
-
-        self.__exit__()
+            self.__exit__(AssertionError, 0, 0)
 
     def toggle_doors(self):
 
