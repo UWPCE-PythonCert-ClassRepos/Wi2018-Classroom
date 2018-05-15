@@ -1,0 +1,48 @@
+There are a few issues with recursive.py.
+
+
+First, since we're going to debug it with pdb, I had to rename the "n"
+to "num" because n is already "next" in pdb. I'm not sure if that was 
+intentional, but that was a good refresher on why "n" is a crappy name.
+
+
+Next, this function has no breakpoint/ return value if it gets to less
+than 2 and wasn't a power of 2 to begin with. 
+
+
+So, as we get deeper and deeper into the recursion the "n" (or "num")
+gets divided by 2 forever. You can see this below where we see that
+num is 0.00091552734375 and will keep diminishing by half.
+
+
+To fix this, I'd put an "elif n < 1: return False" on line 6 in 
+recursive.py.
+
+
+
+
+
+$ python -m pdb recursive.py 15
+> z:\pythoncertificate\wi2018-classroom\students\harry_maher\python220b\session05\recursive.py(1)<module>()
+-> import sys
+(Pdb) ll
+  1  -> import sys
+  2
+  3     def my_fun(num):
+  4         if num == 2:
+  5             return True
+  6         return my_fun(num/2)
+  7
+  8
+  9     if __name__ == "__main__":
+ 10         num = int(sys.argv[1])
+ 11         my_fun(num)
+(Pdb) b 6
+Breakpoint 1 at z:\pythoncertificate\wi2018-classroom\students\harry_maher\python220b\session05\recursive.py:6
+(Pdb) condition 1 num < .001
+New condition set for breakpoint 1.
+(Pdb) c
+> z:\pythoncertificate\wi2018-classroom\students\harry_maher\python220b\session05\recursive.py(6)my_fun()
+-> return my_fun(num/2)
+(Pdb) num
+0.00091552734375
