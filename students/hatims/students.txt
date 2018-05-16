@@ -6,3 +6,4 @@ Daisy Duck: c#
 Huey Duck: matlab
 Dewey Duck: c++
 Louie Duck: sql
+Test Duck: python
