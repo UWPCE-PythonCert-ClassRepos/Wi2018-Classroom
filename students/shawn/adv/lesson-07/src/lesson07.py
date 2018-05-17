@@ -31,7 +31,7 @@ def seed():
 
     try:
 
-        database = SqliteDatabase('personjob.db')
+        database = SqliteDatabase('../src/data/personjob.db')
         database.connect()
         database.execute_sql('PRAGMA foreign_keys = ON;')  # needed for sqlite only
 
@@ -76,23 +76,46 @@ def seed():
                 )
                 new_dept.save()
 
-        qry=(Person.select(Person.person_name,Person.lives_in_town,
-                    Job.job_name,
-                    Dept.dept_name)
-             .join(Job)
-             .join(Dept)
-             .order_by(Person.person_name)
-        )
 
-        [print(f"{i.person_name} lives in  {i.lives_in_town} "
-               f"as a {i.job.job_name} "
-               f"in {i.job.dept.dept_name}") for i in qry]
+
+        # display the db
+        display()
+
+        # update a record
+        andrew=Person.get(Person.person_name=="Andrew")
+        andrew.lives_in_town="Somerville"
+        andrew.save()
+        display()
+
+        # delete a record
+        pam=Person.get(Person.person_name=="Pam")
+        pam.delete_instance()
+        display()
+
+        # remove a range
+        recs=Person.delete().where(Person.person_name.startswith("S"))
+        recs.execute()
+        display()
 
     except Exception as e:
         print(e.args)
 
     finally:
         database.close()
+
+def display():
+    print("====================================================")
+    qry = (Person.select(Person.person_name, Person.lives_in_town,
+                         Job.job_name,
+                         Dept.dept_name)
+           .join(Job)
+           .join(Dept)
+           .order_by(Person.person_name)
+           )
+
+    [print(f"{i.person_name} lives in  {i.lives_in_town} "
+           f"as a {i.job.job_name} "
+           f"in {i.job.dept.dept_name}") for i in qry]
 
 if __name__ == '__main__':
     seed()

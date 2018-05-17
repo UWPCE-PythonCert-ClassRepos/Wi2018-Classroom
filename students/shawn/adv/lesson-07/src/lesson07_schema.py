@@ -1,7 +1,7 @@
 from peewee import *
 
 
-database = SqliteDatabase('personjob.db')
+database = SqliteDatabase('../src/data/personjob.db')
 database.connect()
 database.execute_sql('PRAGMA foreign_keys = ON;') # needed for sqlite only
 
@@ -37,8 +37,6 @@ class Dept(BaseModel):
     dept_num = CharField( max_length = 4)
     dept_name = CharField(max_length = 30)
     job = ForeignKeyField(Job,backref="depts")
-
-
 
 database.create_tables([
         Job,
