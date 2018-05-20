@@ -1,6 +1,6 @@
 # Mac files
 .DS_Store
-
+*.idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -48,6 +48,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -84,13 +85,16 @@ celerybeat-schedule
 
 # dotenv
 .env
+*.csv
 
 # virtualenv
 .venv
 venv/
 ENV/
 vclassroom/
+advclassroom/
 edu-collections/
+
 
 # Spyder project settings
 .spyderproject
@@ -107,7 +111,3 @@ edu-collections/
 
 # emacs
 *.*~
-
-# my own
-scratch.py
-
