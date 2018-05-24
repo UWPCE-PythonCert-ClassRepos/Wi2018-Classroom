@@ -146,16 +146,13 @@ def from_json(_json):
         return from_json_dict(json.load(_json))
 
 
-# @json_save
-# class MyClass:
+@json_save
+class MyClass:
 
-#     x = Int()
-#     y = Float()
-#     lst = List()
+    d = Dict()
 
-#     def __init__(self, x, lst):
-#         self.x = x
-#         self.lst = lst
+    def __init__(self, d):
+        self.d = d
 
 
 # @json_save
@@ -169,12 +166,12 @@ def from_json(_json):
 #         self.bar = bar
 
 
-# # create one:
-# print("about to create a instance")
-# mc = MyClass(5, [3, 5, 7, 9])
+# create one:
+print("about to create a instance")
+mc = MyClass({1:2, 2:4, 4:8})
 
-# print(mc)
+print(mc)
 
-# jc = mc.to_json_compat()
+jc = mc.to_json_compat()
 
-# print(jc)
+print(jc)

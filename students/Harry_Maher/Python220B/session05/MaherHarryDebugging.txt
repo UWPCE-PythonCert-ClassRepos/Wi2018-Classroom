@@ -15,7 +15,7 @@ gets divided by 2 forever. You can see this below where we see that
 num is 0.00091552734375 and will keep diminishing by half.
 
 
-To fix this, I'd put an "elif n < 1: return False" on line 6 in 
+To fix this, I'd put an "elif n < 2: return False" on line 6 in 
 recursive.py.
 
 
