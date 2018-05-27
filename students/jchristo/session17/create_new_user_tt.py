@@ -1,28 +1,33 @@
+"""
+This program will automatically generate the trouble tickets to request new SFDC user profiles for submission by one end user
+"""
+
+import boto3
 import webbrowser
 import psycopg2
 import pandas as pd
 import logging
-import os
 import sys
 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-sql_script = os.path.normpath("/Users/jchristo/Desktop/PythonProjects/new_user_query.sql")#for Mac, replace with S3 bucket
+s3 = boto3.resource('s3')
+source_bucket = 'BUCKET_NAME_HERE'
+sql_script = 'FILE_NAME_HERE'
 
 
 class MyDatabase():
     """This class is designed to create one database connection for use in a module"""
-    database = ''
-    host = ''
-    port = ''
-    user = '' #username and password can be replaced with amazon secrets in the future
-    password = ''
+    database = 'DATABASE_NAME_HERE'
+    host = 'HOST_NAME_HERE'
+    port = 'PORT_HERE'
+    user = 'DB_USER_HERE' #username and password can be replaced with amazon secrets in the future
+    password = 'USER_PASSWORD_HERE'
 
     def __init__(self):
-        self.conn = psycopg2.connect(dbname=self.database, host=self.host,
-                                     port=self.port, user=self.user, password=self.password)
+        self.conn = psycopg2.connect(dbname=self.database, host=self.host, port=self.port,
+                                     user=self.user, password=self.password)
         self.cur = self.conn.cursor()
 
     def query(self, query):
@@ -40,27 +45,27 @@ class MyDatabase():
         self.conn.close()
 
 
-#def create_connection():
 """Establish a database connection for use by the program"""
 try:
     logging.info('attempting to connect to the database')
     db = MyDatabase()
     logging.info('successfully connected to the database')
-    #return db
 except Exception as e:
     logging.error(e)
     logging.info('unable to connect to the database')
     sys.exit(1)
 
 
-"""Retrieve the query to be executed from an external file"""
+"""Retrieve the SQL query to be executed from S3"""
 try:
-    with open(sql_script, 'r') as f:
-        logging.info('reading SQL script')
-        new_user_query = f.read()
-        logging.info('SQL script successfully read from file')
+    logging.info('importing SQL script from S3')
+    obj = s3.Object(source_bucket, sql_script)
+    new_user_query = obj.get()['Body'].read()
+    logging.info('successfully imported SQL script from S3')
+    logging.info(new_user_query)
 except Exception as e:
-    logging.info('unable to locate SQL script')
+    logging.info('unable to import SQL script from s3')
+    logging.info(e)
 
 
 def get_new_users():
@@ -76,7 +81,7 @@ def get_new_users():
 
 
 def get_new_user_variable_names(query_results):
-    """This function may not be needed"""
+    """Retrieve column names from the dataframe for use as variables"""
     try:
         logging.info('generating list of variables for TT')
         new_user_variables = [x for x in query_results]
@@ -130,5 +135,4 @@ def the_kick():
 
 
 if __name__ == '__main__':
-    #create_connection()
     the_kick()
