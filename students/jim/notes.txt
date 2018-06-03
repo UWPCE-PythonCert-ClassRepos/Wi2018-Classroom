@@ -1,0 +1,9 @@
+@TODO
+-Learn more about virtual environments
+-Bone up on JSON
+-Install JSON utility properly
+-Logging
+-Debugging
+
+@LOOKINTO
+"Any port below 1024 is a privileged port." (Unix)
