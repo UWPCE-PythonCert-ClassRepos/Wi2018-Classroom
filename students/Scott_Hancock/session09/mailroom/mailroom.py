@@ -1,8 +1,7 @@
 class Donor:
-    """ Class to keep track of donors with a donor name and list of donation amounts """
+    """ Class to keep track of a donor with a donor name and list of donation amounts """
 
     def __init__(self, name=''):
-        """ """
         self.name = name.strip()
         self.donationList = list()
 
@@ -10,6 +9,7 @@ class Donor:
         """ Add a donation amount to the list """
         self.donationList.append(amount)
 
+    # CHANGE INTO A PROPERTY
     def getNumDonations(self):
         """ Get the number of donations the donor has made """
         return len(self.donationList)
@@ -36,14 +36,18 @@ class Donor:
 
 
 class DonorCollection:
+    """ Keeps track of the collection of donors as well as writing thank you letters and the donor report """
+    """ To add: read and write donor collection as a JSON """
 
     def __init__(self):
         self.donorList = list()
 
     def addDonor(self, donor):
+        """ Add a donor to the list """
         self.donorList.append(donor)
 
     def findDonor(self, searchName):
+        """ Search for a donor in the list by the donor's name """
         result = None
         for donor in self.donorList:
             if donor.name.lower() == searchName.strip().lower():
@@ -52,16 +56,19 @@ class DonorCollection:
         return result
 
     def listDonors(self):
+        """ List all the donors """
         for donor in self.donorList:
             print(donor.name)
 
     def storeThankYouLetters(self):
+        """ Save each thank you letter to a file by the donor's name """
         for donor in self.donorList:
             f = open("{:s}.txt".format(donor.name).replace(" ", "_"), 'w')
             f.write(donor.createThankYouEmail())
             f.close()
 
     def getReport(self):
+        """ Return a report of all the donors and donation roll-up """
         result = ("\nDonor Name          | Total Given | Num Gifts | Average Gift"
             "\n------------------------------------------------------------")
         for donor in self.donorList:
@@ -110,21 +117,22 @@ def quit():
     """ Quits the main menu """
     return 'quit'
 
-main_prompt = ("\nWelcome to the Mailroom.py prompt:\n"
+# CAPITALIZE THESE
+MAIN_PROMPT = ("\nWelcome to the Mailroom.py prompt:\n"
     "1. Send a Thank You\n"
     "2. Create a Report\n"
     "3. Send letters to everyone\n"
     "q. Quit\n"
     ">-> "
     )
-main_dispatch = {"1": sendThankYou,
+MAIN_DISPATCH = {"1": sendThankYou,
     "2": createReport,
     "3": donors.storeThankYouLetters,
     "q": quit,
     }
 
 if __name__ == '__main__':
-    menu_selection(main_prompt, main_dispatch)
+    menu_selection(MAIN_PROMPT, MAIN_DISPATCH)
 
 
 
