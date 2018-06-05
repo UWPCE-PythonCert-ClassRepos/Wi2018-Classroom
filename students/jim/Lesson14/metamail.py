@@ -1,5 +1,5 @@
 import json
-
+import pdb
 
 class DonorDatabase():
     
@@ -27,18 +27,45 @@ class DonorDatabase():
         return self.total_donations_from(name) / self.num_donations_from(name)
 
     def new_donation(self, name, amount):
-        if name in self.data.keys():
-            self.data[name].append(amount)
+        if name not in self.data.keys():
+            self.data[name] = []
+        for a in amount:
+            self.data[name].append(a)
+        return
+
+    def user_menu(self):
+        print("Donations database manager")
+        print("1) View dononation information")
+        print("2) Add donation information")
+        print("3) Load")
+        print("4) Save")
+        print("5) Exit")
+        user_selection = input(">")
+        user_selection = int(user_selection)
+
+        if user_selection == 1:
+            print(self.data)
+            self.user_menu()
+
+        elif user_selection == 2:
+            donor_name = input("Name of this donor? ")
+            donations = input("Dollar amount of {}'s donations? ".format(donor_name))
+            donations = donations.split(",")
+            donations = [int(d) for d in donations]
+            self.new_donation(donor_name, donations)
+            self.user_menu()
+            
+        elif user_selection == 3:
+            # load database from json
+            pass
+
+        elif user_selection == 4:
+            # save database to jason
+            pass
+
         else:
-            self.data[name] = [amount]
-    
+            exit(0)
 
 if __name__ == "__main__":
-    print("Donations database manager")
-    print("1) View dononation information")
-    print("2) Add donation information")
-    print("3) Load")
-    print("4) Save")
-    print("5) Exit")
-    user_selection = input(">")
-    print(user_selection)
+    ddb = DonorDatabase()
+    ddb.user_menu()
