@@ -10,18 +10,6 @@ def generate_sheeran(artist_name):
         if artist_name in music.artists[i]:
             yield music.name[i]
 
-
-def get_songs(criterion, threshold=0.5):
-    tracks = []
-    for i in range(len(music)):
-        if music.iloc[i][criterion] >= threshold:
-            track = (music.iloc[i]['artists'],
-                     music.iloc[i]['name'],
-                     music.iloc[i][criterion])
-            tracks.append(track)
-    return tracks
-
-
 eds_tracks = generate_sheeran("Sheeran")
 
 print("These are the tracks by Ed Sheeran:")
@@ -32,7 +20,33 @@ for track in music.artists:
     except StopIteration:
         break
 
+print("And here is a list of songs with energy of at least 0.8:")
+
+# Closure.
+def get_songs(criterion, threshold=0.8):
+    track_num = 0
+    def inner():
+        nonlocal track_num    
+        i = track_num
+        if music.iloc[i][criterion] >= threshold:
+            track = (music.iloc[i]['artists'],
+                     music.iloc[i]['name'],
+                     music.iloc[i][criterion])
+            print(track)
+        track_num += 1
+        return i
+    return inner
+
+song_extractor = get_songs('energy', threshold=0.8)
+
+# Is this clunky? It feels clunky.
+for _ in range(len(music)):
+    song_extractor()
+
+
+'''
 print("And these are the songs with energy >= 0.8:")
 
 for song in get_songs('energy', 0.8):
     print(song)
+'''
