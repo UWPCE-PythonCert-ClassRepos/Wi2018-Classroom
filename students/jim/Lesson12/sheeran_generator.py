@@ -1,19 +1,30 @@
 import pandas as pd
+import pdb
 
-# I should mention here that Ed Sheeran is *NOT* my favorite artist.
-# I chose him as the default.
-music = pd.read_csv("featuresdf.csv")
-
-dataframe_size = music.iloc[-1].name + 1
-
+# I should mention here that Ed Sheeran is not exactly my favorite artist.
+# But he makes a fine default.
+music = pd.read_csv('/home/diogenes/python-cert/Wi2018-Classroom/students/jim/Lesson12/featuresdf.csv')
 
 def generate_sheeran(artist_name):
-    for i in range(dataframe_size):
+    for i in range(len(music)):
         if artist_name in music.artists[i]:
             yield music.name[i]
 
 
+def get_songs(criterion, threshold=0.5):
+    tracks = []
+    for i in range(len(music)):
+        if music.iloc[i][criterion] >= threshold:
+            track = (music.iloc[i]['artists'],
+                     music.iloc[i]['name'],
+                     music.iloc[i][criterion])
+            tracks.append(track)
+    return tracks
+
+
 eds_tracks = generate_sheeran("Sheeran")
+
+print("These are the tracks by Ed Sheeran:")
 
 for track in music.artists:
     try:
@@ -21,17 +32,7 @@ for track in music.artists:
     except StopIteration:
         break
 
+print("And these are the songs with energy >= 0.8:")
 
-def get_songs_based_on(song_property):
-    if song_property not in music.columns:
-        print("No such property: ", song_property)
-        return
-    for c in range(len(music.columns)):
-        if music.columns[c] == song_property:
-            col = music.columns[c]
-
-    def above(n):
-        pass
-
-
-get_songs_based_on("Energy")
+for song in get_songs('energy', 0.8):
+    print(song)
