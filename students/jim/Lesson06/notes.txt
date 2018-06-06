@@ -1,0 +1,16 @@
+TODO:
+-----
+Mailroom 2, 3, 4
+  write function to write to disk thank you letters for everyone.
+
+Add a full suite (i.e. all functions in MR script) of tests.
+(test_mailroom.py)
+Refactor if necessary.
+Sign up for next quarter
+
+Using super:
+
+class SubClass(SuperClass):
+    def __init__(self, arg1, arg2)
+    self.foo = arg1
+    super().__init__(arg2)

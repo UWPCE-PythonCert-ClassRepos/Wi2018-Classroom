@@ -1,0 +1,24 @@
+For associating various fields together, use zip.
+zip(music.whatever, music.this, music.that) if x[0] > 5 and x[1] < 2 will return
+tracks where whatever is greater than 5 and this is less than 2
+
+Also wrap list() around zip to ensure the right data structure
+
+mylist[::-1] returns reverse
+
+def fibo_gen():
+    a,b = 0,1
+    while True:
+        yield b
+        a,b = b,a+b
+
+Closure: (??)
+
+def make_average():
+    count, total = 0, 0
+
+    def averager(new_value):
+        count += 1
+        total += new_value
+        return total / count
+    return averager

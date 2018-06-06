@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Element():
     tag = ""
 
@@ -17,20 +19,22 @@ class Element():
         tag_indent = cur_ind
         content_indent = (cur_ind+"    ")
 
-        # Walk through content in the content list. If it's a string,
-        # print it as content. Otherwise, we'll catch the TypeError
-        # and treat it like another Element subclass and recursively
-        # render it.
         print(tag_indent + self.open_tag())
         for item in self.content_items:
-            try:
+            if isinstance(item, str):
                 print(content_indent + item)
-            except TypeError:
+            elif isinstance(item, Element):
                 item.render(file_out, cur_ind+"    ")
+            else:
+                pass
         print(tag_indent + self.close_tag())
 
     def open_tag(self):
-        return '<'+self.tag+'>'
+        ot = "<"+self.tag
+        for key, value in self.attributes.items():
+            ot += " "+str(key)+"="+str(value)
+        ot += ">"
+        return ot
 
     def close_tag(self):
         return '</'+self.tag+'>'
@@ -46,3 +50,23 @@ class Body(Element):
 
 class P(Element):
     tag = "p"
+
+
+class Head(Element):
+    tag = "head"
+
+
+class OneLineTag(Element):
+    def render(self, file_out, cur_ind=""):
+        tag_indent = cur_ind
+        content_indent = (cur_ind+"    ")
+
+        line = self.open_tag() + " "
+        for item in self.content_items:
+            line += item + " "
+        line += self.close_tag()
+        print(line)
+
+
+class Title(OneLineTag):
+    tag = "title"
