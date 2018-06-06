@@ -7,6 +7,10 @@ Keezer management project.  See README.md
 import keezer_sensor as sns
 import keezer_output as outp
 
+# Test classes
+import keezer_sensor_generator as ksg
+import keezer_output_stdout as kos
+
 class KeezerManager:
     """
     Driver class for keezer manager.  Sensors register with driver, which
@@ -28,9 +32,9 @@ class KeezerManager:
 
 
 if __name__ == "__main__":
-    kman = KeezerManager
-    sns = sns.KSensor
-    outp = outp.KOutput
+    kman = KeezerManager()
+    sns = ksg.KSGenerator
+    outp = kos.KOStdout
 
     # Assert that sensor and output have registered with keezer manager
     assert(len(kman.sensors) == 1)

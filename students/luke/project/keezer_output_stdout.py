@@ -7,7 +7,7 @@ class KOStdout(KOutput):
 
     def __init__(self):
         """ Register self with driver """
-        super.__init__(self)
+        super().__init__(self)
         self.data = []
 
 
