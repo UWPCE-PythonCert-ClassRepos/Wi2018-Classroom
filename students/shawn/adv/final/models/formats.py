@@ -94,10 +94,10 @@ class Format:
             f.write(f"| {'-' * 10} Post-testing modifications {'-' * 10}\n")
             f.write("|  Date        User        Modification\n|\n")
             f.write(f"*{'-'*73}*;\n")
-            f.write("%include 'init.sas;'\n\n")
+            f.write("%include 'init.sas';\n\n")
 
             # delete existing catalogs
-            f.write("proc datasets library=out memtype=catalog;\n\tdelete formats;\nrun;\n\n")
+            # f.write("proc datasets library=out memtype=catalog;\n\tdelete formats;\nrun;\n\n")
 
             f.write("proc format library=out;\n")
 
@@ -107,7 +107,7 @@ class Format:
                 f.write(Format.write_comment(i))
 
                 # Write the invalue statement
-                if i.fmt_type==Format_val.Invalue:
+                if i.fmt_value==Format_val.Invalue:
                     f.write("\tinvalue")
                     if i.fmt_type==Format_type.Numeric:
                         f.write(f" ${i.name + '_' + i.category}\n")
@@ -129,7 +129,7 @@ class Format:
                     else:
                         f.write(f"\t\t\"{remove_cc(j[0])}\" = ")
                     # label
-                    if i.fmt_type == Format_val.Invalue:
+                    if i.fmt_value == Format_val.Invalue:
                         f.write(f"{remove_cc(j[1])}\n")
                     else:
                         f.write(f'"{remove_cc(j[1])}"\n')
