@@ -63,4 +63,4 @@ Classes:
 
 Deliverables:
 
-The initial implementation of the keezer project will use flat text files for input and output using simple concrete subclasses.  Subsequent iterations will add additional subclasses for actual devices, protocols, etc.
+The initial implementation of the keezer project will use random data andflat text files for input and output using simple concrete subclasses.  Subsequent iterations will add additional subclasses for actual devices, protocols, etc.
