@@ -10,7 +10,7 @@ class KeezerSensor(object):
         pass
 
 
-    def poll_sensor(self):
+    def poll(self):
         """ Return sensor reading """
         return True
 

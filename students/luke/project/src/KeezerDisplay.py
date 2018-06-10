@@ -15,11 +15,11 @@ class KeezerDisplay(object):
         pass
 
 
-    def do_output(self):
+    def display(self):
         """ Show configured output """
         return True
 
 
 if __name__ == "__main__":
     outp = KeezerDisplay()
-    assert(outp.do_output())
+    assert(outp.display())
