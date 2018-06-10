@@ -79,7 +79,7 @@ class KeezerManager:
     def __init__(self):
         logging.debug("called")
         self.sensors = []
-        self.outputs = []
+        self.displays = []
 
         """ Populate sensors from sensors/ directory"""
         for file in glob.glob("sensors/*.py"):
@@ -89,7 +89,7 @@ class KeezerManager:
         """ Populate displays from displays/ directory"""
         for file in glob.glob("displays/*.py"):
             logging.debug("appending display: " + file)
-            self.sensors.append(import_class(file, KeezerDisplay))
+            self.displays.append(import_class(file, KeezerDisplay))
 
 
     def run(self):
@@ -106,4 +106,8 @@ class KeezerManager:
 if __name__ == "__main__":
     # List registered sensors and displays
     km = KeezerManager()
+    for sensor in km.sensors:
+        print(f"sensor: {sensor}")
+    for display in km.displays:
+        print(f"display: {display}")
 
