@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-class KeezerSensor:
+class KeezerSensor(object):
     """ Sensor class for keezer management project """
 
 

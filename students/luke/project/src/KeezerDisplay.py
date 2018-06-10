@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-class KeezerDisplay:
+class KeezerDisplay(object):
     """ Output class for keezer management project """
 
 
