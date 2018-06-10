@@ -1,0 +1,11 @@
+code,inval,outval,desc
+C2C, codedValue, codedValue, Default for zero-fill
+T2N, crfDecode, crfCodedValue, CRF text to CRF code
+N2P, crfCodedValue, codedValue, CRF code to CDISC preferred term
+P2N, codedValue, crfCodedValue, CDISC preferred term to CRF code
+T2P, crfDecode, codedValue, CRF text to CDISC preferred term
+P2T, codedValue, crfDecode, CDISC preferred term to CRF text
+P2S, codedValue, stdCrfCodedValue, CDISC preferred term to TLF code
+P2C, codedValue, stdCrfDecode, CDISC preferred term to TLF text
+S2C, stdCrfCodedValue, stdCrfDecode, TLF code to TLF text
+C2S, stdCrfDecode, stdCrfCodedValue, TLF text to TLF code
