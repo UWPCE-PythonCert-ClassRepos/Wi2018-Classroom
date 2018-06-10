@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-class KOStdout(KOutput):
+class keezer_display_stdout(keezer_display):
     """ Output class for keezer management project """
 
 
@@ -24,5 +24,5 @@ class KOStdout(KOutput):
 
 
 if __name__ == "__main__":
-    outp = KOutput()
+    outp = keezer_display()
     assert(outp.do_output())

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-class KOutput:
+class KeezerDisplay:
     """ Output class for keezer management project """
 
 
@@ -21,5 +21,5 @@ class KOutput:
 
 
 if __name__ == "__main__":
-    outp = KOutput()
+    outp = KeezerDisplay()
     assert(outp.do_output())

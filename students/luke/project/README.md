@@ -12,6 +12,8 @@ Measurement
 
 Display
  - LCD screen
+  - Display pounds of CO2 remaining
+  - Display gallons of beer remaining per keg
 
 Alert
  - send email when thresholds are reached
@@ -22,6 +24,24 @@ Retention
  - store values for analysis
   - graphing
   - consumption projection
+
+
+
+
+Use case 1:
+Exhaust CO2 cannister, swap with a fresh one, verify refill on LCD.
+1. LCD reads 0 pounds CO2 remaining.
+2. Open keezer, disconnect CO2 lines, remove tank and regulator
+3. LCD reads negative value (tare weight of tank and regulator)
+4. Move regulator to new tank, reconnect lines, place in keezer
+5. LCD reads approximately 5 pounds CO2 remaining
+
+Use case 2:
+Serve a dozen beers.
+1. LCD reads 2 gallons remaining
+2. Dispense beers
+3. LCD reads 0.5 gallons remaining
+4. Email alert received warning of imminent keg pop
 
 
 Design:

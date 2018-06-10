@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-class KSensor:
+class KeezerSensor:
     """ Sensor class for keezer management project """
 
 
@@ -16,5 +16,5 @@ class KSensor:
 
 
 if __name__ == "__main__":
-    sns = KSensor()
+    sns = KeezerSensor()
     assert(sns.poll_sensor())
