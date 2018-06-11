@@ -8,23 +8,25 @@ import sys
 import os
 import imp
 import glob
-import datetime
+import time
 import logging
 import logging.handlers
 
 from KeezerSensor import KeezerSensor
 from KeezerDisplay import KeezerDisplay
 
-dflformat = "%(asctime)s %(filename)s:%(lineno)-3d %(levelname)s %(message)s"
-formatter = logging.Formatter(dflformat)
+POLL_INTERVAL=10
 
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_handler.setFormatter(formatter)
+DFLFMT = "%(asctime)s %(filename)s:%(lineno)-3d %(levelname)s %(message)s"
+FORMATTER = logging.Formatter(DFLFMT)
 
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.addHandler(console_handler)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
+
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.DEBUG)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 # Concrete sensor and display classes are loaded dynamically.  There are
 # a few approaches to this.  In addition to the goergevreilly one copied
@@ -52,16 +54,16 @@ def import_class(implementation_filename, base_class):
             logging.debug(f"obj {obj}")
             try:
                 if (type(obj) == type(base_class)
-                    and issubclass(obj, base_class)
-                    and obj != base_class):
-                        return obj
+                        and issubclass(obj, base_class)
+                        and obj != base_class):
+                    return obj
 
             except TypeError as excpt:
                 """ issubclass will throw TypeError for some imports """
                 logging.debug(f"caught {excpt}")
 
         raise ValueError("No subclass of {0} in {1}".format(
-                base_class.__name__, implementation_filename))
+            base_class.__name__, implementation_filename))
 
     finally:
         sys.path.pop(0)
@@ -77,30 +79,44 @@ class KeezerManager:
     """
 
     def __init__(self):
+        """ Load subclasses """
         logging.debug("called")
         self.sensors = []
         self.displays = []
 
         """ Populate sensors from sensors/ directory"""
         for file in glob.glob("sensors/*.py"):
-            logging.debug("appending sensor: " + file)
-            self.sensors.append(import_class(file, KeezerSensor))
+            logging.debug(f"appending sensor: {file}")
+            self.sensors.append(import_class(file, KeezerSensor)())
 
         """ Populate displays from displays/ directory"""
         for file in glob.glob("displays/*.py"):
-            logging.debug("appending display: " + file)
-            self.displays.append(import_class(file, KeezerDisplay))
+            logging.debug(f"appending display: {file}")
+            self.displays.append(import_class(file, KeezerDisplay)())
 
 
     def run(self):
+        """ Main loop: poll sensors and feed to displays """
         logging.debug("called")
         while True:
-            pass
-            # sample time
-            # poll sensors
-                # send sensor data to display
+            loop_start = time.clock()
+            logging.debug(f"loop started at {loop_start}")
+
+            for sensor in self.sensors:
+                data = sensor.poll()
+
+                for display in self.displays:
+                    display.display(data)
 
             # sleep for remainder of polling interval
+            loop_end = time.clock()
+            logging.debug(f"loop ended at {loop_end}")
+            time_delta = loop_end - loop_start
+            sleep_for = POLL_INTERVAL - time_delta
+            if sleep_for < 0:
+                sleep_for = 0
+            logging.debug(f"sleeping for {sleep_for}")
+            time.sleep(sleep_for)
 
 
 if __name__ == "__main__":
@@ -111,3 +127,4 @@ if __name__ == "__main__":
     for display in km.displays:
         print(f"display: {display}")
 
+    km.run()

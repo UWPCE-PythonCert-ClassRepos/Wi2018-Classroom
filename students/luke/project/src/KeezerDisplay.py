@@ -15,7 +15,7 @@ class KeezerDisplay(object):
         pass
 
 
-    def display(self):
+    def display(self, data):
         """ Show configured output """
         return True
 

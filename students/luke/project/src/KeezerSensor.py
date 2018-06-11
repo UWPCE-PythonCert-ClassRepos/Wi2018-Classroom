@@ -17,4 +17,4 @@ class KeezerSensor(object):
 
 if __name__ == "__main__":
     sns = KeezerSensor()
-    assert(sns.poll_sensor())
+    assert(sns.poll())
