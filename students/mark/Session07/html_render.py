@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 A class-based system for rendering html.
@@ -7,7 +7,10 @@ A class-based system for rendering html.
 # This is the framework for the base class
 class Element(object):
 
-
+    ### hints:
+    ### there is a reason why it is not a string
+    ### string may not be the best way to keep the content until rendered
+    ### append function should just append
     open_tag=u''
     close_tag=u''
     empty_tag=u''
@@ -24,6 +27,7 @@ class Element(object):
 
 
     def render(self, file_out, cur_ind=""):
+        """ cur_ind should be the number of lines to indent """
         self.content = self.open_tag + self.content + self.close_tag
         file_out.write(self.content)
 

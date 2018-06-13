@@ -34,9 +34,6 @@ Submit your code and the top five tracks to complete the assignment.
 """
 
 
-import pandas as pd
-music = pd.read_csv("./data/featuresdf.csv")
-
 ### Take a look around to get a sense of the general shape of the data.
 #### Uneeded after debugging (remove from production code / here only as example of looking around)
 # print(music.head())
@@ -50,25 +47,42 @@ music = pd.read_csv("./data/featuresdf.csv")
 # print([x for (x,y) in zip(music.loudness, music.danceability) if x < -5.0])
 # print([(x,y) for (x,y) in zip(music.loudness, music.danceability) if x < -5.0 and y > 0.8])
 
+import pandas as pd
+music = pd.read_csv("./data/featuresdf.csv")
+
+LENGTH_OF_OUTPUT=5
+
+
 def create_sexy_music_list():
+    """Use a sorted list comprehension to create the return output"""
+    ## return sorted([(z, n, x, y) for (n, x, y, z) in zip(music.name, music.artists, music.loudness, music.danceability) if y < -5.0 and z > 0.8], reverse=True)
+    # return sorted([(danceability, name, artists, loudness)
+    #                     for (name, artists, loudness, danceability) in zip(music.name, music.artists, music.loudness, music.danceability)
+    #                     if loudness < -5.0 and danceability > 0.8],
+    #                     reverse=True)
+    import pdb; pdb.set_trace()
+    musical_values=zip(music.name, music.artists, music.loudness, music.danceability)
+    musical_preferred=[(z, n, x, y, broken) for (n, x, y, z) in  musical_values if y < -5.0 and z > 0.8]
+    return sorted(musical_preferred, reverse=True)
 
-    return [(z,n,x,y) for (n,x,y,z) in zip(music.name, music.artists, music.loudness, music.danceability) if y < -5.0 and z > 0.8]
 
-music_lc_ordered=create_sexy_music_list()
+def select_output(music_lc_ordered):
+    """Select the length of the output to be used in the output"""
 
-
-def select_output():
-    while len(sorted(music_lc_ordered, reverse=True)) > 5:
+    while len(music_lc_ordered) > LENGTH_OF_OUTPUT:
         music_lc_ordered.pop()
 
     return (music_lc_ordered)
 
 
 def output_selected(music_lc_ordered):
+    """ Output all of the selected output"""
+
     print ('{:50s} | {:25s} | {:20s}'.format('Name', 'Artist', 'danceability'))
     print ('-' * 95)
     for i in sorted(music_lc_ordered, reverse=True):
         print ('{:50s} | {:25s} | {:20s}'.format(i[1], str(i[2]), str(i[0])))
 
-select_output()
-output_selected(music_lc_ordered)
+
+if __name__ == '__main__':
+    output_selected(select_output(create_sexy_music_list()))
