@@ -1,3 +1,10 @@
+"""
+This Python module will (if possible) standardize the form of 
+Indo-European roots from lemma entries in 'brilldictionary.db' and then
+find and list any other entries in the database that are associated 
+with the same root
+"""
+
 from operator import itemgetter
 from peewee import *
 
@@ -90,7 +97,7 @@ def parse(rootinput):
 
     return rootinput
 
-def printlemma():
+def printlemmas():
 
     query = (Lemmas
             .select(Lemmas, Material)
@@ -106,14 +113,12 @@ def printlemma():
         print(x)
 
 if __name__ == '__main__':
-    '''
+
     while True:
         rootinput = input("Enter IE root: ")
         if rootinput == 'q':
+            printlemmas()
             break
         else:
             print(parse(rootinput))
             print()
-    '''
-    print(parse('bh2'))
-    printlemma()
