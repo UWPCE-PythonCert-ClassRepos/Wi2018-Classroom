@@ -1,9 +1,15 @@
+import json_save.json_save_dec as js
+import copy
+
+@js.json_save
 class Donor:
     """ Class to keep track of a donor with a donor name and list of donation amounts """
+    name = js.String()
+    donationList = js.List()
 
     def __init__(self, name=''):
         self.name = name.strip()
-        self.donationList = list()
+        self.donationList = js.List()
 
     def addDonation(self, amount):
         """ Add a donation amount to the list """
@@ -34,13 +40,16 @@ class Donor:
             )
         return result
 
+    def getDictRep(self):
+        return {self.name:self.donationList}
 
+@js.json_save
 class DonorCollection:
     """ Keeps track of the collection of donors as well as writing thank you letters and the donor report """
-    """ To add: read and write donor collection as a JSON """
+    donorList = js.List()
 
     def __init__(self):
-        self.donorList = list()
+        self.donorList = js.List()
 
     def addDonor(self, donor):
         """ Add a donor to the list """
@@ -75,8 +84,32 @@ class DonorCollection:
             result += "\n{:20s}| ${:10.2f} |{:10d} | ${:10.2f}".format(donor.name, donor.getTotDonation(), donor.getNumDonations(), donor.getAvgDonation())
         return result
 
+    def getDictRep(self):
+        return [donor.getDictRep() for donor in self.donorList]
 
+    def saveDB(self):
+        print(self.to_json_compat())
+        f = open("donors.json", 'w')
+        f.write(self.to_json_compat())
+        f.close()
+
+''' FILE OPEN HERE... CHANGE WHEN UNDERSTAND HOW TO SET UP JSON_SAVE '''
+'''
+f = open("donors.json", 'r')
+fileData = f.read()
+f.close()
+donors = DonorCollection.from_json_dict(fileData)
+'''
 donors = DonorCollection()
+
+def challenge(factor):
+    newDB = copy.deepcopy(donors)
+    for donor in newDB.donorList:
+        print(donor.name)
+        print(donor.donationList)
+        donor.donationList = list(map(lambda x: x*factor, donor.donationList))
+        print(donor.donationList)
+    return newDB
 
 def menu_selection(prompt, dispatch_dict):
     """ Run the basic menu(s) of the program """
@@ -84,6 +117,17 @@ def menu_selection(prompt, dispatch_dict):
         response = input(prompt).lower()
         if dispatch_dict[response]() == 'quit':
             break
+
+def startChallenge():
+    print(donors)
+    try:
+        response = int(input("Enter a challenge factor: "))
+    except ValueError:
+        print("Not a valid value.")
+        return
+    donors = challenge(response)
+    print("Multiplied all donations by {:d}!".format(response))
+    print(donors)
 
 def getDonorDB():
     return donors
@@ -122,12 +166,16 @@ MAIN_PROMPT = ("\nWelcome to the Mailroom.py prompt:\n"
     "1. Send a Thank You\n"
     "2. Create a Report\n"
     "3. Send letters to everyone\n"
+    "4. Save donor database\n"
+    "5. Challenge!\n"
     "q. Quit\n"
     ">-> "
     )
 MAIN_DISPATCH = {"1": sendThankYou,
     "2": createReport,
     "3": donors.storeThankYouLetters,
+    "4": donors.saveDB,
+    "5": startChallenge,
     "q": quit,
     }
 

@@ -1,3 +1,6 @@
+import json
+import copy
+
 class Donor:
     """ Class to keep track of a donor with a donor name and list of donation amounts """
 
@@ -33,6 +36,9 @@ class Donor:
             "\t\tSincerely,\n\t\t\t- The Team".format(self.name, self.getTotDonation())
             )
         return result
+
+    def getDictRep(self):
+        return {self.name:self.donationList}
 
 
 class DonorCollection:
@@ -75,8 +81,25 @@ class DonorCollection:
             result += "\n{:20s}| ${:10.2f} |{:10d} | ${:10.2f}".format(donor.name, donor.getTotDonation(), donor.getNumDonations(), donor.getAvgDonation())
         return result
 
+    def getDictRep(self):
+        return [donor.getDictRep() for donor in self.donorList]
+
+    def saveDB(self):
+        print(self.getDictRep())
+        f = open("donors.json", 'w')
+        f.write(json.dumps(self.getDictRep(), indent=4))
+        f.close()
 
 donors = DonorCollection()
+
+def challenge(factor):
+    newDB = copy.deepcopy(donors)
+    for donor in newDB.donorList:
+        print(donor.name)
+        print(donor.donationList)
+        donor.donationList = list(map(lambda x: x*factor, donor.donationList))
+        print(donor.donationList)
+    return newDB
 
 def menu_selection(prompt, dispatch_dict):
     """ Run the basic menu(s) of the program """
@@ -84,6 +107,17 @@ def menu_selection(prompt, dispatch_dict):
         response = input(prompt).lower()
         if dispatch_dict[response]() == 'quit':
             break
+
+def startChallenge():
+    print(donors)
+    try:
+        response = int(input("Enter a challenge factor: "))
+    except ValueError:
+        print("Not a valid value.")
+        return
+    donors = challenge(response)
+    print("Multiplied all donations by {:d}!".format(response))
+    print(donors)
 
 def getDonorDB():
     return donors
@@ -122,12 +156,16 @@ MAIN_PROMPT = ("\nWelcome to the Mailroom.py prompt:\n"
     "1. Send a Thank You\n"
     "2. Create a Report\n"
     "3. Send letters to everyone\n"
+    "4. Save donor database\n"
+    "5. Challenge!\n"
     "q. Quit\n"
     ">-> "
     )
 MAIN_DISPATCH = {"1": sendThankYou,
     "2": createReport,
     "3": donors.storeThankYouLetters,
+    "4": donors.saveDB,
+    "5": startChallenge,
     "q": quit,
     }
 
