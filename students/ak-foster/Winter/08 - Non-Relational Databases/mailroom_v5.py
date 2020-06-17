@@ -115,10 +115,3 @@ while True:
     res = input("\nType '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit.\n")
     switcher[res]()
 """
-import logging
-
-logging.critical("This is a critical error!")
-logging.error("I'm an error.")
-logging.warning("Hello! I'm a warning!")
-logging.info("This is some information.")
-logging.debug("Perhaps this information will help you find your problem?")

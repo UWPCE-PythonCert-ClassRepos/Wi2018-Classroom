@@ -27,13 +27,17 @@ def thankYouNote(name, amount):
     """Return string containing thank you note message which is customized for given NAME and donation AMOUNT"""
     return f"{name},\n\nThank you for your gift of {amount} dollars. Your donation will be put to good use.\n\n - The Team"
 
-class Prompt:
 
-    def __init__(self, name, amount):
-        self.name = name
-        self.amount = amount
-
-
+def promptForName(name=False):
+    if not name:
+        name = input("\nPlease enter the donor's name. Type 'list' to display all donors or leave blank to quit.\n")
+    if name == "":
+        quit()
+    elif name == 'list':
+        print(donate.keys())
+        promptForName()
+    else:
+        return name
 
 
 def promptForAmount(amount=False):
@@ -55,8 +59,12 @@ def createReport(test=False):
     # Calculate donation summary for each donor and add to the report
     donateReport = [[name, sum(gifts), len(gifts), sum(gifts) // len(gifts)] for name, gifts in donate.items()]
 
+    # get total donations for sort
+    def totalDonations(elem):
+        return elem[1]
+
     # sort donations report for highest total donations
-    sortedDonateReport = sorted(donateReport, key=lambda i: i[1], reverse=True)
+    sortedDonateReport = sorted(donateReport, key=totalDonations, reverse=True)
 
     # format row (left align - column 10 wide, right align - column 20 wide, right align - column 20 wide)
     row = '{:<10}{:>20}{:>20}{:>20}'
@@ -115,10 +123,3 @@ while True:
     res = input("\nType '1' to send a thank you. \nType '2' to create a report. \nType '3' to send letters. \nType '0' to quit.\n")
     switcher[res]()
 """
-import logging
-
-logging.critical("This is a critical error!")
-logging.error("I'm an error.")
-logging.warning("Hello! I'm a warning!")
-logging.info("This is some information.")
-logging.debug("Perhaps this information will help you find your problem?")

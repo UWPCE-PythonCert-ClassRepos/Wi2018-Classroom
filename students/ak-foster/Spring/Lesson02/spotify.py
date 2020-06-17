@@ -11,8 +11,10 @@ for i in (song for artist, song in zip(music.artists, music.name) if 'Sheeran' i
 # CLOSURE
 # High energy tracks (>0.8)
 def get_energy(energy):
+
     def over_cuttoff(cuttoff):
         return energy > cuttoff
+
     return over_cuttoff(0.8)
 
 # Get list of high energy song in list comprehension

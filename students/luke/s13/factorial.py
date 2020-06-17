@@ -3,7 +3,7 @@
 """
 https://canvas.uw.edu/courses/1188584/assignments/4189639?module_item_id=8331807
 
-Write a recursive solution for the factorial function.
+Write a recursive.py solution for the factorial function.
 """
 
 

@@ -1,0 +1,16 @@
+Q: What's wrong with the logic? Why does't the function stop calling itself?
+A: If n is an odd number or less than two, this recursive function won't stop.
+
+Q: What's happening to the value of 'n' as the function gets deeper and deeper into recursion?
+A: It's becoming a smaller decimal (less than 1) and continues to divide itself by 2.
+
+
+Debugged in PyCharm (very spoiled!). Not much to copy/pate...
+
+(venv) 784f439776dc:Lesson05 affoste$ touch FosterDebugging.txt
+(venv) 784f439776dc:Lesson05 affoste$ python recursive.py
+Traceback (most recent call last):
+  File "recursive.py", line 11, in <module>
+    n = int(sys.argv[1])
+IndexError: list index out of range
+(venv) 784f439776dc:Lesson05 affoste$
